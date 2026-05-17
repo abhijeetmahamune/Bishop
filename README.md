@@ -31,21 +31,21 @@ cd brain-checker-ai
 ```bash
 cp .env.example .env
 ```
-Open `.env` and add your Gemini API key:
+Open `.env` and add your OPENROUTER_API_KEY:
 ```
-GEMINI_API_KEY=your_real_key_here
+OPENROUTER_API_KEY=your_real_key_here
 ```
 Get your key from: https://aistudio.google.com/app/apikey
 
 ### 3. Install Python dependencies
 ```bash
 cd backend
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
 ### 4. Run the backend
 ```bash
-uvicorn main:app --reload --port 8000
+python -m uvicorn backend.main:app --reload --port 8000
 ```
 
 ### 5. Open the frontend
@@ -88,7 +88,7 @@ brain-checker-ai/
 
 - **Frontend:** HTML, CSS, JavaScript (vanilla)
 - **Backend:** Python, FastAPI
-- **AI:** Google Gemini 1.5 Flash
+- **AI:** OPENROUTER_API_KEY - nvidia/nemotron-3-super-120b-a12b:free
 - **PDF Parsing:** PyMuPDF / pypdf
 - **Fonts:** Poppins, DM Sans
 
