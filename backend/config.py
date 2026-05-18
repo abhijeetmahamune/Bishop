@@ -99,7 +99,7 @@ SECRET_KEY: str = os.getenv("SECRET_KEY", "dev-secret-change-in-production")
 #   ALLOWED_ORIGINS=https://bishop.onrender.com,https://bishop.netlify.app
 _raw_origins = os.getenv(
     "ALLOWED_ORIGINS",
-    "http://localhost:5500,http://localhost:8000"   # safe local dev defaults
+    "http://localhost:5500,http://localhost:8000,https://bishop-brainchecker-di7m.onrender.com"   # safe local dev defaults
 )
 ALLOWED_ORIGINS: list[str] = [o.strip() for o in _raw_origins.split(",") if o.strip()]
 
