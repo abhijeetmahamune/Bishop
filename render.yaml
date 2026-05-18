@@ -1,35 +1,11 @@
-# render.yaml - Deployment configuration for Render.com
 services:
   - type: web
-    name: brain-checker-api
-    runtime: python-3.11
+    name: bishop-backend
+    env: python
     plan: free
-    
-    # Build command - install dependencies avoiding Rust compilation
-    buildCommand: |
-      pip install --upgrade pip setuptools wheel && \
-      pip install --no-cache-dir --prefer-binary -r backend/requirements.txt
-    
-    # Start command - run the FastAPI server
-    startCommand: python backend/main.py
-    
-    # Environment variables
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
     envVars:
-      - key: OPENROUTER_API_KEY
-        scope: run
-        sync: false
-      - key: PORT
-        value: 8000
-      - key: PYTHONUNBUFFERED
-        value: 1
-    
-    # Pre-deploy build script to ensure Python 3.11
-    preDeployCommand: |
-      python --version && \
-      pip --version
-    
-    # Health check
-    healthCheckPath: "/"
-    
-    # Auto deploy on push
-    autoDeploy: true
+      - key: PYTHON_VERSION
+        value: 3.11.0

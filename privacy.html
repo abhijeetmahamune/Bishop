@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy · Bishop by Brain Checker</title>
+<meta name="description" content="Privacy Policy for Bishop by Brain Checker — AI Post-Counseling System.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-deep:  #0f1c30;
+  --navy-mid:   #1e3050;
+  --teal:       #00b4d8;
+  --teal-light: #e0f7fc;
+  --white:      #ffffff;
+  --gray-300:   #cbd5e1;
+  --gray-400:   #94a3b8;
+  --gray-600:   #64748b;
+  --success:    #10b981;
+  --fh: 'Poppins', sans-serif;
+  --fb: 'DM Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fb);
+  background: var(--navy-deep);
+  color: var(--gray-300);
+  line-height: 1.8;
+}
+
+/* ── Background ── */
+.bg-mesh {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 50% 40% at 15% 10%, rgba(0,180,216,0.06) 0%, transparent 70%),
+              linear-gradient(170deg, var(--navy-deep) 0%, #0c1e38 100%);
+}
+
+/* ── Navbar ── */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(15,28,48,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 0 2rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo  { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; border: 1.5px solid var(--teal); }
+.nav-name  { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--white); }
+.nav-sub   { font-size: 10px; color: var(--teal); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+.nav-back  {
+  font-size: 12px; font-weight: 600; color: var(--gray-400);
+  text-decoration: none; padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 99px;
+  transition: all 0.2s;
+}
+.nav-back:hover { color: var(--white); border-color: rgba(255,255,255,0.25); }
+
+/* ── Layout ── */
+.page-wrap {
+  position: relative; z-index: 1;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+
+/* ── Header ── */
+.page-header { margin-bottom: 3rem; }
+.page-eyebrow {
+  display: inline-block;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal); background: rgba(0,180,216,0.1);
+  border: 1px solid rgba(0,180,216,0.25); border-radius: 99px;
+  padding: 3px 12px; margin-bottom: 14px;
+}
+.page-title {
+  font-family: var(--fh);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.page-meta {
+  font-size: 13px; color: var(--gray-600);
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.page-meta span { display: flex; align-items: center; gap: 5px; }
+
+/* ── Table of Contents ── */
+.toc {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2.5rem;
+}
+.toc-title { font-family: var(--fh); font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.toc ol { padding-left: 1.2rem; }
+.toc li { margin-bottom: 5px; }
+.toc a  { font-size: 13px; color: var(--gray-400); text-decoration: none; transition: color 0.15s; }
+.toc a:hover { color: var(--teal); }
+
+/* ── Sections ── */
+.section { margin-bottom: 2.75rem; }
+.section-anchor { display: block; height: 72px; margin-top: -72px; visibility: hidden; }
+
+h2 {
+  font-family: var(--fh);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; gap: 10px;
+}
+.h2-num {
+  width: 26px; height: 26px; border-radius: 8px;
+  background: rgba(0,180,216,0.15); color: var(--teal);
+  font-size: 11px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+p { margin-bottom: 1rem; font-size: 14px; color: var(--gray-300); }
+p:last-child { margin-bottom: 0; }
+
+ul, ol { padding-left: 1.4rem; margin-bottom: 1rem; }
+li { font-size: 14px; color: var(--gray-300); margin-bottom: 6px; line-height: 1.7; }
+
+strong { color: var(--white); font-weight: 500; }
+
+/* ── Highlight boxes ── */
+.box {
+  border-radius: 10px; padding: 14px 18px;
+  margin: 1.2rem 0; font-size: 13px; line-height: 1.65;
+}
+.box-info    { background: rgba(0,180,216,0.07); border: 1px solid rgba(0,180,216,0.2); color: var(--gray-300); }
+.box-success { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); color: var(--gray-300); }
+.box-info strong, .box-success strong { color: var(--teal); }
+.box-success strong { color: var(--success); }
+
+/* ── Contact card ── */
+.contact-card {
+  background: rgba(0,180,216,0.07);
+  border: 1px solid rgba(0,180,216,0.2);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  margin-top: 1rem;
+}
+.contact-card h3 { font-family: var(--fh); font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.contact-card p  { font-size: 13px; margin-bottom: 6px; }
+.contact-card a  { color: var(--teal); text-decoration: none; }
+.contact-card a:hover { text-decoration: underline; }
+
+/* ── Footer ── */
+.page-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  font-size: 12px; color: var(--gray-600);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.page-footer a { color: var(--gray-400); text-decoration: none; }
+.page-footer a:hover { color: var(--teal); }
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+
+<nav class="navbar">
+  <a class="nav-brand" href="/">
+    <img src="/assets/logo.jpg" class="nav-logo" alt="BC" onerror="this.style.display='none'">
+    <div>
+      <div class="nav-name">Bishop by Brain Checker</div>
+      <div class="nav-sub">Post-Counseling AI</div>
+    </div>
+  </a>
+  <a class="nav-back" href="/">← Back to App</a>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-header">
+    <span class="page-eyebrow">Legal Document</span>
+    <h1 class="page-title">Privacy Policy</h1>
+    <div class="page-meta">
+      <span>📅 Effective: 1 June 2025</span>
+      <span>🔄 Last updated: 1 June 2025</span>
+      <span>📍 Governed by Indian Law (DPDP Act 2023)</span>
+    </div>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#s1">Who we are</a></li>
+      <li><a href="#s2">What information we collect</a></li>
+      <li><a href="#s3">How your PDF reports are handled</a></li>
+      <li><a href="#s4">How we use your information</a></li>
+      <li><a href="#s5">Who we share your information with</a></li>
+      <li><a href="#s6">Data storage and security</a></li>
+      <li><a href="#s7">Data retention</a></li>
+      <li><a href="#s8">Your rights</a></li>
+      <li><a href="#s9">Cookies and tracking</a></li>
+      <li><a href="#s10">Children's privacy</a></li>
+      <li><a href="#s11">Changes to this policy</a></li>
+      <li><a href="#s12">Contact us</a></li>
+    </ol>
+  </div>
+
+  <div class="box box-success">
+    <strong>Summary in plain English</strong><br>
+    Brain Checker collects your email and name to create your account.
+    The PDF reports you upload are processed in memory to generate AI answers
+    — they are <strong>never stored as files</strong> on our servers.
+    We store text embeddings (mathematical representations of your reports)
+    in a secure database so the AI can answer your questions.
+    We do not sell your data. We do not show you ads.
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <span class="section-anchor" id="s1"></span>
+    <h2><span class="h2-num">1</span> Who we are</h2>
+    <p>
+      Bishop is an AI-powered post-counseling assistant operated by
+      <strong>Brain Checker</strong> ("Brain Checker", "we", "us", or "our"),
+      a career counseling organisation based in India.
+    </p>
+    <p>
+      This Privacy Policy explains how we collect, use, store, and protect
+      your personal information when you use the Bishop platform at
+      <strong>bishop.brainchecker.in</strong> (or any Render-hosted URL we provide).
+    </p>
+    <p>
+      By creating an account and using Bishop, you agree to the practices
+      described in this policy. If you do not agree, please do not use the service.
+    </p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <span class="section-anchor" id="s2"></span>
+    <h2><span class="h2-num">2</span> What information we collect</h2>
+
+    <p><strong>Account information (provided by you at signup):</strong></p>
+    <ul>
+      <li>Full name</li>
+      <li>Email address</li>
+      <li>Password (stored as a secure hash by Supabase — we never see your plain-text password)</li>
+    </ul>
+
+    <p><strong>Usage information (generated automatically):</strong></p>
+    <ul>
+      <li>Which Brain Checker product you selected (e.g. DMIT, Psychometric)</li>
+      <li>Number of questions asked per month (for usage limit enforcement)</li>
+      <li>Which analysis cards you used and when</li>
+      <li>Chat messages you send and the AI responses you receive</li>
+    </ul>
+
+    <p><strong>PDF report content (processed temporarily):</strong></p>
+    <p>
+      When you upload a PDF report, we extract its text, split it into sections,
+      and generate mathematical embeddings. See Section 3 for full details.
+    </p>
+
+    <p><strong>We do NOT collect:</strong></p>
+    <ul>
+      <li>Payment or banking information (no payments are processed through Bishop)</li>
+      <li>Device location or GPS data</li>
+      <li>Biometric data</li>
+      <li>Fingerprint scan data (DMIT raw fingerprint images are handled only by Brain Checker counselors — not by this software)</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <span class="section-anchor" id="s3"></span>
+    <h2><span class="h2-num">3</span> How your PDF reports are handled</h2>
+
+    <div class="box box-info">
+      <strong>Important:</strong> Your PDF files are NEVER stored on our servers or in our database as files.
+    </div>
+
+    <p>Here is exactly what happens when you upload a PDF report to Bishop:</p>
+    <ol>
+      <li>The PDF file bytes are received by our backend server running on Render.com.</li>
+      <li>Text is extracted from the PDF <strong>entirely in memory</strong> — it is never written to any disk or file system.</li>
+      <li>The extracted text is split into sections and converted into numerical vectors called <strong>embeddings</strong> (mathematical representations of meaning — not readable text).</li>
+      <li>These embeddings, along with small text excerpts, are stored in our Supabase database linked to your session.</li>
+      <li>When you ask a question, the AI uses these embeddings to retrieve the most relevant sections of your report and generate an answer.</li>
+      <li>When you log out, your session data (embeddings and text excerpts) is deleted from the database.</li>
+    </ol>
+
+    <p>
+      The original PDF file is discarded from server memory as soon as step 4 is complete.
+      It is not cached, backed up, or accessible after that point.
+    </p>
+
+    <p>
+      <strong>Confidentiality of report content:</strong> Report text excerpts stored in the
+      database are associated with your account only. No other user can access your report
+      data. Brain Checker staff do not routinely access report content but may do so
+      for technical troubleshooting with your explicit consent.
+    </p>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <span class="section-anchor" id="s4"></span>
+    <h2><span class="h2-num">4</span> How we use your information</h2>
+    <ul>
+      <li><strong>To provide the service:</strong> Authenticate your account, load your product and session, process your PDFs, and generate AI answers.</li>
+      <li><strong>To enforce usage limits:</strong> Track monthly question usage to apply the fair-use limit included with your Brain Checker counselling package.</li>
+      <li><strong>To improve the service:</strong> Aggregate, anonymised usage patterns (e.g. which cards are most used) help us improve prompts and features. We do not use individual chat content for AI training.</li>
+      <li><strong>To provide support:</strong> If you contact us with a problem, we may need to look at your account information to help you.</li>
+      <li><strong>To communicate with you:</strong> We may send account-related emails (e.g. verification, password reset) via Supabase Auth. We do not send marketing emails without your consent.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <span class="section-anchor" id="s5"></span>
+    <h2><span class="h2-num">5</span> Who we share your information with</h2>
+    <p>We do not sell your personal data. We share data only with the following service providers who help us operate Bishop:</p>
+    <ul>
+      <li>
+        <strong>Supabase (supabase.com)</strong> — Database, authentication, and vector storage.
+        Your account data and report embeddings are stored on Supabase servers.
+        Supabase is SOC 2 Type II certified and GDPR-compliant.
+        Data is stored in <strong>AWS ap-south-1 (Mumbai, India)</strong> when the India-region project is selected, or in the EU/US depending on your project region.
+      </li>
+      <li>
+        <strong>OpenRouter (openrouter.ai)</strong> — AI inference gateway. Your chat messages
+        and relevant report excerpts are sent to OpenRouter to generate responses.
+        OpenRouter routes requests to the configured language model (e.g. GPT-4o).
+        OpenRouter's privacy policy applies to this data in transit.
+        We do not share your name or email with OpenRouter.
+      </li>
+      <li>
+        <strong>Render (render.com)</strong> — Cloud hosting for the backend server.
+        Render processes requests but does not store your data beyond standard server logs
+        (retained for 7 days on the free tier).
+      </li>
+    </ul>
+    <p>
+      We may disclose your information if required by Indian law, a court order, or
+      other lawful authority, or to protect the safety of our users.
+    </p>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section">
+    <span class="section-anchor" id="s6"></span>
+    <h2><span class="h2-num">6</span> Data storage and security</h2>
+    <ul>
+      <li>Account data (email, name, usage counts) is stored in Supabase with Row Level Security (RLS) — meaning your data is only accessible to your own account.</li>
+      <li>All communication between your browser, our server, and Supabase is encrypted using HTTPS/TLS.</li>
+      <li>Passwords are hashed using bcrypt by Supabase Auth — we never see or store your plain-text password.</li>
+      <li>JWT tokens used for authentication expire and are stored only in your browser's sessionStorage (not cookies), reducing cross-site request forgery risk.</li>
+      <li>Report embeddings are stored only for the duration of your session and are deleted on logout.</li>
+    </ul>
+    <p>
+      Despite these measures, no internet service is 100% secure.
+      Please use a strong, unique password for your Bishop account.
+    </p>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="section">
+    <span class="section-anchor" id="s7"></span>
+    <h2><span class="h2-num">7</span> Data retention</h2>
+    <ul>
+      <li><strong>Report embeddings and chat history:</strong> Deleted when you log out (or when you manually clear your session from within the app).</li>
+      <li><strong>Account information (email, name):</strong> Retained until you request account deletion.</li>
+      <li><strong>Usage logs:</strong> Retained for 12 months for service improvement, then deleted.</li>
+      <li><strong>Server logs (Render):</strong> Retained for 7 days by Render, then automatically deleted.</li>
+    </ul>
+    <p>
+      To request deletion of your account and all associated data, email us at
+      <a href="mailto:support@brainchecker.in" style="color:var(--teal)">support@brainchecker.in</a>
+      with the subject "Account Deletion Request". We will process your request within 30 days.
+    </p>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="section">
+    <span class="section-anchor" id="s8"></span>
+    <h2><span class="h2-num">8</span> Your rights</h2>
+    <p>Under the Digital Personal Data Protection Act 2023 (India) and applicable law, you have the right to:</p>
+    <ul>
+      <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
+      <li><strong>Correction:</strong> Ask us to correct inaccurate data (e.g. wrong name on your account).</li>
+      <li><strong>Deletion:</strong> Request that we delete your account and all personal data.</li>
+      <li><strong>Grievance redressal:</strong> Raise a complaint about how we have handled your data.</li>
+    </ul>
+    <p>
+      To exercise any of these rights, contact us at
+      <a href="mailto:support@brainchecker.in" style="color:var(--teal)">support@brainchecker.in</a>.
+      We will respond within 30 days.
+    </p>
+  </div>
+
+  <!-- SECTION 9 -->
+  <div class="section">
+    <span class="section-anchor" id="s9"></span>
+    <h2><span class="h2-num">9</span> Cookies and tracking</h2>
+    <p>
+      Bishop does <strong>not use cookies</strong> for authentication or session management.
+      Your login token is stored in <code>sessionStorage</code>, which is automatically
+      cleared when you close your browser tab.
+    </p>
+    <p>
+      We do not use Google Analytics, Meta Pixel, or any advertising trackers.
+      If we add analytics in the future, we will update this policy and use a
+      privacy-first, cookie-free solution (such as Plausible or Umami).
+    </p>
+    <p>
+      Google Fonts are loaded from Google's CDN for typography. Google may log
+      your IP address when serving these fonts. To avoid this, you can use a
+      browser extension that blocks Google Fonts requests.
+    </p>
+  </div>
+
+  <!-- SECTION 10 -->
+  <div class="section">
+    <span class="section-anchor" id="s10"></span>
+    <h2><span class="h2-num">10</span> Children's privacy</h2>
+    <p>
+      Bishop is used by Brain Checker counselors and the parents or guardians of
+      students — not by children directly. If a student is under 18, their parent
+      or guardian must create the account and use the service on their behalf.
+    </p>
+    <p>
+      We do not knowingly collect personal data directly from children under 18.
+      If you believe a minor has created an account without parental consent,
+      please contact us and we will delete it promptly.
+    </p>
+  </div>
+
+  <!-- SECTION 11 -->
+  <div class="section">
+    <span class="section-anchor" id="s11"></span>
+    <h2><span class="h2-num">11</span> Changes to this policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. When we make significant
+      changes, we will update the "Last updated" date at the top of this page and,
+      where appropriate, notify you by email or an in-app notice.
+    </p>
+    <p>
+      Continued use of Bishop after a policy update constitutes your acceptance of
+      the revised policy.
+    </p>
+  </div>
+
+  <!-- SECTION 12 -->
+  <div class="section">
+    <span class="section-anchor" id="s12"></span>
+    <h2><span class="h2-num">12</span> Contact us</h2>
+    <p>For any privacy-related questions, requests, or complaints:</p>
+    <div class="contact-card">
+      <h3>Brain Checker — Privacy Contact</h3>
+      <p>📧 Email: <a href="mailto:support@brainchecker.in">support@brainchecker.in</a></p>
+      <p>📍 India</p>
+      <p style="margin-top:10px;font-size:12px;color:var(--gray-600);">
+        We aim to respond to all privacy requests within 30 days.
+        For urgent data deletion requests, please include "URGENT" in your subject line.
+      </p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>© 2025 Brain Checker. All rights reserved.</span>
+    <span>
+      <a href="/">Bishop App</a> &nbsp;·&nbsp;
+      <a href="/terms">Terms of Service</a> &nbsp;·&nbsp;
+      <a href="/privacy">Privacy Policy</a>
+    </span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -2,1221 +2,1761 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brain Checker – AI Post-Counseling Guidance</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bishop by Brain Checker · AI Post-Counseling System</title>
+<meta name="description" content="Bishop — AI-powered post-counseling assistant by Brain Checker. Understand your assessment reports instantly.">
+<meta property="og:title" content="Bishop by Brain Checker">
+<meta property="og:description" content="AI-powered post-counseling assistant. Decode your Brain Checker assessment reports.">
+<meta property="og:image" content="/assets/bishop_BC.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --teal: #1D9E75;
-    --teal-light: #E1F5EE;
-    --teal-mid: #9FE1CB;
-    --teal-dark: #0F6E56;
-    --teal-deeper: #085041;
-    --blue: #378ADD;
-    --blue-light: #E6F1FB;
-    --blue-dark: #185FA5;
-    --green: #639922;
-    --green-light: #EAF3DE;
-    --gray-100: #F8F9FA;
-    --gray-200: #E9ECEF;
-    --gray-300: #DEE2E6;
-    --gray-500: #6C757D;
-    --gray-700: #495057;
-    --gray-900: #212529;
-    --white: #FFFFFF;
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
-    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
-    --radius-xl: 28px;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #F0F5F3;
-    color: var(--gray-900);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ─── NAVBAR ─── */
-  nav {
-    background: var(--white);
-    border-bottom: 1px solid var(--gray-200);
-    padding: 0 2rem;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
-
-  .nav-logo {
-    width: 38px;
-    height: 38px;
-    background: linear-gradient(135deg, var(--teal), var(--blue));
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-
-  .nav-brand-text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .nav-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--teal-dark);
-    line-height: 1.1;
-  }
-
-  .nav-subtitle {
-    font-size: 10px;
-    color: var(--gray-500);
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-  }
-
-  .nav-badge {
-    background: var(--teal-light);
-    color: var(--teal-dark);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--teal-mid);
-  }
-
-  /* ─── HERO ─── */
-  .hero {
-    background: linear-gradient(135deg, var(--teal-deeper) 0%, var(--teal-dark) 40%, #1a6e72 100%);
-    color: white;
-    text-align: center;
-    padding: 56px 2rem 40px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.04);
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -80px; left: -40px;
-    width: 250px; height: 250px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.04);
-  }
-
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 18px;
-  }
-
-  .hero h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 14px;
-    max-width: 620px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero p {
-    font-size: 15px;
-    opacity: 0.85;
-    max-width: 520px;
-    margin: 0 auto 10px;
-    line-height: 1.6;
-  }
-
-  .hero-steps {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-
-  .hero-step {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.18);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 500;
-    opacity: 0.9;
-  }
-
-  .hero-step-arrow {
-    font-size: 12px;
-    opacity: 0.5;
-  }
-
-  /* ─── MAIN LAYOUT ─── */
-  .main-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-  }
-
-  /* ─── MODE CARDS ─── */
-  .section-label {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 8px;
-  }
-
-  .section-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: 6px;
-  }
-
-  .section-sub {
-    font-size: 14px;
-    color: var(--gray-500);
-    margin-bottom: 28px;
-    line-height: 1.5;
-  }
-
-  .mode-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 14px;
-    margin-bottom: 40px;
-  }
-
-  .mode-card {
-    background: var(--white);
-    border-radius: var(--radius-md);
-    border: 2px solid transparent;
-    padding: 20px 16px;
-    cursor: pointer;
-    transition: all 0.22s ease;
-    box-shadow: var(--shadow-sm);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .mode-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--teal), var(--blue));
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .mode-card:hover {
-    border-color: var(--teal-mid);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-  }
-
-  .mode-card:hover::before { opacity: 1; }
-
-  .mode-card.active {
-    border-color: var(--teal);
-    box-shadow: 0 0 0 3px rgba(29,158,117,0.12), var(--shadow-md);
-    background: #fafffd;
-  }
-
-  .mode-card.active::before { opacity: 1; }
-
-  .mode-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    margin: 0 auto 12px;
-  }
-
-  .mode-card-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--gray-900);
-    margin-bottom: 5px;
-    line-height: 1.3;
-  }
-
-  .mode-card-desc {
-    font-size: 11px;
-    color: var(--gray-500);
-    line-height: 1.4;
-  }
-
-  .mode-card.active .mode-card-title { color: var(--teal-dark); }
-
-  /* ─── CHAT AREA ─── */
-  .chat-wrapper {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--gray-200);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 540px;
-    max-height: 680px;
-  }
-
-  .chat-header {
-    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: white;
-    flex-shrink: 0;
-  }
-
-  .chat-header-icon {
-    width: 38px;
-    height: 38px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-
-  .chat-header-info { flex: 1; }
-
-  .chat-header-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-
-  .chat-header-mode {
-    font-size: 11px;
-    opacity: 0.8;
-    margin-top: 2px;
-  }
-
-  .chat-header-status {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    opacity: 0.85;
-  }
-
-  .status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #5DCAA5;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-
-  .chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background: #FAFBFA;
-  }
-
-  .chat-messages::-webkit-scrollbar { width: 5px; }
-  .chat-messages::-webkit-scrollbar-track { background: transparent; }
-  .chat-messages::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
-
-  /* ─── MESSAGE BUBBLES ─── */
-  .msg { display: flex; gap: 10px; max-width: 100%; }
-  .msg.user { flex-direction: row-reverse; }
-
-  .msg-avatar {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  .msg-avatar.ai {
-    background: linear-gradient(135deg, var(--teal), var(--blue));
-    color: white;
-    font-size: 13px;
-  }
-
-  .msg-avatar.user-av {
-    background: var(--blue-light);
-    color: var(--blue-dark);
-    font-size: 12px;
-  }
-
-  .msg-body { max-width: calc(100% - 50px); }
-
-  .msg.user .msg-body { align-items: flex-end; display: flex; flex-direction: column; }
-
-  .msg-bubble {
-    padding: 12px 16px;
-    border-radius: 16px;
-    font-size: 14px;
-    line-height: 1.6;
-    position: relative;
-  }
-
-  .msg.ai .msg-bubble {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 4px 16px 16px 16px;
-    color: var(--gray-900);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .msg.user .msg-bubble {
-    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
-    color: white;
-    border-radius: 16px 4px 16px 16px;
-  }
-
-  .msg-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 6px;
-    flex-wrap: wrap;
-  }
-
-  .msg-time {
-    font-size: 10px;
-    color: var(--gray-500);
-  }
-
-  .source-tag {
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-weight: 500;
-    border: 1px solid;
-  }
-
-  .source-tag.direct {
-    background: var(--green-light);
-    color: #3B6D11;
-    border-color: #C0DD97;
-  }
-
-  .source-tag.inferred {
-    background: var(--blue-light);
-    color: var(--blue-dark);
-    border-color: #B5D4F4;
-  }
-
-  .source-tag.general {
-    background: #FFF8E1;
-    color: #815000;
-    border-color: #FFE082;
-  }
-
-  .source-label {
-    font-size: 10px;
-    color: var(--teal-dark);
-    background: var(--teal-light);
-    padding: 2px 8px;
-    border-radius: 10px;
-    border: 1px solid var(--teal-mid);
-    font-weight: 500;
-  }
-
-  .disclaimer {
-    font-size: 10px;
-    color: var(--gray-500);
-    font-style: italic;
-    margin-top: 8px;
-    padding: 6px 10px;
-    background: #FFFBF0;
-    border-left: 2px solid #FFD54F;
-    border-radius: 0 4px 4px 0;
-  }
-
-  /* ─── SUGGESTION CHIPS ─── */
-  .chips-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-  }
-
-  .chip {
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1.5px solid var(--teal-mid);
-    background: var(--teal-light);
-    color: var(--teal-dark);
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-
-  .chip:hover {
-    background: var(--teal);
-    color: white;
-    border-color: var(--teal);
-    transform: translateY(-1px);
-  }
-
-  /* ─── UPLOAD AREA ─── */
-  .upload-zone {
-    border: 2px dashed var(--teal-mid);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--teal-light);
-    margin: 12px 0;
-  }
-
-  .upload-zone:hover {
-    border-color: var(--teal);
-    background: #d3efe6;
-  }
-
-  .upload-zone-icon { font-size: 28px; margin-bottom: 8px; }
-  .upload-zone-title { font-size: 14px; font-weight: 600; color: var(--teal-dark); margin-bottom: 4px; }
-  .upload-zone-sub { font-size: 12px; color: var(--gray-500); }
-
-  .upload-success {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--green-light);
-    border: 1px solid #C0DD97;
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
-    font-size: 13px;
-    color: #3B6D11;
-    font-weight: 500;
-    margin: 8px 0;
-  }
-
-  /* ─── ROADMAP / TIMELINE ─── */
-  .timeline {
-    position: relative;
-    padding-left: 24px;
-    margin: 12px 0;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 9px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--teal), var(--blue));
-  }
-
-  .tl-item {
-    position: relative;
-    margin-bottom: 16px;
-  }
-
-  .tl-dot {
-    position: absolute;
-    left: -19px;
-    top: 4px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--teal);
-    border: 2px solid white;
-    box-shadow: 0 0 0 2px var(--teal);
-  }
-
-  .tl-phase {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--teal);
-    margin-bottom: 3px;
-  }
-
-  .tl-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--gray-900);
-    margin-bottom: 3px;
-  }
-
-  .tl-body {
-    font-size: 12px;
-    color: var(--gray-500);
-    line-height: 1.5;
-  }
-
-  /* ─── TABLE ─── */
-  .plan-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-    margin: 8px 0;
-  }
-
-  .plan-table th {
-    background: var(--teal-dark);
-    color: white;
-    padding: 8px 10px;
-    text-align: left;
-    font-weight: 600;
-  }
-
-  .plan-table td {
-    padding: 7px 10px;
-    border-bottom: 1px solid var(--gray-200);
-    vertical-align: top;
-    line-height: 1.4;
-  }
-
-  .plan-table tr:nth-child(even) td { background: var(--gray-100); }
-
-  /* ─── TYPING ANIMATION ─── */
-  .typing-indicator {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 12px 16px;
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 4px 16px 16px 16px;
-    width: fit-content;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .typing-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--teal);
-    animation: typing 1.2s infinite;
-  }
-
-  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-  @keyframes typing {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-    30% { transform: translateY(-4px); opacity: 1; }
-  }
-
-  /* ─── INPUT ROW ─── */
-  .chat-input-area {
-    border-top: 1px solid var(--gray-200);
-    padding: 14px 16px;
-    background: var(--white);
-    flex-shrink: 0;
-  }
-
-  .input-row {
-    display: flex;
-    gap: 10px;
-    align-items: flex-end;
-  }
-
-  .chat-input {
-    flex: 1;
-    border: 1.5px solid var(--gray-300);
-    border-radius: var(--radius-md);
-    padding: 10px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    resize: none;
-    outline: none;
-    min-height: 44px;
-    max-height: 120px;
-    transition: border-color 0.2s;
-    color: var(--gray-900);
-    background: var(--gray-100);
-    line-height: 1.5;
-  }
-
-  .chat-input:focus {
-    border-color: var(--teal);
-    background: var(--white);
-  }
-
-  .chat-input::placeholder { color: var(--gray-500); }
-
-  .send-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--teal), var(--blue));
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 18px;
-    transition: all 0.2s;
-    flex-shrink: 0;
-  }
-
-  .send-btn:hover { transform: scale(1.05); opacity: 0.92; }
-  .send-btn:active { transform: scale(0.97); }
-
-  .input-hint {
-    font-size: 11px;
-    color: var(--gray-500);
-    margin-top: 6px;
-    text-align: center;
-  }
-
-  /* ─── COLLEGE CARD ─── */
-  .college-card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    padding: 12px;
-    margin: 6px 0;
-  }
-
-  .college-card-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-  }
-
-  .college-badge {
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-weight: 600;
-  }
-
-  .college-badge.govt {
-    background: var(--green-light);
-    color: #3B6D11;
-  }
-
-  .college-badge.private {
-    background: var(--blue-light);
-    color: var(--blue-dark);
-  }
-
-  .college-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--gray-900);
-  }
-
-  .college-details {
-    font-size: 12px;
-    color: var(--gray-500);
-    line-height: 1.5;
-  }
-
-  /* ─── NEXT STEP CARD ─── */
-  .next-step-card {
-    background: linear-gradient(135deg, var(--teal-light), var(--blue-light));
-    border: 1px solid var(--teal-mid);
-    border-radius: var(--radius-sm);
-    padding: 12px 14px;
-    margin-top: 10px;
-  }
-
-  .next-step-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--teal-dark);
-    margin-bottom: 5px;
-  }
-
-  .next-step-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--gray-900);
-    margin-bottom: 8px;
-  }
-
-  .next-step-chips {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  /* ─── WELCOME CARD (no mode selected) ─── */
-  .welcome-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--gray-500);
-  }
-
-  .welcome-icon {
-    font-size: 48px;
-    margin-bottom: 16px;
-    filter: grayscale(0.3);
-  }
-
-  .welcome-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--gray-700);
-    margin-bottom: 8px;
-  }
-
-  .welcome-sub {
-    font-size: 13px;
-    color: var(--gray-500);
-    max-width: 300px;
-    line-height: 1.5;
-  }
-
-  /* ─── FORM FIELDS ─── */
-  .form-group {
-    margin-bottom: 10px;
-  }
-
-  .form-label {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--gray-700);
-    margin-bottom: 4px;
-  }
-
-  .form-select {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1.5px solid var(--gray-300);
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--gray-900);
-    background: var(--white);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .form-select:focus { border-color: var(--teal); }
-
-  /* ─── FOOTER ─── */
-  .footer {
-    background: var(--teal-deeper);
-    color: rgba(255,255,255,0.7);
-    text-align: center;
-    padding: 24px;
-    font-size: 12px;
-    margin-top: 40px;
-    line-height: 1.8;
-  }
-
-  .footer a { color: var(--teal-mid); text-decoration: none; }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 600px) {
-    .mode-grid { grid-template-columns: repeat(2, 1fr); }
-    nav { padding: 0 1rem; }
-    .hero { padding: 40px 1rem 32px; }
-    .hero-steps { display: none; }
-    .main-container { padding: 1.5rem 1rem 3rem; }
-  }
-
-  /* ─── FADE IN ─── */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .fade-in { animation: fadeIn 0.3s ease forwards; }
-
-  /* ─── FILE INPUT HIDDEN ─── */
-  #file-input { display: none; }
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --navy-deep:  #000204;
+  --navy-mid:   #243657;
+  --navy-light: #2e4470;
+  --teal:       #00b4d8;
+  --teal-dark:  #0096b5;
+  --teal-light: #e0f7fc;
+  --white:      #ffffff;
+  --gray-400:   #94a3b8;
+  --gray-600:   #64748b;
+  --gray-800:   #334155;
+  --success:    #10b981;
+  --error:      #ef4444;
+  --warning:    #f59e0b;
+  --info:       #3b82f6;
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.18);
+  --shadow-lg:  0 10px 40px rgba(0,0,0,0.22);
+  --glow-teal:  0 0 40px rgba(0,180,216,0.18);
+  --r-sm:  6px;
+  --r-md:  12px;
+  --r-lg:  18px;
+  --r-xl:  26px;
+  --r-full:9999px;
+  --fh: 'Poppins', sans-serif;
+  --fb: 'DM Sans', sans-serif;
+  --nav-h: 56px;
+  --mob-drawer-h: 52px;
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; }
+
+body {
+  font-family: var(--fb);
+  background: var(--navy-deep);
+  color: var(--white);
+  overflow: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Global scrollbar hide — all scrollable areas */
+* { scrollbar-width: none; }
+*::-webkit-scrollbar { display: none; }
+
+/* ═══════════════════════════════════════════
+   BACKGROUND
+═══════════════════════════════════════════ */
+.bg-mesh {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,180,216,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,180,216,0.04) 0%, transparent 60%),
+    linear-gradient(160deg, var(--navy-deep) 0%, #0d2240 50%, var(--navy-deep) 100%);
+}
+
+/* ═══════════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════════ */
+.screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+.screen.active { display: flex; }
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════ */
+.navbar {
+  background: rgba(10,20,36,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 0 1.25rem;
+  height: var(--nav-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 20;
+  gap: 8px;
+}
+
+.navbar-brand {
+  display: flex; align-items: center; gap: 9px;
+  min-width: 0; flex-shrink: 1; overflow: hidden;
+}
+.navbar-logo {
+  width: 32px; height: 32px; border-radius: 8px;
+  object-fit: cover; flex-shrink: 0;
+  border: 1.5px solid rgba(0,180,216,0.35);
+}
+.brand-text { min-width: 0; overflow: hidden; }
+.brand-main {
+  font-family: var(--fh); font-size: 13px; font-weight: 800;
+  color: var(--white); letter-spacing: -0.01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.brand-sub {
+  font-size: 9.5px; color: var(--teal); font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.navbar-right {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+}
+.navbar-user {
+  font-size: 11.5px; color: var(--gray-400);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 120px;
+}
+.navbar-user strong { color: var(--white); }
+
+.btn-logout {
+  padding: 5px 12px; background: transparent;
+  border: 1px solid rgba(255,255,255,0.14); border-radius: var(--r-full);
+  color: var(--gray-400); font-size: 11.5px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; font-family: var(--fb); white-space: nowrap; flex-shrink: 0;
+}
+.btn-logout:hover { border-color: var(--error); color: var(--error); }
+
+.btn-secondary {
+  padding: 6px 13px; background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.13); border-radius: var(--r-md);
+  color: var(--white); font-size: 11.5px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; font-family: var(--fb); white-space: nowrap; flex-shrink: 0;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.13); }
+
+/* ═══════════════════════════════════════════
+   ALERT / TOAST SYSTEM
+═══════════════════════════════════════════ */
+.alert {
+  padding: 10px 14px; border-radius: var(--r-sm);
+  font-size: 13px; margin-bottom: 1rem; display: none; line-height: 1.5;
+}
+.alert.error   { background: rgba(239,68,68,0.12); color: #fca5a5; border-left: 3px solid var(--error); display: block; }
+.alert.success { background: rgba(16,185,129,0.12); color: #6ee7b7; border-left: 3px solid var(--success); display: block; }
+.alert.info    { background: rgba(59,130,246,0.12); color: #93c5fd; border-left: 3px solid var(--info); display: block; }
+.alert.warning { background: rgba(245,158,11,0.12); color: #fcd34d; border-left: 3px solid var(--warning); display: block; }
+
+/* Toast — for upload/chat errors that aren't in the auth form */
+#toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+  z-index: 9999; max-width: 360px; width: calc(100% - 2rem);
+  padding: 10px 16px; border-radius: var(--r-md); font-size: 13px;
+  line-height: 1.5; font-family: var(--fb); text-align: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.25s;
+}
+#toast.show { opacity: 1; pointer-events: auto; }
+#toast.t-error   { background: rgba(15,5,5,0.95); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
+#toast.t-success { background: rgba(5,15,10,0.95); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.4); }
+#toast.t-info    { background: rgba(5,10,20,0.95); color: #93c5fd; border: 1px solid rgba(59,130,246,0.4); }
+#toast.t-warning { background: rgba(15,10,5,0.95); color: #fcd34d; border: 1px solid rgba(245,158,11,0.4); }
+
+/* ═══════════════════════════════════════════
+   AUTH SCREEN
+═══════════════════════════════════════════ */
+#screen-auth {
+  align-items: center; justify-content: center;
+  padding: 1.5rem; overflow-y: auto;
+}
+
+.auth-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: var(--r-xl);
+  padding: 2.25rem 2rem;
+  width: 100%; max-width: 420px;
+  z-index: 1;
+  box-shadow: var(--shadow-lg), var(--glow-teal);
+  animation: slideUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+@keyframes slideUp {
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.auth-logo {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin-bottom: 6px;
+}
+.auth-logo-img {
+  width: 52px; height: 52px; border-radius: 14px;
+  object-fit: cover; border: 2px solid rgba(0,180,216,0.4);
+}
+.auth-logo-text .brand-main { font-size: 1.2rem; }
+.auth-logo-text .brand-sub  { font-size: 10px; }
+
+.auth-tagline {
+  text-align: center; font-size: 11px; color: var(--gray-400);
+  margin-bottom: 1.6rem; font-style: italic; letter-spacing: 0.01em;
+}
+
+.auth-tabs {
+  display: flex; background: rgba(255,255,255,0.06);
+  border-radius: var(--r-md); padding: 4px; margin-bottom: 1.4rem; gap: 4px;
+}
+.auth-tab {
+  flex: 1; padding: 8px; border: none; background: transparent;
+  border-radius: var(--r-sm); font-family: var(--fh); font-size: 13px;
+  font-weight: 600; color: var(--gray-400); cursor: pointer; transition: all 0.2s;
+}
+.auth-tab.active {
+  background: var(--teal); color: var(--navy-deep);
+  box-shadow: 0 2px 10px rgba(0,180,216,0.4);
+}
+
+.form-group { margin-bottom: 0.9rem; }
+.form-label {
+  display: block; font-size: 10.5px; font-weight: 700; color: var(--gray-400);
+  margin-bottom: 5px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.form-input {
+  width: 100%; padding: 11px 13px;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.11);
+  border-radius: var(--r-md);
+  font-family: var(--fb); font-size: 14px; color: var(--white);
+  outline: none; transition: all 0.2s;
+}
+.form-input::placeholder { color: rgba(255,255,255,0.22); }
+.form-input:focus {
+  border-color: var(--teal); background: rgba(0,180,216,0.07);
+  box-shadow: 0 0 0 3px rgba(0,180,216,0.14);
+}
+
+.btn-primary {
+  width: 100%; padding: 13px; background: var(--teal); color: var(--navy-deep);
+  border: none; border-radius: var(--r-md); font-family: var(--fh); font-size: 14px;
+  font-weight: 700; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 0.25rem;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--teal-dark); transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,180,216,0.4);
+}
+.btn-primary:disabled {
+  background: rgba(255,255,255,0.08); color: var(--gray-600);
+  cursor: not-allowed; transform: none;
+}
+
+.auth-footer-links {
+  display: flex; justify-content: center; gap: 14px;
+  margin-top: 1.2rem; flex-wrap: wrap;
+}
+.auth-footer-links a {
+  font-size: 11px; color: var(--gray-600); text-decoration: none;
+  transition: color 0.15s;
+}
+.auth-footer-links a:hover { color: var(--teal); }
+
+.signup-legal {
+  font-size: 10.5px; color: var(--gray-600); text-align: center;
+  margin-top: 10px; line-height: 1.6;
+}
+.signup-legal a { color: var(--teal); text-decoration: none; }
+.signup-legal a:hover { text-decoration: underline; }
+
+/* ═══════════════════════════════════════════
+   SPINNER
+═══════════════════════════════════════════ */
+.spinner {
+  display: inline-block; width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.3); border-top-color: currentColor;
+  border-radius: 50%; animation: spin 0.65s linear infinite;
+  vertical-align: middle; margin-right: 4px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ═══════════════════════════════════════════
+   PRODUCT SELECTION SCREEN
+═══════════════════════════════════════════ */
+.page-content {
+  flex: 1; max-width: 1100px; margin: 0 auto;
+  padding: 1.75rem 1.25rem; width: 100%; overflow-y: auto;
+}
+.page-eyebrow {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 4px;
+}
+.page-title {
+  font-family: var(--fh); font-size: clamp(1.25rem, 3vw, 1.7rem);
+  font-weight: 800; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px;
+}
+.page-sub { font-size: 13.5px; color: var(--gray-400); margin-bottom: 1.75rem; }
+
+.section-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gray-400); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::after { content:''; flex:1; height:1px; background:rgba(255,255,255,0.07); }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 10px; margin-bottom: 1.75rem;
+}
+
+.product-card {
+  background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.09);
+  border-radius: var(--r-lg); padding: 16px; cursor: pointer;
+  transition: all 0.22s ease; position: relative; overflow: hidden;
+}
+.product-card.loading { pointer-events: none; opacity: 0.6; }
+.product-card:hover {
+  border-color: var(--teal); background: rgba(0,180,216,0.07);
+  transform: translateY(-3px); box-shadow: var(--shadow-md), var(--glow-teal);
+}
+.product-card-icon { font-size: 24px; margin-bottom: 9px; }
+.product-card-name {
+  font-family: var(--fh); font-size: 13px; font-weight: 700;
+  color: var(--white); margin-bottom: 7px; line-height: 1.3;
+}
+.product-card-badges { display: flex; gap: 4px; flex-wrap: wrap; }
+.badge { font-size: 9.5px; font-weight: 600; padding: 2px 7px; border-radius: var(--r-full); }
+.badge-pdf  { background: rgba(0,180,216,0.15); color: var(--teal); border: 1px solid rgba(0,180,216,0.3); }
+.badge-cards{ background: rgba(255,255,255,0.07); color: var(--gray-400); border: 1px solid rgba(255,255,255,0.11); }
+.badge-corp { background: rgba(245,158,11,0.15); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
+
+/* ═══════════════════════════════════════════
+   UPLOAD SCREEN
+═══════════════════════════════════════════ */
+.upload-content {
+  flex: 1; max-width: 640px; margin: 0 auto;
+  padding: 1.75rem 1.25rem; width: 100%; overflow-y: auto;
+}
+
+.upload-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(0,180,216,0.1); border: 1px solid rgba(0,180,216,0.25);
+  padding: 4px 13px; border-radius: var(--r-full);
+  font-size: 12px; font-weight: 600; color: var(--teal); margin-bottom: 1.4rem;
+}
+
+.upload-slots { margin-bottom: 1.6rem; }
+
+.upload-slot {
+  background: rgba(255,255,255,0.04);
+  border: 1.5px dashed rgba(255,255,255,0.14);
+  border-radius: var(--r-lg); padding: 14px 16px; margin-bottom: 9px;
+  display: flex; align-items: center; gap: 13px;
+  cursor: pointer; transition: all 0.2s ease; user-select: none;
+}
+.upload-slot:hover:not(.slot-uploading) {
+  border-color: var(--teal); background: rgba(0,180,216,0.06);
+}
+.upload-slot.slot-done {
+  border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.05); border-style: solid;
+}
+.upload-slot.slot-uploading {
+  border-color: var(--teal); background: rgba(0,180,216,0.06);
+  cursor: wait; pointer-events: none;
+}
+.upload-slot.slot-error {
+  border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.04); border-style: solid;
+}
+
+.slot-icon {
+  width: 40px; height: 40px; border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0; background: rgba(255,255,255,0.06);
+}
+.slot-done  .slot-icon { background: rgba(16,185,129,0.14); }
+.slot-uploading .slot-icon { background: rgba(0,180,216,0.12); }
+.slot-error .slot-icon { background: rgba(239,68,68,0.12); }
+
+.slot-info { flex: 1; min-width: 0; }
+.slot-label { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+.slot-meta  { font-size: 11px; color: var(--gray-400); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.slot-meta.ok  { color: var(--success); }
+.slot-meta.err { color: #fca5a5; white-space: normal; }
+
+.slot-badge {
+  font-size: 9.5px; font-weight: 700; padding: 2px 8px;
+  border-radius: var(--r-full); flex-shrink: 0;
+  background: rgba(0,180,216,0.14); color: var(--teal); border: 1px solid rgba(0,180,216,0.3);
+}
+
+.progress-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; color: var(--gray-400); margin-bottom: 7px;
+}
+.progress-row strong { color: var(--white); }
+.progress-bar {
+  background: rgba(255,255,255,0.07); border-radius: var(--r-full);
+  height: 5px; overflow: hidden; margin-bottom: 1.4rem;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), #48cae4);
+  border-radius: var(--r-full); transition: width 0.4s ease;
+}
+
+.btn-start {
+  width: 100%; padding: 13px; background: var(--teal); color: var(--navy-deep);
+  border: none; border-radius: var(--r-md); font-family: var(--fh); font-size: 14px;
+  font-weight: 700; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-start:hover:not(:disabled) {
+  background: var(--teal-dark); transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,180,216,0.4);
+}
+.btn-start:disabled {
+  background: rgba(255,255,255,0.08); color: var(--gray-600);
+  cursor: not-allowed; transform: none;
+}
+
+.upload-note {
+  text-align: center; font-size: 10.5px; color: var(--gray-600);
+  margin-top: 0.9rem; line-height: 1.55;
+}
+
+/* ═══════════════════════════════════════════
+   DASHBOARD LAYOUT
+═══════════════════════════════════════════ */
+.dashboard-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
+.dashboard-body    { flex: 1; display: flex; overflow: hidden; min-height: 0; }
+
+/* ── Sidebar (desktop) ── */
+.sidebar {
+  width: 234px; flex-shrink: 0;
+  background: rgba(6,14,26,0.94);
+  border-right: 1px solid rgba(255,255,255,0.07);
+  display: flex; flex-direction: column;
+  overflow-y: auto; overflow-x: hidden;
+}
+
+.sb-section { padding: 14px 13px 0; }
+.sb-product-tag {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 3px;
+}
+.sb-product-name {
+  font-family: var(--fh); font-size: 13px; font-weight: 700;
+  color: var(--white); line-height: 1.35;
+}
+.sb-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 12px 13px 8px; }
+.sb-label {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--gray-600); padding: 0 13px; margin-bottom: 3px;
+}
+
+.card-btn {
+  width: 100%; display: flex; align-items: center; gap: 9px;
+  padding: 9px 13px; background: transparent; border: none;
+  color: var(--gray-400); font-family: var(--fb); font-size: 12.5px;
+  font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: left;
+}
+.card-btn:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+.card-btn.active {
+  background: rgba(0,180,216,0.11); color: var(--teal);
+  border-right: 2px solid var(--teal); font-weight: 600;
+}
+.card-btn-icon {
+  width: 26px; height: 26px; border-radius: 7px;
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0;
+}
+.card-btn.active .card-btn-icon { background: rgba(0,180,216,0.2); }
+
+.usage-meter {
+  margin-top: auto; padding: 12px 13px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.usage-label {
+  font-size: 10.5px; color: var(--gray-400); margin-bottom: 5px;
+  display: flex; justify-content: space-between;
+}
+.usage-bar { background: rgba(255,255,255,0.08); border-radius: var(--r-full); height: 4px; overflow: hidden; }
+.usage-fill { height: 100%; background: var(--teal); border-radius: var(--r-full); transition: width 0.4s; }
+
+.sidebar-footer {
+  padding: 8px 13px 13px;
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.sidebar-footer a {
+  font-size: 10px; color: var(--gray-600); text-decoration: none;
+  transition: color 0.15s;
+}
+.sidebar-footer a:hover { color: var(--teal); }
+
+/* ── Chat panel ── */
+.chat-panel {
+  flex: 1; display: flex; flex-direction: column;
+  overflow: hidden; min-width: 0; background: #080f1c;
+}
+
+.chat-topbar {
+  padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(6,14,26,0.85); flex-shrink: 0;
+}
+.ct-icon {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: rgba(0,180,216,0.14); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; overflow: hidden;
+}
+.ct-icon img { width: 22px; height: 22px; object-fit: contain; border-radius: 4px; }
+.ct-title { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--white); }
+.ct-sub   { font-size: 10.5px; color: var(--gray-400); margin-top: 1px; }
+.ct-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+.online-dot {
+  width: 7px; height: 7px; background: var(--success); border-radius: 50%;
+  animation: pulse-dot 2.2s infinite;
+}
+@keyframes pulse-dot {
+  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,0.4);}
+  50%{opacity:.7;box-shadow:0 0 0 5px rgba(16,185,129,0);}
+}
+
+.feedback-btn {
+  font-size: 11px; color: var(--gray-600); background: none; border: none;
+  cursor: pointer; padding: 4px 6px; border-radius: var(--r-sm);
+  transition: all 0.15s; font-family: var(--fb);
+}
+.feedback-btn:hover { color: var(--teal); background: rgba(0,180,216,0.08); }
+
+/* ── Messages ── */
+.chat-messages {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  padding: 16px; display: flex; flex-direction: column;
+  gap: 13px; min-height: 0;
+}
+
+.chat-welcome {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center; padding: 2.5rem 1.5rem;
+  color: var(--gray-600); flex: 1;
+}
+.chat-welcome-logo {
+  width: 72px; height: 72px; object-fit: contain; margin-bottom: 16px;
+  opacity: 0.7; border-radius: 16px;
+}
+.chat-welcome-title {
+  font-family: var(--fh); font-size: 1rem; font-weight: 700;
+  color: var(--gray-400); margin-bottom: 6px;
+}
+.chat-welcome-sub { font-size: 13px; max-width: 240px; line-height: 1.55; }
+
+.msg { display: flex; gap: 8px; }
+.msg.user { flex-direction: row-reverse; }
+
+.msg-avatar {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; overflow: hidden;
+}
+.msg-avatar.ai   { background: linear-gradient(135deg,var(--teal),#48cae4); }
+.msg-avatar.ai img { width: 18px; height: 18px; object-fit: contain; border-radius: 3px; }
+.msg-avatar.user { background: var(--navy-light); color: var(--white); font-size: 9px; }
+
+.msg-body { max-width: calc(100% - 40px); }
+.msg.user .msg-body { align-items: flex-end; display: flex; flex-direction: column; }
+
+.msg-bubble {
+  padding: 9px 13px; border-radius: 13px;
+  font-size: 13.5px; line-height: 1.65;
+}
+.msg-bubble p { margin-bottom: 6px; }
+.msg-bubble p:last-child { margin-bottom: 0; }
+.msg.ai   .msg-bubble {
+  background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 4px 13px 13px 13px; color: rgba(255,255,255,0.91);
+}
+.msg.user .msg-bubble {
+  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+  color: var(--navy-deep); border-radius: 13px 4px 13px 13px; font-weight: 500;
+}
+.msg-time { font-size: 9.5px; color: var(--gray-600); margin-top: 3px; padding: 0 2px; }
+
+.disclaimer {
+  font-size: 10.5px; color: var(--gray-600); font-style: italic;
+  margin-top: 6px; padding: 5px 9px;
+  background: rgba(245,158,11,0.06); border-left: 2px solid var(--warning);
+  border-radius: 0 4px 4px 0;
+}
+
+.chips-row { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+.chip {
+  padding: 4px 12px; border-radius: var(--r-full); font-size: 11.5px;
+  font-weight: 500; cursor: pointer;
+  border: 1px solid rgba(0,180,216,0.35); background: rgba(0,180,216,0.07);
+  color: var(--teal); transition: all 0.15s; white-space: nowrap;
+}
+.chip:hover {
+  background: var(--teal); color: var(--navy-deep);
+  border-color: var(--teal); transform: translateY(-1px);
+}
+
+.typing-indicator {
+  display: flex; align-items: center; gap: 4px; padding: 9px 13px;
+  background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 4px 13px 13px 13px; width: fit-content;
+}
+.typing-dot {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
+  animation: bounce-dot 1.2s infinite;
+}
+.typing-dot:nth-child(2){animation-delay:.2s;}
+.typing-dot:nth-child(3){animation-delay:.4s;}
+@keyframes bounce-dot {
+  0%,60%,100%{transform:translateY(0);opacity:.35;}
+  30%{transform:translateY(-5px);opacity:1;}
+}
+
+/* ── Chat input ── */
+.chat-input-area {
+  flex-shrink: 0; border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 10px 14px 12px; background: rgba(6,14,26,0.92);
+}
+.input-row { display: flex; gap: 8px; align-items: flex-end; }
+
+.chat-input {
+  flex: 1; background: rgba(255,255,255,0.065);
+  border: 1.5px solid rgba(255,255,255,0.11); border-radius: var(--r-md);
+  padding: 10px 12px; font-family: var(--fb); font-size: 14px; color: var(--white);
+  resize: none; outline: none; min-height: 42px; max-height: 110px;
+  transition: border-color 0.2s; line-height: 1.5;
+}
+.chat-input::placeholder { color: rgba(255,255,255,0.22); }
+.chat-input:focus { border-color: var(--teal); background: rgba(0,180,216,0.06); }
+.chat-input:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.send-btn {
+  width: 42px; height: 42px; border-radius: var(--r-md); background: var(--teal);
+  border: none; cursor: pointer; display: flex; align-items: center;
+  justify-content: center; color: var(--navy-deep); font-size: 17px;
+  transition: all 0.2s; flex-shrink: 0;
+}
+.send-btn:hover:not(:disabled) { background: var(--teal-dark); transform: scale(1.05); }
+.send-btn:disabled { background: rgba(255,255,255,0.07); cursor: not-allowed; color: var(--gray-600); }
+
+.input-hint { font-size: 10px; color: var(--gray-600); margin-top: 5px; text-align: center; }
+
+/* ── Animations ── */
+.fade-in { animation: fadeIn 0.26s ease forwards; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);} }
+
+/* ── Hidden file input ── */
+.hidden-file { display: none; }
+
+/* ═══════════════════════════════════════════
+   MOBILE CARD DRAWER  (replaces hidden sidebar on mobile)
+   A bottom drawer that slides up with the card list
+═══════════════════════════════════════════ */
+.mobile-card-bar {
+  display: none; /* hidden on desktop */
+  flex-shrink: 0; height: var(--mob-drawer-h);
+  background: rgba(6,14,26,0.97);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  overflow-x: auto; overflow-y: hidden;
+  align-items: center; gap: 6px;
+  padding: 0 10px;
+  z-index: 10;
+}
+.mob-card-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 7px 12px; border-radius: var(--r-full); flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05);
+  color: var(--gray-400); font-family: var(--fb); font-size: 12px;
+  font-weight: 500; cursor: pointer; transition: all 0.18s; white-space: nowrap;
+}
+.mob-card-chip:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+.mob-card-chip.active {
+  background: rgba(0,180,216,0.18); border-color: var(--teal);
+  color: var(--teal); font-weight: 600;
+}
+.mob-card-chip-icon { font-size: 13px; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+═══════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 768px) {
+  :root { --nav-h: 52px; }
+
+  .navbar { padding: 0 1rem; gap: 6px; }
+  .brand-main { font-size: 12px; }
+  .navbar-user { display: none; } /* hide "Welcome, Name" — too cramped */
+  .btn-secondary { padding: 5px 10px; font-size: 11px; }
+
+  .sidebar { display: none; } /* hidden — replaced by mobile-card-bar */
+  .mobile-card-bar { display: flex; }
+
+  /* Dashboard: chat fills screen, card bar is at bottom */
+  .dashboard-body { flex-direction: column; }
+  .chat-panel { flex: 1; min-height: 0; }
+
+  /* Reorder: chat messages, then input, then card bar at very bottom */
+  #screen-dashboard .dashboard-wrapper {
+    display: flex; flex-direction: column;
+  }
+  #screen-dashboard .dashboard-body {
+    flex: 1; min-height: 0; overflow: hidden;
+  }
+
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .page-content  { padding: 1.25rem 1rem; }
+  .upload-content{ padding: 1.25rem 1rem; }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .brand-main { font-size: 11.5px; }
+  .brand-sub  { font-size: 9px; }
+  .navbar-logo { width: 28px; height: 28px; }
+
+  .products-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .product-card  { padding: 12px; }
+  .product-card-icon { font-size: 20px; margin-bottom: 7px; }
+  .product-card-name { font-size: 12px; }
+
+  .auth-card { padding: 1.75rem 1.25rem; }
+  .auth-logo-img { width: 44px; height: 44px; }
+  .auth-logo-text .brand-main { font-size: 1rem; }
+
+  .chat-input-area { padding: 8px 10px 10px; }
+  .chat-messages   { padding: 12px 10px; gap: 10px; }
+  .msg-bubble { font-size: 13px; }
+
+  .mob-card-chip { padding: 6px 10px; font-size: 11.5px; }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .brand-main { display: none; } /* just show logo on tiny phones */
+}
 </style>
 </head>
 <body>
+<div class="bg-mesh"></div>
 
-<!-- NAVBAR -->
-<nav>
-  <div class="nav-brand">
-    <div class="nav-logo">🧠</div>
-    <div class="nav-brand-text">
-      <span class="nav-title">Brain Checker</span>
-      <span class="nav-subtitle">Post-Counseling AI System</span>
+<!-- ═══════════════════════ TOAST ═══════════════════════ -->
+<div id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 1 — AUTH
+════════════════════════════════════════════════════ -->
+<div id="screen-auth" class="screen active">
+  <div class="auth-card">
+
+    <div class="auth-logo">
+      <img src="assets/bishop_BC.png" class="auth-logo-img" alt="Bishop Brain Checker"
+           onerror="this.style.display='none'">
+      <div class="auth-logo-text">
+        <div class="brand-main">Bishop by Brain Checker</div>
+        <div class="brand-sub">Post-Counseling AI System</div>
+      </div>
     </div>
-  </div>
-  <div class="nav-badge">✦ AI-Powered Guidance</div>
-</nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">✦ Counseling Report Complete</div>
-  <h1>Turn Your Report Into<br>a Clear Family Action Plan</h1>
-  <p>Your counseling session is done. Now let our AI guide you step-by-step through understanding, planning, and next steps.</p>
-  <div class="hero-steps">
-    <span class="hero-step">📄 Understand Report</span>
-    <span class="hero-step-arrow">→</span>
-    <span class="hero-step">🗺 Career Roadmap</span>
-    <span class="hero-step-arrow">→</span>
-    <span class="hero-step">🎓 Find College</span>
-    <span class="hero-step-arrow">→</span>
-    <span class="hero-step">📅 Action Plan</span>
-    <span class="hero-step-arrow">→</span>
-    <span class="hero-step">👨‍👩‍👧 Parent Guide</span>
+    <div class="auth-tagline">Decoding Brain Power, Unleashing Opportunities</div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+      <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+    </div>
+
+    <div id="auth-alert" class="alert"></div>
+
+    <!-- Login form -->
+    <div id="login-form">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" id="login-email" type="email"
+               placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" id="login-pass" type="password"
+               placeholder="Your password" autocomplete="current-password"
+               onkeydown="if(event.key==='Enter') doLogin()">
+      </div>
+      <button class="btn-primary" id="btn-login" onclick="doLogin()">
+        Login to Bishop
+      </button>
+    </div>
+
+    <!-- Signup form -->
+    <div id="signup-form" style="display:none;">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" id="su-name" type="text"
+               placeholder="Your full name" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" id="su-email" type="email"
+               placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" id="su-pass" type="password"
+               placeholder="Min. 8 characters" autocomplete="new-password"
+               onkeydown="if(event.key==='Enter') doSignup()">
+      </div>
+      <button class="btn-primary" id="btn-signup" onclick="doSignup()">
+        Create Account
+      </button>
+      <div class="signup-legal">
+        By creating an account you agree to our
+        <a href="/terms" target="_blank">Terms of Service</a> and
+        <a href="/privacy" target="_blank">Privacy Policy</a>.
+      </div>
+    </div>
+
+    <div class="auth-footer-links">
+      <a href="/privacy" target="_blank">Privacy Policy</a>
+      <a href="/terms"   target="_blank">Terms of Service</a>
+      <a href="mailto:support@brainchecker.in">Support</a>
+    </div>
+
   </div>
 </div>
 
-<!-- MAIN -->
-<div class="main-container">
 
-  <!-- MODE SELECTION -->
-  <div>
-    <div class="section-label">Choose Your Mode</div>
-    <div class="section-title">What would you like to do today?</div>
-    <div class="section-sub">Select a mode below — the AI assistant will focus only on that task.</div>
-  </div>
-
-  <div class="mode-grid" id="mode-grid">
-    <div class="mode-card" onclick="selectMode('report')" id="card-report">
-      <div class="mode-icon" style="background:#E1F5EE;">📄</div>
-      <div class="mode-card-title">Understand Report</div>
-      <div class="mode-card-desc">Upload & explain your counseling report in simple language</div>
-    </div>
-    <div class="mode-card" onclick="selectMode('roadmap')" id="card-roadmap">
-      <div class="mode-icon" style="background:#E6F1FB;">🗺️</div>
-      <div class="mode-card-title">Career & College Roadmap</div>
-      <div class="mode-card-desc">See your path from 10th → 12th → Degree → Career</div>
-    </div>
-    <div class="mode-card" onclick="selectMode('college')" id="card-college">
-      <div class="mode-icon" style="background:#EAF3DE;">🎓</div>
-      <div class="mode-card-title">Find Best Fit College</div>
-      <div class="mode-card-desc">Get personalised college recommendations based on your profile</div>
-    </div>
-    <div class="mode-card" onclick="selectMode('plan')" id="card-plan">
-      <div class="mode-icon" style="background:#FFF8E1;">📅</div>
-      <div class="mode-card-title">Roadmap / Action Plan</div>
-      <div class="mode-card-desc">30-60-90 day study & action plan for student and parent</div>
-    </div>
-    <div class="mode-card" onclick="selectMode('parent')" id="card-parent">
-      <div class="mode-icon" style="background:#FAEEDA;">👨‍👩‍👧</div>
-      <div class="mode-card-title">Parent Guide</div>
-      <div class="mode-card-desc">How to support, motivate, and communicate with your child</div>
-    </div>
-  </div>
-
-  <!-- CHAT WRAPPER -->
-  <div class="chat-wrapper" id="chat-wrapper">
-    <div class="chat-header" id="chat-header">
-      <div class="chat-header-icon" id="chat-mode-icon">🧠</div>
-      <div class="chat-header-info">
-        <div class="chat-header-title" id="chat-mode-title">Brain Checker AI Assistant</div>
-        <div class="chat-header-mode" id="chat-mode-sub">Select a mode above to begin</div>
-      </div>
-      <div class="chat-header-status"><div class="status-dot"></div> Online</div>
-    </div>
-
-    <div class="chat-messages" id="chat-messages">
-      <div class="welcome-card" id="welcome-card">
-        <div class="welcome-icon">🧠</div>
-        <div class="welcome-title">Welcome to Brain Checker AI</div>
-        <div class="welcome-sub">Choose one of the 5 modes above to begin your post-counseling journey. The AI will guide you step by step.</div>
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 2 — PRODUCT SELECTION
+════════════════════════════════════════════════════ -->
+<div id="screen-products" class="screen">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC"
+           onerror="this.style.display='none'">
+      <div class="brand-text">
+        <div class="brand-main">Bishop by Brain Checker</div>
+        <div class="brand-sub">Post-Counseling AI</div>
       </div>
     </div>
+    <div class="navbar-right">
+      <div class="navbar-user">Welcome, <strong id="nav-user-name">User</strong></div>
+      <button class="btn-logout" onclick="doLogout()">Logout</button>
+    </div>
+  </nav>
 
-    <div class="chat-input-area" id="chat-input-area">
-      <div id="upload-row"></div>
-      <div class="input-row">
-        <textarea
-          class="chat-input"
-          id="chat-input"
-          placeholder="Select a mode to start chatting..."
-          rows="1"
-          disabled
-          onkeydown="handleKey(event)"
-          oninput="autoResize(this)"
-        ></textarea>
-        <button class="send-btn" onclick="sendMessage()" id="send-btn" disabled>➤</button>
-      </div>
-      <div class="input-hint" id="input-hint">🔒 Powered by Claude AI · Your data is private</div>
+  <div class="page-content">
+    <div class="page-eyebrow">Step 1 of 3</div>
+    <div class="page-title">Choose Your Assessment</div>
+    <div class="page-sub">Select the Brain Checker product your counselling session used.</div>
+
+    <div id="prod-loading" style="color:var(--gray-400);font-size:13px;padding:1rem 0;">
+      <span class="spinner" style="border-top-color:var(--teal);"></span> Loading products…
+    </div>
+
+    <div id="prod-student" style="display:none;">
+      <div class="section-label">For Students &amp; Parents</div>
+      <div class="products-grid" id="grid-student"></div>
+    </div>
+    <div id="prod-corp" style="display:none;">
+      <div class="section-label">For Professionals &amp; Corporates</div>
+      <div class="products-grid" id="grid-corp"></div>
     </div>
   </div>
-
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <strong style="color:white;">Brain Checker® Post-Counseling AI System</strong><br>
-  107, Business Court, 100 Feet Ring Road, Nashik-422006 · <a href="tel:+919970057774">+91-99700-57774</a><br>
-  <span style="font-size:10px;opacity:0.65;">This AI assistant is for guidance only and does not replace professional counseling. Always refer to your counselor's original report and recommendations.</span>
-</footer>
 
-<input type="file" id="file-input" accept=".pdf" onchange="handleFileUpload(event)">
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 3 — PDF UPLOAD
+════════════════════════════════════════════════════ -->
+<div id="screen-upload" class="screen">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC"
+           onerror="this.style.display='none'">
+      <div class="brand-text">
+        <div class="brand-main">Bishop by Brain Checker</div>
+        <div class="brand-sub">Post-Counseling AI</div>
+      </div>
+    </div>
+    <div class="navbar-right">
+      <button class="btn-secondary" onclick="goTo('screen-products')">← Change</button>
+      <button class="btn-logout" onclick="doLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="upload-content">
+    <div class="page-eyebrow">Step 2 of 3</div>
+    <div class="page-title" id="up-title">Upload Your Reports</div>
+    <div class="page-sub" id="up-sub">Upload required PDFs to unlock AI analysis.</div>
+    <div class="upload-badge" id="up-badge">📋 Product</div>
+    <div class="upload-slots" id="up-slots"></div>
+
+    <div class="progress-row">
+      <span>Upload progress</span>
+      <strong id="up-count">0 of 0 required</strong>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="up-fill" style="width:0%"></div>
+    </div>
+
+    <button class="btn-start" id="btn-start" onclick="goToDashboard()" disabled>
+      🔒 Upload required reports to continue
+    </button>
+    <div class="upload-note">
+      PDFs are processed in memory — never stored as files on our servers.
+      Only text embeddings are saved to power your AI session.
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 4 — DASHBOARD / CHAT
+════════════════════════════════════════════════════ -->
+<div id="screen-dashboard" class="screen">
+  <div class="dashboard-wrapper">
+
+    <!-- Shared navbar -->
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC"
+             onerror="this.style.display='none'">
+        <div class="brand-text">
+          <div class="brand-main">Bishop by Brain Checker</div>
+          <div class="brand-sub">Post-Counseling AI</div>
+        </div>
+      </div>
+      <div class="navbar-right">
+        <div class="navbar-user">Hi, <strong id="dash-user-name">User</strong></div>
+        <button class="btn-logout" onclick="doLogout()">Logout</button>
+      </div>
+    </nav>
+
+    <div class="dashboard-body">
+
+      <!-- ── SIDEBAR (desktop only) ── -->
+      <div class="sidebar">
+        <div class="sb-section">
+          <div class="sb-product-tag">Active Product</div>
+          <div class="sb-product-name" id="sb-prod-name">—</div>
+        </div>
+        <div class="sb-divider"></div>
+        <div class="sb-label">Analysis Cards</div>
+        <div id="card-btns"></div>
+
+        <div class="usage-meter">
+          <div class="usage-label">
+            <span>Questions used</span>
+            <span id="usage-count">—</span>
+          </div>
+          <div class="usage-bar">
+            <div class="usage-fill" id="usage-fill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <a href="/privacy" target="_blank">Privacy</a>
+          <a href="/terms"   target="_blank">Terms</a>
+          <a href="mailto:support@brainchecker.in">Support</a>
+          <a href="#" onclick="openFeedback(); return false;">Feedback</a>
+        </div>
+      </div>
+
+      <!-- ── CHAT PANEL ── -->
+      <div class="chat-panel">
+
+        <!-- Chat topbar -->
+        <div class="chat-topbar">
+          <div class="ct-icon" id="ct-icon">
+            <img src="assets/bishop_BC.png" alt="Bishop" id="ct-icon-img">
+          </div>
+          <div>
+            <div class="ct-title" id="ct-title">Bishop AI Assistant</div>
+            <div class="ct-sub"   id="ct-sub">Select a card to begin</div>
+          </div>
+          <div class="ct-actions">
+            <button class="feedback-btn" onclick="openFeedback()" title="Send feedback">
+              💬 Feedback
+            </button>
+            <div class="online-dot" title="AI Online"></div>
+          </div>
+        </div>
+
+        <!-- Messages area -->
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-welcome" id="chat-welcome">
+            <img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop"
+                 onerror="this.style.display='none'">
+            <div class="chat-welcome-title">Your reports are loaded</div>
+            <div class="chat-welcome-sub">Select an analysis card to start chatting with Bishop.</div>
+          </div>
+        </div>
+
+        <!-- Input area -->
+        <div class="chat-input-area">
+          <div class="input-row">
+            <textarea class="chat-input" id="chat-input"
+                      placeholder="Select a card to start…" rows="1"
+                      disabled
+                      onkeydown="handleKey(event)"
+                      oninput="autoResize(this)"></textarea>
+            <button class="send-btn" id="send-btn" onclick="sendMessage()" disabled>➤</button>
+          </div>
+          <div class="input-hint">
+            Powered by Bishop · Brain Checker AI &nbsp;·&nbsp;
+            <a href="/privacy" target="_blank" style="color:var(--gray-600);text-decoration:none;">Privacy</a> &nbsp;·&nbsp;
+            <a href="/terms"   target="_blank" style="color:var(--gray-600);text-decoration:none;">Terms</a>
+          </div>
+        </div>
+
+      </div><!-- /chat-panel -->
+    </div><!-- /dashboard-body -->
+
+    <!-- ── MOBILE CARD BAR (visible only on mobile, below chat) ── -->
+    <div class="mobile-card-bar" id="mobile-card-bar"></div>
+
+  </div><!-- /dashboard-wrapper -->
+</div><!-- /screen-dashboard -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     FEEDBACK MODAL
+════════════════════════════════════════════════════ -->
+<div id="feedback-modal" style="
+  display:none; position:fixed; inset:0; z-index:9000;
+  background:rgba(0,0,0,0.7); backdrop-filter:blur(6px);
+  align-items:center; justify-content:center; padding:1.5rem;
+">
+  <div style="
+    background:#0d1e34; border:1px solid rgba(255,255,255,0.12);
+    border-radius:20px; padding:2rem; max-width:400px; width:100%;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    animation: slideUp 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+  ">
+    <div style="font-family:var(--fh);font-size:16px;font-weight:700;margin-bottom:6px;">
+      💬 Send Feedback
+    </div>
+    <div style="font-size:12px;color:var(--gray-400);margin-bottom:1.2rem;line-height:1.5;">
+      Tell us what's working, what's broken, or how we can improve Bishop.
+    </div>
+    <textarea id="feedback-text" rows="4" style="
+      width:100%;padding:10px 12px;background:rgba(255,255,255,0.07);
+      border:1.5px solid rgba(255,255,255,0.12);border-radius:var(--r-md);
+      font-family:var(--fb);font-size:13px;color:var(--white);
+      resize:none;outline:none;margin-bottom:10px;
+    " placeholder="Your feedback…"></textarea>
+    <div style="display:flex;gap:8px;">
+      <button onclick="submitFeedback()" style="
+        flex:1;padding:10px;background:var(--teal);color:var(--navy-deep);
+        border:none;border-radius:var(--r-md);font-family:var(--fh);font-size:13px;
+        font-weight:700;cursor:pointer;transition:all 0.2s;
+      ">Send Feedback</button>
+      <button onclick="closeFeedback()" style="
+        padding:10px 16px;background:rgba(255,255,255,0.07);
+        border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-md);
+        color:var(--gray-400);font-family:var(--fb);font-size:13px;cursor:pointer;
+      ">Cancel</button>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:var(--gray-600);text-align:center;">
+      Or email us: <a href="mailto:support@brainchecker.in" style="color:var(--teal);">support@brainchecker.in</a>
+    </div>
+  </div>
+</div>
+
 
 <script>
-const API_URL = `${window.location.origin}/api/ask`;
-const UPLOAD_URL = `${window.location.origin}/api/upload`;
+/* ═══════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════ */
+const S = {
+  token: null, user: null, sessionId: null, product: null,
+  card: null, history: [], uploadDone: {}, isTyping: false
+};
+const LIMIT = 40;
+const BASE = window.location.origin;
 
-let currentMode = null;
-let conversationHistory = [];
-let pdfText = "";
-let uploadedFileName = "";
-let isTyping = false;
-let sessionId = "default_" + Date.now();
-let collegeQStep = 0;
-let planQStep = 0;
-let collegeAnswers = {};
-let planAnswers = {};
-
-const MODES = {
-  report: {
-    icon: "📄", title: "Understand Report", sub: "Upload your PDF & ask questions",
-    placeholder: "Ask about your counseling report...",
-  },
-  roadmap: {
-    icon: "🗺️", title: "Career & College Roadmap", sub: "Career path from 10th to job",
-    placeholder: "Tell me the student's stream and interests...",
-  },
-  college: {
-    icon: "🎓", title: "Find Best Fit College", sub: "Guided college recommendation",
-    placeholder: "Answer the questions to get college suggestions...",
-  },
-  plan: {
-    icon: "📅", title: "Roadmap / Action Plan", sub: "30-60-90 day plan for student & parent",
-    placeholder: "Answer a few questions to get your action plan...",
-  },
-  parent: {
-    icon: "👨‍👩‍👧", title: "Parent Guide", sub: "How to support your child",
-    placeholder: "Ask how to help your child...",
-  }
+/* ═══════════════════════════════════════════
+   MAPS
+═══════════════════════════════════════════ */
+const PROD_ICONS = {
+  dmit:'🧬', career_combo:'🎯', psychometric:'🧩', polaris:'🏢',
+  polaris_combo:'🔗', best:'⚙️', best_combo:'🔬', tycoon:'🚀',
+  tycoon_combo:'💡', hiring:'👔', hiring_comparison:'⚖️'
 };
 
-const INITIAL_MESSAGES = {
-  report: [
-    { type: 'upload', text: "Hello! 👋 I'm your Brain Checker AI Assistant. I'll help you understand your child's psychometric counseling report in simple, clear language.\n\nPlease upload the counseling report PDF to get started. After that, you can ask me anything about it — IQ scores, personality traits, career suggestions, and more." },
-    { chips: ["Explain IQ Score", "What is RIASEC?", "What stream should I choose?", "Career Options", "Personality Traits"] }
-  ],
-  roadmap: [
-    { text: "Welcome! 🗺️ I'll help you build a clear career and education roadmap from today right up to your dream career.\n\nTo get started, please tell me:\n• **Which class is the student in?** (10th / 11th / 12th / passed 12th)\n• **What stream or subjects** are they in or interested in?\n• **Any career interests** they already have?" },
-    { chips: ["Science Stream - Engineering", "Science Stream - Medical", "Commerce Stream", "Arts / Humanities", "Not Sure Yet"] }
-  ],
-  college: [
-    { text: "Great! 🎓 Let's find the best colleges for your child.\n\nI'll ask a few quick questions one by one to understand your profile. Then I'll suggest the most suitable government and private colleges.\n\n**Question 1 of 6:** What stream/field is the student interested in?\n*(e.g., Engineering, Medical, Commerce, Arts, Design, Law, etc.)*" },
-    { chips: ["Engineering / B.Tech", "Medical / MBBS", "Commerce / MBA path", "Arts / Humanities", "Law", "Design / Architecture"] }
-  ],
-  plan: [
-    { text: "📅 Let's build your personalised 30-60-90 day action plan!\n\nI need to understand your situation a little better first.\n\n**Question 1 of 3:** How many hours can the student realistically study per day?\n*(Be honest — a realistic plan works better than an ideal one!)*" },
-    { chips: ["1–2 hours/day", "2–4 hours/day", "4–6 hours/day", "6+ hours/day"] }
-  ],
-  parent: [
-    { text: "Welcome, dear parent! 👨‍👩‍👧 You're already doing something wonderful by seeking guidance for your child.\n\nI'm here to help you understand how to best support your child after counseling — in terms of study environment, communication, motivation, and more.\n\n**What would you like to understand first?**" },
-    { chips: ["How child learns best", "How to motivate child", "What parents should avoid", "Communication tips", "Study environment tips", "Handling exam stress"] }
-  ]
+const CARD_ICONS = {
+  understand_report:'📄', career_roadmap:'🗺️', college_finder:'🎓',
+  action_plan:'📅', parent_guide:'👨‍👩‍👧', profile_insights:'🔍',
+  strengths_weaknesses:'💪', learning_style:'📖', career_growth:'📈',
+  skill_gap:'🔧', workplace_behavior:'🏢', skill_development:'⚙️',
+  personality_insights:'🧬', engineering_branch:'🏗️', skill_requirements:'📋',
+  career_path:'🚀', engineering_specialization:'🔬', entrepreneur_profile:'💡',
+  business_skills:'💼', real_world_application:'🌍', entrepreneur_path:'🛣️',
+  candidate_evaluation:'🔎', job_fit:'🎯', strengths_gaps:'📊',
+  hiring_recommendation:'✅', candidate_comparison:'⚖️',
+  ranking_dashboard:'🏆', strength_comparison:'💪', final_recommendation:'📣'
 };
 
-function selectMode(mode) {
-  currentMode = mode;
-  conversationHistory = [];
-  pdfText = "";
-  uploadedFileName = "";
-  collegeQStep = 0;
-  planQStep = 0;
-  collegeAnswers = {};
-  planAnswers = {};
+const CARD_LABELS = {
+  understand_report:'Understand Report', career_roadmap:'Career Roadmap',
+  college_finder:'College Finder', action_plan:'Action Plan',
+  parent_guide:'Parent Guide', profile_insights:'Profile Insights',
+  strengths_weaknesses:'Strengths & Weaknesses', learning_style:'Learning Style',
+  career_growth:'Career Growth Plan', skill_gap:'Skill Gap Analysis',
+  workplace_behavior:'Workplace Behavior', skill_development:'Skill Development',
+  personality_insights:'Personality Insights', engineering_branch:'Engineering Branch',
+  skill_requirements:'Skill Requirements', career_path:'Career Path',
+  engineering_specialization:'Engineering Specialization',
+  entrepreneur_profile:'Entrepreneur Profile', business_skills:'Business Skills',
+  real_world_application:'Real-World Application', entrepreneur_path:'Entrepreneur Path',
+  candidate_evaluation:'Candidate Evaluation', job_fit:'Job Fit Analysis',
+  strengths_gaps:'Strengths & Gaps', hiring_recommendation:'Hiring Recommendation',
+  candidate_comparison:'Candidate Comparison', ranking_dashboard:'Ranking Dashboard',
+  strength_comparison:'Strength Comparison', final_recommendation:'Final Recommendation'
+};
 
-  // Update cards
-  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
-  document.getElementById('card-' + mode).classList.add('active');
+const CARD_CHIPS = {
+  understand_report:['Explain IQ Score','RIASEC overview','Top strengths','Recommended stream','Personality traits'],
+  career_roadmap:['Science → Engineering','Commerce path','Arts path','After 10th options','Entrance exams'],
+  college_finder:['Government colleges','Private colleges','State CETs','Budget options','Backup colleges'],
+  action_plan:['30-day plan','60-day milestones','Weekly schedule','Parent support tips'],
+  parent_guide:['How child learns','Motivation tips','Mistakes to avoid','Communication tips'],
+  profile_insights:['Combined analysis','DMIT vs Psychometric','Key patterns','Career alignment'],
+  strengths_weaknesses:['Top strengths','Areas to improve','Leverage strengths','Improvement plan'],
+  learning_style:['Study tips','Parent support','Best methods'],
+  career_growth:['1-year plan','3-year plan','Skills to develop','Certifications'],
+  skill_gap:['Current vs target','How to close gaps','Training options'],
+  workplace_behavior:['Communication style','Leadership approach','Team dynamics'],
+  engineering_branch:['Best branch for me','JEE tips','Top colleges'],
+  entrepreneur_profile:['My business style','Risk appetite','Innovation score'],
+  candidate_evaluation:['Key strengths','Areas of concern','Full evaluation'],
+  job_fit:['Fit score','Technical match','Soft skills'],
+  hiring_recommendation:['Hire decision','Conditions','Onboarding plan'],
+  candidate_comparison:['Full comparison','Ranking','Top candidate'],
+  final_recommendation:['Show ranking','Top candidate','Full recommendation']
+};
 
-  // Update header
-  const m = MODES[mode];
-  document.getElementById('chat-mode-icon').textContent = m.icon;
-  document.getElementById('chat-mode-title').textContent = m.title;
-  document.getElementById('chat-mode-sub').textContent = m.sub;
+const CARD_WELCOME = {
+  understand_report:(p) => `Hello! 👋 I'll help you understand your **${p}** report in plain language. What would you like to know?`,
+  career_roadmap:() => `🗺️ Let's build your career roadmap! Tell me the student's current class, stream, and any interests.`,
+  college_finder:() => `🎓 I'll help find best-fit colleges. What field or stream is the student aiming for?`,
+  action_plan:() => `📅 Let's create a 30-60-90 day action plan. How many hours a day can the student realistically study?`,
+  parent_guide:() => `👨‍👩‍👧 Welcome! I'm here to help you support your child after counselling. What would you like guidance on?`,
+  profile_insights:() => `🔍 I'll cross-reference all your uploaded documents for deep insights. What would you like to explore first?`,
+  strengths_weaknesses:() => `💪 Let me identify the top strengths and growth areas from the report. Which aspect first?`,
+  learning_style:() => `📖 I'll explain the student's learning style with tailored study tips. Shall I start with the full overview?`,
+  career_growth:() => `📈 Let's build a career growth plan. What is the professional's current role and target role?`,
+  skill_gap:() => `🔧 I'll analyse the skill gap. What role or career aspiration are we targeting?`,
+  workplace_behavior:() => `🏢 I'll explain workplace behaviour and leadership style. What would you like to explore first?`,
+  engineering_branch:() => `⚙️ I'll recommend the best engineering branches. Shall I start with the full recommendation?`,
+  entrepreneur_profile:() => `💡 Let's explore the entrepreneurial profile — business style, risk appetite, and innovation score.`,
+  candidate_evaluation:() => `🔎 I'll evaluate the candidate's profile. Start with strengths, concerns, or full evaluation?`,
+  job_fit:() => `🎯 I'll score the candidate's job fit across technical skills, soft skills, and experience.`,
+  hiring_recommendation:() => `✅ I'll provide a clear hiring recommendation based on all documents. Ready to begin?`,
+  candidate_comparison:() => `⚖️ I'll compare all candidates side by side. Shall I generate the full comparison table?`,
+  final_recommendation:() => `📣 I'll provide the final ranking and recommendation. Ready?`
+};
 
-  // Clear messages
-  const msgs = document.getElementById('chat-messages');
-  msgs.innerHTML = '';
+/* ═══════════════════════════════════════════
+   FRIENDLY ERROR MESSAGES
+═══════════════════════════════════════════ */
+function friendlyUploadError(data, status) {
+  const d = (data.detail || '').toLowerCase();
+  if (d.includes('too large') || d.includes('maximum'))
+    return 'This PDF is too large (max 20 MB). Please compress it at ilovepdf.com and try again.';
+  if (d.includes('not a valid pdf') || d.includes('magic') || d.includes('%pdf'))
+    return 'This file doesn\'t appear to be a valid PDF. Please check the file and try again.';
+  if (d.includes('empty'))
+    return 'The file is empty. Please check and upload a proper PDF.';
+  if (d.includes('scanned') || d.includes('image') || d.includes('extract'))
+    return 'Could not read text from this PDF — it may be a scanned image. Please use the original digital PDF from Brain Checker.';
+  if (d.includes('session') || status === 403)
+    return 'Session expired. Please go back and select your product again.';
+  if (status === 500)
+    return 'Something went wrong on our end. Please try again in a moment.';
+  return 'Upload failed. Please check the file and try again, or contact Brain Checker support.';
+}
 
-  // Show initial messages
-  const init = INITIAL_MESSAGES[mode];
-  init.forEach((item, i) => {
-    setTimeout(() => {
-      if (item.type === 'upload') {
-        addAIMessage(item.text, null, null, true);
-      } else if (item.text) {
-        addAIMessage(item.text);
-      }
-      if (item.chips) addChips(item.chips);
-    }, i * 300);
-  });
+function friendlyChatError(data, status) {
+  const d = (data.detail || '').toLowerCase();
+  if (status === 429 || d.includes('limit') || d.includes('monthly'))
+    return '⚠️ You\'ve reached your monthly question limit. It resets automatically on the 1st of next month. Contact Brain Checker support for an early reset.';
+  if (status === 403 || d.includes('not available') || d.includes('card'))
+    return '⚠️ This analysis card isn\'t available for your product. Please select a different card from the sidebar.';
+  if (status === 401 || d.includes('expired') || d.includes('authentication'))
+    return '⚠️ Your session has expired. Please save your work and log in again.';
+  if (d.includes('busy') || d.includes('rate') || d.includes('429'))
+    return '⚠️ The AI is temporarily busy. Please wait 30 seconds and try again.';
+  if (d.includes('timeout') || d.includes('timed out'))
+    return '⚠️ The AI took too long to respond. Try a shorter or simpler question.';
+  if (status === 0)
+    return '⚠️ Cannot reach the server. Please check your internet connection.';
+  return '⚠️ The AI is temporarily unavailable. Please try again in a moment.';
+}
 
-  // Enable input
-  const input = document.getElementById('chat-input');
-  input.disabled = false;
-  input.placeholder = m.placeholder;
-  document.getElementById('send-btn').disabled = false;
+/* ═══════════════════════════════════════════
+   API HELPERS
+═══════════════════════════════════════════ */
+let _slowTimer = null;
 
-  // Upload row
-  const uploadRow = document.getElementById('upload-row');
-  if (mode === 'report') {
-    uploadRow.innerHTML = `
-      <div style="margin-bottom:8px;">
-        <div id="upload-zone-el" class="upload-zone" onclick="document.getElementById('file-input').click()">
-          <div class="upload-zone-icon">📎</div>
-          <div class="upload-zone-title">Click to upload counseling report PDF</div>
-          <div class="upload-zone-sub">Supported: PDF files only · Max 10MB</div>
-        </div>
-      </div>`;
-  } else {
-    uploadRow.innerHTML = '';
+async function api(path, opts = {}) {
+  const h = { 'Content-Type': 'application/json', ...opts.headers };
+  if (S.token) h['Authorization'] = 'Bearer ' + S.token;
+
+  // Show cold-start warning after 5 seconds
+  clearTimeout(_slowTimer);
+  _slowTimer = setTimeout(() => {
+    showToast('⏳ Server is waking up — please wait up to 30 seconds…', 'info', 30000);
+  }, 5000);
+
+  try {
+    const r = await fetch(BASE + path, { ...opts, headers: h });
+    clearTimeout(_slowTimer);
+    hideToast();
+    const d = await r.json().catch(() => ({ detail: r.statusText }));
+    return { ok: r.ok, data: d, status: r.status };
+  } catch (err) {
+    clearTimeout(_slowTimer);
+    hideToast();
+    return { ok: false, status: 0, data: { detail: 'Network error' } };
   }
 }
 
-function addAIMessage(text, sourceLabel, confidenceType, showDisclaimer) {
-  const msgs = document.getElementById('chat-messages');
-  const welcome = document.getElementById('welcome-card');
-  if (welcome) welcome.remove();
+async function apiUpload(path, form) {
+  const h = {};
+  if (S.token) h['Authorization'] = 'Bearer ' + S.token;
+  try {
+    const r = await fetch(BASE + path, { method: 'POST', headers: h, body: form });
+    const d = await r.json().catch(() => ({ detail: r.statusText }));
+    return { ok: r.ok, data: d, status: r.status };
+  } catch (err) {
+    return { ok: false, status: 0, data: { detail: 'Network error' } };
+  }
+}
 
-  const div = document.createElement('div');
-  div.className = 'msg ai fade-in';
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+let _toastTimer = null;
+function showToast(msg, type = 'info', duration = 4000) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `show t-${type}`;
+  clearTimeout(_toastTimer);
+  if (duration > 0) _toastTimer = setTimeout(hideToast, duration);
+}
+function hideToast() {
+  document.getElementById('toast').className = '';
+}
 
-  let metaHTML = '';
-  if (sourceLabel) metaHTML += `<span class="source-label">📌 ${sourceLabel}</span>`;
-  if (confidenceType) metaHTML += `<span class="source-tag ${confidenceType}">${confidenceType.charAt(0).toUpperCase() + confidenceType.slice(1)}</span>`;
-  metaHTML += `<span class="msg-time">${getTime()}</span>`;
+/* ═══════════════════════════════════════════
+   SCREEN NAVIGATION
+═══════════════════════════════════════════ */
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 
-  let disclaimerHTML = '';
-  if (showDisclaimer) {
-    disclaimerHTML = `<div class="disclaimer">⚠️ This AI explains your Brain Checker counseling report. It does not replace professional counseling. Always consult your counselor for medical or psychological concerns.</div>`;
+/* ═══════════════════════════════════════════
+   AUTH SCREEN
+═══════════════════════════════════════════ */
+function switchTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach((t, i) =>
+    t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'signup'))
+  );
+  document.getElementById('login-form').style.display  = tab === 'login'  ? '' : 'none';
+  document.getElementById('signup-form').style.display = tab === 'signup' ? '' : 'none';
+  clearAlert();
+}
+
+function showAlert(msg, type = 'error') {
+  const el = document.getElementById('auth-alert');
+  el.className = 'alert ' + type;
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function clearAlert() {
+  const el = document.getElementById('auth-alert');
+  el.style.display = 'none';
+}
+
+function setBtnLoading(id, on, label) {
+  const b = document.getElementById(id);
+  b.disabled = on;
+  b.innerHTML = on ? `<span class="spinner"></span>${label}` : label;
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  clearAlert();
+  if (!email || !pass) {
+    showAlert('Please enter your email and password.');
+    return;
+  }
+  setBtnLoading('btn-login', true, 'Logging in…');
+  const { ok, data, status } = await api('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password: pass })
+  });
+  setBtnLoading('btn-login', false, 'Login to Bishop');
+
+  if (!ok) {
+    if (status === 401 || (data.detail || '').toLowerCase().includes('invalid'))
+      showAlert('Incorrect email or password. Please try again.');
+    else if (status === 0)
+      showAlert('Cannot connect to the server. Please check your internet connection.');
+    else if ((data.detail || '').toLowerCase().includes('verify') || (data.detail || '').toLowerCase().includes('confirm'))
+      showAlert('Please check your email and verify your account before logging in.', 'warning');
+    else
+      showAlert(data.detail || 'Login failed. Please try again.');
+    return;
   }
 
-  div.innerHTML = `
-    <div class="msg-avatar ai">BC</div>
-    <div class="msg-body">
-      <div class="msg-bubble">${formatText(text)}</div>
-      <div class="msg-meta">${metaHTML}</div>
-      ${disclaimerHTML}
+  S.token = data.access_token;
+  S.user  = data.user;
+  sessionStorage.setItem('bc_token', S.token);
+  sessionStorage.setItem('bc_user',  JSON.stringify(S.user));
+  afterLogin();
+}
+
+async function doSignup() {
+  const name  = document.getElementById('su-name').value.trim();
+  const email = document.getElementById('su-email').value.trim();
+  const pass  = document.getElementById('su-pass').value;
+  clearAlert();
+
+  if (!name)  { showAlert('Please enter your full name.'); return; }
+  if (!email) { showAlert('Please enter a valid email address.'); return; }
+  if (!pass)  { showAlert('Please enter a password.'); return; }
+  if (pass.length < 8) { showAlert('Password must be at least 8 characters long.'); return; }
+
+  setBtnLoading('btn-signup', true, 'Creating account…');
+  const { ok, data, status } = await api('/api/auth/signup', {
+    method: 'POST',
+    body: JSON.stringify({ full_name: name, email, password: pass })
+  });
+  setBtnLoading('btn-signup', false, 'Create Account');
+
+  if (!ok) {
+    if (status === 409 || (data.detail || '').toLowerCase().includes('already'))
+      showAlert('An account with this email already exists. Please log in instead.');
+    else if (status === 0)
+      showAlert('Cannot connect to the server. Please check your internet connection.');
+    else
+      showAlert(data.detail || 'Account creation failed. Please try again.');
+    return;
+  }
+
+  showAlert('Account created! ✅ Please check your email to verify your account, then log in.', 'success');
+  setTimeout(() => switchTab('login'), 2400);
+}
+
+function afterLogin() {
+  const name = S.user.full_name || S.user.email || 'User';
+  document.getElementById('nav-user-name').textContent = name;
+  document.getElementById('dash-user-name').textContent = name.split(' ')[0];
+  loadProducts();
+  goTo('screen-products');
+}
+
+/* ═══════════════════════════════════════════
+   PRODUCTS
+═══════════════════════════════════════════ */
+async function loadProducts() {
+  const el = document.getElementById('prod-loading');
+  el.innerHTML = '<span class="spinner" style="border-top-color:var(--teal);"></span> Loading products…';
+  el.style.display = 'block';
+
+  const { ok, data, status } = await api('/api/auth/products');
+  el.style.display = 'none';
+
+  if (!ok) {
+    el.innerHTML = status === 0
+      ? '⚠️ No internet connection. Please refresh the page.'
+      : '⚠️ Could not load products. Please refresh the page.';
+    el.style.color = 'var(--error)';
+    el.style.display = 'block';
+    return;
+  }
+
+  const students = data.products.filter(p => !p.is_corporate);
+  const corps    = data.products.filter(p =>  p.is_corporate);
+
+  if (students.length) {
+    renderGrid('grid-student', students);
+    document.getElementById('prod-student').style.display = '';
+  }
+  if (corps.length) {
+    renderGrid('grid-corp', corps);
+    document.getElementById('prod-corp').style.display = '';
+  }
+}
+
+function renderGrid(gridId, products) {
+  const g = document.getElementById(gridId);
+  g.innerHTML = '';
+  products.forEach(p => {
+    const d = document.createElement('div');
+    d.className = 'product-card';
+    d.onclick = () => selectProduct(p, d);
+    d.innerHTML = `
+      <div class="product-card-icon">${PROD_ICONS[p.slug] || '📋'}</div>
+      <div class="product-card-name">${p.name}</div>
+      <div class="product-card-badges">
+        <span class="badge badge-pdf">${p.required_pdfs} PDF${p.required_pdfs > 1 ? 's' : ''}</span>
+        <span class="badge badge-cards">${(p.cards || []).length} cards</span>
+        ${p.is_corporate ? '<span class="badge badge-corp">Corporate</span>' : ''}
+      </div>`;
+    g.appendChild(d);
+  });
+}
+
+async function selectProduct(p, cardEl) {
+  // Show loading state on the card
+  if (cardEl) {
+    cardEl.classList.add('loading');
+    cardEl.innerHTML = `<div class="product-card-icon"><span class="spinner" style="border-top-color:var(--teal);width:20px;height:20px;border-width:3px;"></span></div><div class="product-card-name">${p.name}</div>`;
+  }
+
+  const { ok, data, status } = await api('/api/auth/select-product', {
+    method: 'POST',
+    body: JSON.stringify({ product_slug: p.slug })
+  });
+
+  if (!ok) {
+    if (cardEl) cardEl.classList.remove('loading');
+    const msg = status === 0
+      ? 'No internet connection. Please check and try again.'
+      : 'Could not select this product. Please try again.';
+    showToast('⚠️ ' + msg, 'error');
+    loadProducts(); // rebuild grid
+    return;
+  }
+
+  S.sessionId = data.session_id;
+  S.product   = data.product;
+  S.uploadDone = {};
+
+  // Normalise arrays from API
+  if (typeof S.product.pdf_labels === 'string') {
+    try { S.product.pdf_labels = JSON.parse(S.product.pdf_labels); } catch { S.product.pdf_labels = []; }
+  }
+  if (!Array.isArray(S.product.pdf_labels)) S.product.pdf_labels = [];
+  if (typeof S.product.cards === 'string') {
+    try { S.product.cards = JSON.parse(S.product.cards); } catch { S.product.cards = []; }
+  }
+  if (!Array.isArray(S.product.cards)) S.product.cards = [];
+
+  buildUploadGate();
+  goTo('screen-upload');
+}
+
+/* ═══════════════════════════════════════════
+   UPLOAD
+═══════════════════════════════════════════ */
+function buildUploadGate() {
+  const p = S.product;
+  document.getElementById('up-title').textContent = `Upload Reports for ${p.name}`;
+  document.getElementById('up-sub').textContent =
+    `${p.required_pdfs} report${p.required_pdfs > 1 ? 's are' : ' is'} required before chatting.`;
+  document.getElementById('up-badge').textContent = `${PROD_ICONS[p.slug] || '📋'} ${p.name}`;
+
+  document.getElementById('up-slots').innerHTML = '';
+  document.querySelectorAll('.hidden-file').forEach(e => e.remove());
+
+  const labels    = p.pdf_labels;
+  const totalSlots = p.required_pdfs + 1; // +1 optional slot
+
+  for (let i = 0; i < totalSlots; i++) {
+    const required = i < p.required_pdfs;
+    const label    = required ? (labels[i] || `Report ${i + 1}`) : 'Additional Report (Optional)';
+    S.uploadDone[i] = false;
+
+    const slot = document.createElement('div');
+    slot.id = `slot-${i}`;
+    slot.className = `upload-slot ${required ? 'slot-required' : 'slot-optional'}`;
+    slot.innerHTML = `
+      <div class="slot-icon" id="slot-icon-${i}">📄</div>
+      <div class="slot-info">
+        <div class="slot-label">${required ? '★ ' : ''}${label}</div>
+        <div class="slot-meta" id="slot-meta-${i}">
+          ${required ? 'Required · Tap to upload' : 'Optional · Tap to upload'}
+        </div>
+      </div>
+      <span class="slot-badge" id="slot-badge-${i}">${required ? 'Required' : 'Optional'}</span>`;
+    slot.onclick = () => document.getElementById(`finput-${i}`).click();
+    document.getElementById('up-slots').appendChild(slot);
+
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = '.pdf';
+    inp.className = 'hidden-file'; inp.id = `finput-${i}`;
+    inp.onchange = (e) => handleUpload(e, i, label);
+    document.body.appendChild(inp);
+  }
+  refreshProgress();
+}
+
+async function handleUpload(evt, idx, label) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  evt.target.value = '';
+
+  // Client-side size check before even uploading
+  if (file.size > 20 * 1024 * 1024) {
+    showSlotError(idx, '❌', 'File is too large (max 20 MB). Please compress it first.', idx < S.product.required_pdfs);
+    return;
+  }
+
+  const slot = document.getElementById(`slot-${idx}`);
+  slot.className = 'upload-slot slot-uploading';
+  document.getElementById(`slot-icon-${idx}`).textContent = '⏳';
+  document.getElementById(`slot-meta-${idx}`).textContent = `Uploading ${file.name}…`;
+  document.getElementById(`slot-badge-${idx}`).textContent = 'Uploading…';
+
+  const form = new FormData();
+  form.append('file', file);
+  const path = `/api/upload?session_id=${encodeURIComponent(S.sessionId)}&doc_index=${idx}&doc_label=${encodeURIComponent(label)}`;
+  const { ok, data, status } = await apiUpload(path, form);
+
+  if (!ok) {
+    const msg = friendlyUploadError(data, status);
+    showSlotError(idx, '❌', msg, idx < S.product.required_pdfs);
+    return;
+  }
+
+  S.uploadDone[idx] = true;
+  const slot2 = document.getElementById(`slot-${idx}`);
+  slot2.className = 'upload-slot slot-done';
+  document.getElementById(`slot-icon-${idx}`).textContent = '✅';
+  const meta = document.getElementById(`slot-meta-${idx}`);
+  meta.textContent = `${file.name} · Tap to replace`;
+  meta.className = 'slot-meta ok';
+  document.getElementById(`slot-badge-${idx}`).textContent = 'Uploaded ✓';
+  refreshProgress();
+}
+
+function showSlotError(idx, icon, msg, required) {
+  const slot = document.getElementById(`slot-${idx}`);
+  slot.className = 'upload-slot slot-error';
+  document.getElementById(`slot-icon-${idx}`).textContent = icon;
+  const meta = document.getElementById(`slot-meta-${idx}`);
+  meta.textContent = msg;
+  meta.className = 'slot-meta err';
+  document.getElementById(`slot-badge-${idx}`).textContent = required ? 'Required' : 'Optional';
+}
+
+function refreshProgress() {
+  const req = S.product.required_pdfs;
+  let done = 0;
+  for (let i = 0; i < req; i++) { if (S.uploadDone[i]) done++; }
+  const pct = req > 0 ? (done / req) * 100 : 0;
+  document.getElementById('up-fill').style.width = pct + '%';
+  document.getElementById('up-count').textContent = `${done} of ${req} required`;
+  const btn = document.getElementById('btn-start');
+  if (done >= req) {
+    btn.disabled = false;
+    btn.textContent = '🚀 Start Chatting →';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `🔒 Upload required reports to continue (${done}/${req})`;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════════════ */
+function goToDashboard() {
+  buildDashboard();
+  goTo('screen-dashboard');
+}
+
+function buildDashboard() {
+  const p    = S.product;
+  const name = S.user?.full_name || S.user?.email || 'User';
+  document.getElementById('dash-user-name').textContent = name.split(' ')[0];
+  document.getElementById('sb-prod-name').textContent   = p.name;
+
+  const cards     = Array.isArray(p.cards) ? p.cards : [];
+  const container = document.getElementById('card-btns');
+  const mobBar    = document.getElementById('mobile-card-bar');
+  container.innerHTML = '';
+  mobBar.innerHTML    = '';
+
+  cards.forEach(key => {
+    // Desktop sidebar button
+    const btn = document.createElement('button');
+    btn.className = 'card-btn';
+    btn.id = 'cbtn-' + key;
+    btn.onclick = () => activateCard(key);
+    btn.innerHTML = `<div class="card-btn-icon">${CARD_ICONS[key] || '📋'}</div>${CARD_LABELS[key] || key}`;
+    container.appendChild(btn);
+
+    // Mobile bar chip
+    const chip = document.createElement('button');
+    chip.className = 'mob-card-chip';
+    chip.id = 'mob-cbtn-' + key;
+    chip.onclick = () => activateCard(key);
+    chip.innerHTML = `<span class="mob-card-chip-icon">${CARD_ICONS[key] || '📋'}</span>${CARD_LABELS[key] || key}`;
+    mobBar.appendChild(chip);
+  });
+
+  updateUsage(S.user?.questions_used || 0);
+  S.card = null;
+  S.history = [];
+
+  // Reset chat
+  document.getElementById('chat-messages').innerHTML = `
+    <div class="chat-welcome" id="chat-welcome">
+      <img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop"
+           onerror="this.style.display='none'">
+      <div class="chat-welcome-title">Your reports are loaded</div>
+      <div class="chat-welcome-sub">Select an analysis card${window.innerWidth < 768 ? ' below' : ' from the sidebar'} to start chatting.</div>
     </div>`;
 
-  msgs.appendChild(div);
+  const inp = document.getElementById('chat-input');
+  inp.disabled = true;
+  inp.placeholder = 'Select a card to start…';
+  inp.value = '';
+  document.getElementById('send-btn').disabled = true;
+
+  // Reset topbar
+  document.getElementById('ct-icon-img').src = 'assets/bishop_BC.png';
+  document.getElementById('ct-title').textContent = 'Bishop AI Assistant';
+  document.getElementById('ct-sub').textContent   = 'Select a card to begin';
+}
+
+function updateUsage(used) {
+  const pct = Math.min(100, (used / LIMIT) * 100);
+  document.getElementById('usage-count').textContent = `${used} / ${LIMIT}`;
+  document.getElementById('usage-fill').style.width  = pct + '%';
+  document.getElementById('usage-fill').style.background =
+    pct > 80 ? 'var(--error)' : pct > 60 ? 'var(--warning)' : 'var(--teal)';
+}
+
+function activateCard(key) {
+  S.card = key;
+  S.history = [];
+
+  // Highlight desktop sidebar
+  document.querySelectorAll('.card-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cbtn-' + key)?.classList.add('active');
+
+  // Highlight mobile bar
+  document.querySelectorAll('.mob-card-chip').forEach(b => b.classList.remove('active'));
+  document.getElementById('mob-cbtn-' + key)?.classList.add('active');
+
+  // Scroll the active mobile chip into view
+  const mc = document.getElementById('mob-cbtn-' + key);
+  if (mc) mc.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+  // Update topbar
+  document.getElementById('ct-icon-img').src = 'assets/bishop_BC.png';
+  document.getElementById('ct-title').textContent = CARD_LABELS[key] || key;
+  document.getElementById('ct-sub').textContent   = S.product.name;
+
+  // Clear messages and enable input
+  const msgs = document.getElementById('chat-messages');
+  msgs.innerHTML = '';
+  const inp = document.getElementById('chat-input');
+  inp.disabled = false;
+  inp.placeholder = 'Ask anything about your report…';
+  inp.value = '';
+  inp.focus();
+  document.getElementById('send-btn').disabled = false;
+
+  // Welcome message
+  const wFn = CARD_WELCOME[key] || (() => `Hello! I'm ready to help with **${CARD_LABELS[key] || key}**. What would you like to know?`);
+  addAI(wFn(S.product.name), true);
+
+  // Chips
+  const chips = CARD_CHIPS[key];
+  if (chips) setTimeout(() => addChips(chips), 180);
+}
+
+/* ═══════════════════════════════════════════
+   MESSAGES
+═══════════════════════════════════════════ */
+function addAI(text, disclaimer = false) {
+  document.getElementById('chat-welcome')?.remove();
+  const msgs = document.getElementById('chat-messages');
+  const d = document.createElement('div');
+  d.className = 'msg ai fade-in';
+  d.innerHTML = `
+    <div class="msg-avatar ai">
+      <img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'">
+    </div>
+    <div class="msg-body">
+      <div class="msg-bubble">${fmt(text)}</div>
+      <div class="msg-time">${now()}</div>
+      ${disclaimer ? '<div class="disclaimer">⚠️ AI guidance — does not replace professional counselling. Always refer to your counsellor\'s report.</div>' : ''}
+    </div>`;
+  msgs.appendChild(d);
   msgs.scrollTop = msgs.scrollHeight;
 }
 
-function addUserMessage(text) {
+function addUser(text) {
+  document.getElementById('chat-welcome')?.remove();
   const msgs = document.getElementById('chat-messages');
-  const welcome = document.getElementById('welcome-card');
-  if (welcome) welcome.remove();
-
-  const div = document.createElement('div');
-  div.className = 'msg user fade-in';
-  div.innerHTML = `
-    <div class="msg-avatar user-av">You</div>
+  const d = document.createElement('div');
+  d.className = 'msg user fade-in';
+  d.innerHTML = `
+    <div class="msg-avatar user">You</div>
     <div class="msg-body">
-      <div class="msg-bubble">${escapeHTML(text)}</div>
-      <div class="msg-meta"><span class="msg-time">${getTime()}</span></div>
+      <div class="msg-bubble">${esc(text)}</div>
+      <div class="msg-time">${now()}</div>
     </div>`;
-  msgs.appendChild(div);
+  msgs.appendChild(d);
   msgs.scrollTop = msgs.scrollHeight;
 }
 
 function addChips(chips) {
   const msgs = document.getElementById('chat-messages');
-  const div = document.createElement('div');
-  div.className = 'chips-row fade-in';
-  div.id = 'chips-' + Date.now();
+  const id   = 'chips-' + Date.now();
+  const row  = document.createElement('div');
+  row.className = 'chips-row fade-in';
+  row.id = id;
   chips.forEach(c => {
     const btn = document.createElement('button');
     btn.className = 'chip';
     btn.textContent = c;
-    btn.onclick = () => {
-      document.getElementById(div.id)?.remove();
-      clickChip(c);
-    };
-    div.appendChild(btn);
+    btn.onclick = () => { document.getElementById(id)?.remove(); clickChip(c); };
+    row.appendChild(btn);
   });
-  msgs.appendChild(div);
+  msgs.appendChild(row);
   msgs.scrollTop = msgs.scrollHeight;
 }
 
 function addTyping() {
+  document.getElementById('chat-welcome')?.remove();
   const msgs = document.getElementById('chat-messages');
-  const div = document.createElement('div');
-  div.className = 'msg ai';
-  div.id = 'typing-indicator';
-  div.innerHTML = `
-    <div class="msg-avatar ai">BC</div>
+  const d = document.createElement('div');
+  d.className = 'msg ai'; d.id = 'typing-ind';
+  d.innerHTML = `
+    <div class="msg-avatar ai">
+      <img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'">
+    </div>
     <div class="msg-body">
       <div class="typing-indicator">
         <div class="typing-dot"></div>
@@ -1224,270 +1764,175 @@ function addTyping() {
         <div class="typing-dot"></div>
       </div>
     </div>`;
-  msgs.appendChild(div);
+  msgs.appendChild(d);
   msgs.scrollTop = msgs.scrollHeight;
 }
 
-function removeTyping() {
-  const t = document.getElementById('typing-indicator');
-  if (t) t.remove();
-}
-
-function addNextStepCard(suggestions) {
-  const msgs = document.getElementById('chat-messages');
-  const div = document.createElement('div');
-  div.className = 'msg ai fade-in';
-  const chipHTML = suggestions.map(s =>
-    `<button class="chip" onclick="selectMode('${s.mode}')" style="font-size:11px;">${s.label}</button>`
-  ).join('');
-  div.innerHTML = `
-    <div class="msg-avatar ai">BC</div>
-    <div class="msg-body">
-      <div class="next-step-card">
-        <div class="next-step-label">✦ Suggested Next Step</div>
-        <div class="next-step-title">Ready to continue your journey?</div>
-        <div class="next-step-chips">${chipHTML}</div>
-      </div>
-    </div>`;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
+function removeTyping() { document.getElementById('typing-ind')?.remove(); }
 
 function clickChip(text) {
   document.getElementById('chat-input').value = text;
   sendMessage();
 }
 
-function getTime() {
-  return new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
-}
-
-function escapeHTML(text) {
-  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
-}
-
-function formatText(text) {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/\n\n/g, '</p><p style="margin-top:8px;">')
-    .replace(/\n/g, '<br>')
-    .replace(/^/, '<p>').replace(/$/, '</p>');
-}
-
+/* ═══════════════════════════════════════════
+   SEND MESSAGE
+═══════════════════════════════════════════ */
 async function sendMessage() {
-  if (!currentMode || isTyping) return;
-  const input = document.getElementById('chat-input');
-  const text = input.value.trim();
+  if (!S.card || S.isTyping) return;
+  const inp  = document.getElementById('chat-input');
+  const text = inp.value.trim();
   if (!text) return;
-
-  input.value = '';
-  input.style.height = '';
-  addUserMessage(text);
-
-  conversationHistory.push({ role: "user", content: text });
-
-  isTyping = true;
+  inp.value = '';
+  autoResize(inp);
+  addUser(text);
+  S.history.push({ role: 'user', content: text });
+  S.isTyping = true;
+  document.getElementById('send-btn').disabled = true;
   addTyping();
 
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        mode: currentMode,
-        message: text,
-        history: conversationHistory,
-        session_id: sessionId
-      })
-    });
+  const { ok, data, status } = await api('/api/ask', {
+    method: 'POST',
+    body: JSON.stringify({
+      session_id: S.sessionId,
+      card_mode:  S.card,
+      message:    text,
+      history:    S.history.slice(-10)
+    })
+  });
 
-    const data = await response.json();
-    removeTyping();
-    isTyping = false;
+  removeTyping();
+  S.isTyping = false;
+  document.getElementById('send-btn').disabled = false;
 
-    if (!response.ok) {
-      addAIMessage("⚠️ Error: " + (data.detail || "Unable to reach the backend. Make sure the backend server is running on port 8000."));
-      conversationHistory.pop();
-      return;
-    }
-
-    const reply = data.reply;
-    conversationHistory.push({ role: "assistant", content: reply });
-
-    addAIMessage(reply);
-
-    // Next step suggestions
-    setTimeout(() => {
-      const nextSteps = getNextSteps();
-      if (nextSteps.length > 0 && Math.random() > 0.5) {
-        addNextStepCard(nextSteps);
-      } else {
-        addContextualChips(currentMode, text, reply);
-      }
-    }, 500);
-
-  } catch (err) {
-    removeTyping();
-    isTyping = false;
-    console.error("Error:", err);
-    addAIMessage("⚠️ Connection error. Please make sure the backend server is running. Run `python -m uvicorn backend.main:app --reload` in the terminal.");
-    conversationHistory.pop();
-  }
-}
-
-function getNextSteps() {
-  const map = {
-    report: [{ mode: 'roadmap', label: '🗺 Career Roadmap →' }, { mode: 'college', label: '🎓 Find Colleges →' }],
-    roadmap: [{ mode: 'college', label: '🎓 Find Best Colleges →' }, { mode: 'plan', label: '📅 Create Action Plan →' }],
-    college: [{ mode: 'plan', label: '📅 Create Action Plan →' }, { mode: 'parent', label: '👨‍👩‍👧 Parent Guide →' }],
-    plan: [{ mode: 'parent', label: '👨‍👩‍👧 Parent Guide →' }],
-    parent: [{ mode: 'plan', label: '📅 Action Plan →' }, { mode: 'roadmap', label: '🗺 Career Roadmap →' }]
-  };
-  return map[currentMode] || [];
-}
-
-function addContextualChips(mode, userText, reply) {
-  const chipsMap = {
-    report: ["Explain IQ Score", "What is RIASEC?", "Career strengths", "Personality overview", "Counselor remarks"],
-    roadmap: ["After 10th options", "After 12th options", "Top entrance exams", "Skills to develop", "Show timeline"],
-    college: ["Government colleges", "Private colleges", "Entrance exam list", "Budget options", "Backup options"],
-    plan: ["30 day plan", "Weekly schedule", "Parent support tips", "Focus techniques", "Exam strategy"],
-    parent: ["Motivation tips", "Avoid these mistakes", "Study environment", "Communication tips", "Handle exam stress"]
-  };
-  const chips = chipsMap[mode] || [];
-  const filtered = chips.filter(c => !userText.toLowerCase().includes(c.toLowerCase().split(' ')[0]));
-  if (filtered.length > 0) addChips(filtered.slice(0, 4));
-}
-
-function handleFileUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  if (file.type !== 'application/pdf') {
-    alert('Please upload a PDF file.');
+  if (!ok) {
+    S.history.pop();
+    addAI(friendlyChatError(data, status));
     return;
   }
 
-  uploadedFileName = file.name;
-  
-  // Show uploading status
-  const zone = document.getElementById('upload-zone-el');
-  if (zone) {
-    zone.innerHTML = `<div class="upload-success">⏳ Uploading ${file.name}...</div>`;
-    zone.style.cssText = 'background:transparent;border:none;padding:0;cursor:default;';
-    zone.onclick = null;
+  S.history.push({ role: 'assistant', content: data.reply });
+  addAI(data.reply);
+  if (data.questions_remaining !== undefined) {
+    updateUsage(LIMIT - data.questions_remaining);
   }
 
-  // Build upload URL with session_id as query parameter
-  const uploadUrlWithSession = `${UPLOAD_URL}?session_id=${encodeURIComponent(sessionId)}`;
-  
-  // Upload to backend
-  const formData = new FormData();
-  formData.append('file', file);
+  // Follow-up chips
+  setTimeout(() => {
+    const followUps = {
+      understand_report:['What does this score mean?','Career suggestions','Stream recommendation'],
+      career_roadmap:['Show timeline','After 12th options','Entrance exams'],
+      college_finder:['Government options','Private options','Backup colleges'],
+      action_plan:['Weekly schedule','Parent tips','Exam strategy'],
+      parent_guide:['Communication tips','Study environment','Motivation strategies'],
+      engineering_branch:['JEE preparation','Top colleges','Career after this branch'],
+      job_fit:['Gap analysis','Final recommendation']
+    };
+    const chips = (followUps[S.card] || []).slice(0, 3);
+    if (chips.length) addChips(chips);
+  }, 280);
+}
 
-  console.log('📤 Starting upload to:', uploadUrlWithSession);
-  console.log('Session ID:', sessionId);
-  console.log('File:', file.name, `(${file.size} bytes)`);
-
-  fetch(uploadUrlWithSession, {
-    method: "POST",
-    body: formData
-  })
-  .then(res => {
-    console.log('📥 Response received:', res.status, res.statusText);
-    console.log('   Content-Type:', res.headers.get('content-type'));
-    
-    // Check if response is OK first
-    if (!res.ok) {
-      // Try to get error details from response
-      return res.text().then(text => {
-        console.log('   Response text:', text);
-        
-        // Try to parse as JSON for error details
-        try {
-          const errorData = JSON.parse(text);
-          throw new Error(errorData.detail || `Upload failed (${res.status}): ${res.statusText}`);
-        } catch (e) {
-          if (e.message.includes('detail')) {
-            throw e; // Re-throw our error
-          }
-          // If JSON parse fails, use the raw text or status
-          throw new Error(`Upload failed (${res.status}): ${text || res.statusText}`);
-        }
-      });
-    }
-    
-    // For successful responses, parse JSON
-    return res.text().then(text => {
-      console.log('   Raw response:', text);
-      
-      if (!text) {
-        throw new Error('Empty response from server');
-      }
-      
-      try {
-        return JSON.parse(text);
-      } catch (e) {
-        console.error('   JSON parse error:', e);
-        console.error('   Raw text was:', text);
-        throw new Error(`Invalid JSON response from server: ${e.message}`);
-      }
-    });
-  })
-  .then(data => {
-    console.log('✅ Upload response parsed:', data);
-    
-    if (data && data.status === 'success') {
-      pdfText = data.filename; // Store filename as reference
-      
-      const zone = document.getElementById('upload-zone-el');
-      if (zone) {
-        zone.innerHTML = `<div class="upload-success">✅ <span><strong>${file.name}</strong> uploaded successfully! You can now ask questions about the report.</span></div>`;
-      }
-      
-      addAIMessage(`✅ I've successfully loaded **${file.name}**. I can now answer questions based on your child's counseling report.\n\nHere are some things you can ask me:\n• Explain the IQ score in simple terms\n• What do the RIASEC codes mean for my child's future?\n• Which stream does the counselor recommend?\n• What are my child's top strengths?`, 'Counselor Remarks', 'direct', true);
-      addChips(["Explain IQ Score", "What is RIASEC?", "Recommended stream?", "Top strengths", "Career suggestions"]);
-    } else {
-      throw new Error('Unexpected response format: ' + JSON.stringify(data));
-    }
-  })
-  .catch(err => {
-    console.error('❌ Upload error:', err);
-    
-    const zone = document.getElementById('upload-zone-el');
-    if (zone) {
-      let errorMsg = 'Upload failed. Make sure the backend is running.';
-      
-      if (err.message.includes('Failed to fetch')) {
-        errorMsg = '❌ Cannot connect to server. Make sure the backend is running on http://localhost:8000';
-      } else if (err.message.includes('JSON')) {
-        errorMsg = `❌ Server returned invalid response. Backend may have crashed. Details: ${err.message}`;
-      } else if (err.message) {
-        errorMsg = `❌ Upload Error: ${err.message}`;
-      }
-      
-      zone.innerHTML = `<div style="color:red;padding:10px;font-size:13px;line-height:1.5;word-break:break-word;">${errorMsg}</div>`;
-    }
-    
-    // Also add error message to chat
-    addAIMessage(`❌ **Upload Failed**: ${err.message || 'Could not upload PDF. Please check the backend server.'}\n\n**Troubleshooting:**\n• Make sure the backend is running: \`python backend/main.py\`\n• Check terminal logs for errors\n• Try a different PDF file\n• Check browser console (F12) for details`, 'System', 'direct', false);
+/* ═══════════════════════════════════════════
+   LOGOUT
+═══════════════════════════════════════════ */
+async function doLogout() {
+  if (S.sessionId) {
+    await api(`/api/session/${S.sessionId}/chunks`, { method: 'DELETE' }).catch(() => {});
+  }
+  await api('/api/auth/logout', { method: 'POST' }).catch(() => {});
+  Object.assign(S, {
+    token: null, user: null, sessionId: null, product: null,
+    card: null, history: [], uploadDone: {}, isTyping: false
   });
+  sessionStorage.removeItem('bc_token');
+  sessionStorage.removeItem('bc_user');
+  ['login-email','login-pass','su-name','su-email','su-pass'].forEach(id => {
+    const e = document.getElementById(id);
+    if (e) e.value = '';
+  });
+  clearAlert();
+  switchTab('login');
+  goTo('screen-auth');
+}
 
-  // Reset file input
-  event.target.value = '';
+/* ═══════════════════════════════════════════
+   FEEDBACK MODAL
+═══════════════════════════════════════════ */
+function openFeedback() {
+  const m = document.getElementById('feedback-modal');
+  m.style.display = 'flex';
+  setTimeout(() => document.getElementById('feedback-text')?.focus(), 100);
+}
+function closeFeedback() {
+  document.getElementById('feedback-modal').style.display = 'none';
+  document.getElementById('feedback-text').value = '';
+}
+async function submitFeedback() {
+  const text = document.getElementById('feedback-text').value.trim();
+  if (!text) { showToast('Please write something before sending.', 'warning'); return; }
+  // Send to support email — simplest approach that works without extra infra
+  const subject = encodeURIComponent('Bishop Feedback');
+  const body    = encodeURIComponent(`User: ${S.user?.email || 'Unknown'}\nCard: ${S.card || 'None'}\n\nFeedback:\n${text}`);
+  window.open(`mailto:support@brainchecker.in?subject=${subject}&body=${body}`, '_blank');
+  closeFeedback();
+  showToast('✅ Feedback opened in your email client. Thank you!', 'success');
+}
+
+/* ═══════════════════════════════════════════
+   UTILITY FUNCTIONS
+═══════════════════════════════════════════ */
+function now() {
+  return new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+}
+
+function esc(t) {
+  return t
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\n/g, '<br>');
+}
+
+function fmt(t) {
+  // Convert basic markdown to HTML for AI messages
+  return t
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,     '<em>$1</em>')
+    .replace(/^#{1,3}\s+(.+)$/gm, '<strong>$1</strong>')
+    .replace(/\n\n/g, '</p><p style="margin-top:8px;">')
+    .replace(/\n/g,   '<br>')
+    .replace(/^/,     '<p>')
+    .replace(/$/,     '</p>');
 }
 
 function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 }
 
 function autoResize(el) {
   el.style.height = '';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+  el.style.height = Math.min(el.scrollHeight, 110) + 'px';
 }
+
+/* ═══════════════════════════════════════════
+   INIT — restore session on page load
+═══════════════════════════════════════════ */
+(function init() {
+  const tok = sessionStorage.getItem('bc_token');
+  const usr = sessionStorage.getItem('bc_user');
+  if (tok && usr) {
+    try {
+      S.token = tok;
+      S.user  = JSON.parse(usr);
+      const name = S.user.full_name || S.user.email || 'User';
+      document.getElementById('nav-user-name').textContent  = name;
+      document.getElementById('dash-user-name').textContent = name.split(' ')[0];
+      loadProducts();
+      goTo('screen-products');
+    } catch (e) {
+      sessionStorage.clear();
+    }
+  }
+})();
 </script>
 </body>
 </html>

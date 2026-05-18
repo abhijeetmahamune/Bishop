@@ -1,0 +1,297 @@
+"""
+main.py – Brain Checker AI Backend (Phase 1)
+FastAPI server with Supabase auth, RAG pipeline, usage limits.
+"""
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends, Query
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from pydantic import BaseModel
+from typing import Optional
+import datetime
+
+from backend.config import (
+    supabase, supabase_admin,
+    OPENROUTER_API_KEY, OPENROUTER_BASE_URL, AI_MODEL,
+    ALLOWED_ORIGINS, MONTHLY_QUESTION_LIMIT
+)
+from backend.auth import router as auth_router, get_current_user
+from backend.rag import process_and_store_pdf, retrieve_relevant_chunks, get_session_pdf_status
+from backend.prompts import build_system_prompt
+from openai import OpenAI
+
+# ─────────────────────────────────────────
+# APP SETUP
+# ─────────────────────────────────────────
+app = FastAPI(title="Brain Checker AI API", version="2.0.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Include auth routes
+app.include_router(auth_router)
+
+security = HTTPBearer()
+
+
+# ─────────────────────────────────────────
+# MODELS
+# ─────────────────────────────────────────
+class ChatRequest(BaseModel):
+    session_id: str
+    card_mode: str
+    message: str
+    history: list = []
+
+
+# ─────────────────────────────────────────
+# HELPERS
+# ─────────────────────────────────────────
+def check_and_increment_usage(user_id: str) -> int:
+    """
+    Check monthly question limit. If within limit, increment and return remaining.
+    Raises 429 if limit exceeded.
+    """
+    profile_res = supabase_admin.table("profiles").select(
+        "questions_used, questions_reset"
+    ).eq("id", user_id).single().execute()
+
+    profile = profile_res.data or {}
+    questions_used = profile.get("questions_used", 0)
+
+    # Check monthly reset
+    reset_date = profile.get("questions_reset")
+    if isinstance(reset_date, str):
+        reset_date = datetime.datetime.fromisoformat(reset_date.replace("Z", "+00:00"))
+    now = datetime.datetime.now(datetime.timezone.utc)
+    if reset_date and (now.year > reset_date.year or now.month > reset_date.month):
+        questions_used = 0
+        supabase_admin.table("profiles").update({
+            "questions_used": 0,
+            "questions_reset": now.isoformat()
+        }).eq("id", user_id).execute()
+
+    if questions_used >= MONTHLY_QUESTION_LIMIT:
+        raise HTTPException(
+            status_code=429,
+            detail=f"Monthly question limit of {MONTHLY_QUESTION_LIMIT} reached. Resets on the 1st of next month."
+        )
+
+    # Increment
+    supabase_admin.table("profiles").update({
+        "questions_used": questions_used + 1
+    }).eq("id", user_id).execute()
+
+    return MONTHLY_QUESTION_LIMIT - (questions_used + 1)
+
+
+def validate_session_ownership(session_id: str, user_id: str) -> dict:
+    """Ensure the session belongs to this user and fetch its product info."""
+    res = supabase_admin.table("sessions").select(
+        "*, products(slug, name, required_pdfs, cards)"
+    ).eq("id", session_id).eq("user_id", user_id).single().execute()
+
+    if not res.data:
+        raise HTTPException(status_code=403, detail="Session not found or access denied.")
+
+    return res.data
+
+
+# ─────────────────────────────────────────
+# PDF UPLOAD ENDPOINT
+# ─────────────────────────────────────────
+@app.post("/api/upload")
+async def upload_pdf(
+    file: UploadFile = File(...),
+    session_id: str = Query(...),
+    doc_index: int = Query(0),
+    doc_label: str = Query("Report"),
+    user=Depends(get_current_user)
+):
+    """
+    Upload and process a PDF for RAG.
+    - session_id: the user's active session
+    - doc_index: 0-based index (0 = first PDF, 1 = second, etc.)
+    - doc_label: human-readable label (e.g. "DMIT Report")
+    """
+    if not file.filename or not file.filename.lower().endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
+
+    # Validate session ownership
+    session = validate_session_ownership(session_id, user.id)
+    product = session.get("products", {})
+    required_pdfs = product.get("required_pdfs", 2)
+
+    if doc_index >= required_pdfs:
+        raise HTTPException(
+            status_code=400,
+            detail=f"This product requires only {required_pdfs} PDF(s). Index {doc_index} is out of range."
+        )
+
+    contents = await file.read()
+    if len(contents) == 0:
+        raise HTTPException(status_code=400, detail="PDF file is empty.")
+
+    try:
+        result = await process_and_store_pdf(
+            pdf_bytes=contents,
+            session_id=session_id,
+            user_id=user.id,
+            doc_label=doc_label,
+            doc_index=doc_index,
+            original_name=file.filename
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to process PDF: {str(e)}")
+
+    # Check overall upload status
+    status = get_session_pdf_status(session_id, required_pdfs)
+
+    return {
+        "status": "success",
+        "filename": file.filename,
+        "doc_label": doc_label,
+        "chunks_stored": result["chunks_stored"],
+        "characters": result["characters"],
+        "upload_progress": {
+            "uploaded": status["uploaded_count"],
+            "required": required_pdfs,
+            "is_complete": status["is_complete"],
+            "documents": status["documents"]
+        }
+    }
+
+
+@app.get("/api/session/{session_id}/pdf-status")
+async def get_pdf_status(session_id: str, user=Depends(get_current_user)):
+    """Check upload status for a session."""
+    session = validate_session_ownership(session_id, user.id)
+    product = session.get("products", {})
+    required_pdfs = product.get("required_pdfs", 2)
+    status = get_session_pdf_status(session_id, required_pdfs)
+    return {"status": "success", **status}
+
+
+# ─────────────────────────────────────────
+# CHAT ENDPOINT
+# ─────────────────────────────────────────
+@app.post("/api/ask")
+async def ask(req: ChatRequest, user=Depends(get_current_user)):
+    """
+    Main chat endpoint with RAG, usage limits, and product-aware prompts.
+    """
+    # Validate session
+    session = validate_session_ownership(req.session_id, user.id)
+    product = session.get("products", {})
+    product_slug = product.get("slug", "dmit")
+    allowed_cards = product.get("cards", [])
+
+    # Validate card mode is allowed for this product
+    if req.card_mode not in allowed_cards:
+        raise HTTPException(
+            status_code=403,
+            detail=f"Card '{req.card_mode}' is not available for your product."
+        )
+
+    # Check and increment usage limit
+    questions_remaining = check_and_increment_usage(user.id)
+
+    # RAG: retrieve relevant chunks
+    rag_context = retrieve_relevant_chunks(req.message, req.session_id)
+
+    # Build system prompt
+    system_prompt = build_system_prompt(product_slug, req.card_mode, rag_context)
+
+    # Build chat history
+    chat_history = [{"role": m["role"], "content": m["content"]} for m in req.history]
+    chat_history.append({"role": "user", "content": req.message})
+
+    # Call AI
+    try:
+        client = OpenAI(api_key=OPENROUTER_API_KEY, base_url=OPENROUTER_BASE_URL)
+        response = client.chat.completions.create(
+            model=AI_MODEL,
+            messages=[{"role": "system", "content": system_prompt}] + chat_history,
+            temperature=0.7,
+            max_tokens=2048
+        )
+        reply = response.choices[0].message.content
+
+    except Exception as e:
+        error_str = str(e).lower()
+        if "429" in str(e) or "rate_limit" in error_str:
+            raise HTTPException(status_code=429, detail="AI rate limit reached. Please wait a moment and try again.")
+        raise HTTPException(status_code=500, detail=f"AI error: {str(e)}")
+
+    # Store in chat history
+    try:
+        supabase_admin.table("chat_history").insert([
+            {
+                "session_id": req.session_id,
+                "user_id": user.id,
+                "card_mode": req.card_mode,
+                "role": "user",
+                "content": req.message
+            },
+            {
+                "session_id": req.session_id,
+                "user_id": user.id,
+                "card_mode": req.card_mode,
+                "role": "assistant",
+                "content": reply
+            }
+        ]).execute()
+    except Exception:
+        pass  # Don't fail the request if history storage fails
+
+    # Log usage
+    try:
+        supabase_admin.table("usage_logs").insert({
+            "user_id": user.id,
+            "session_id": req.session_id,
+            "card_mode": req.card_mode
+        }).execute()
+    except Exception:
+        pass
+
+    return {
+        "reply": reply,
+        "card_mode": req.card_mode,
+        "model": AI_MODEL,
+        "questions_remaining": questions_remaining
+    }
+
+
+# ─────────────────────────────────────────
+# HEALTH CHECK
+# ─────────────────────────────────────────
+@app.get("/")
+def root():
+    return {
+        "status": "running",
+        "app": "Brain Checker AI API",
+        "version": "2.0.0"
+    }
+
+@app.get("/api/health")
+def health():
+    return {"status": "ok", "version": "2.0.0"}
+
+
+# ─────────────────────────────────────────
+# RUN
+# ─────────────────────────────────────────
+if __name__ == "__main__":
+    import uvicorn
+    import os
+    print("\n" + "="*60)
+    print("🚀 Brain Checker AI Backend v2.0")
+    print("="*60)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("backend.main:app", host="0.0.0.0", port=port, reload=True)

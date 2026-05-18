@@ -1,0 +1,253 @@
+-- ============================================================
+-- BRAIN CHECKER AI – SUPABASE SCHEMA
+-- Run this entire file in Supabase SQL Editor
+-- Project: dyasbdiepnvmrllhwjux
+-- ============================================================
+
+-- Enable pgvector for RAG
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- ─────────────────────────────────────────
+-- 1. PRODUCTS TABLE
+-- ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS products (
+  id              SERIAL PRIMARY KEY,
+  slug            TEXT UNIQUE NOT NULL,       -- e.g. 'dmit', 'career_combo'
+  name            TEXT NOT NULL,              -- Display name
+  required_pdfs   INTEGER NOT NULL DEFAULT 2, -- How many PDFs user must upload
+  pdf_labels      JSONB NOT NULL DEFAULT '[]',-- Labels for each PDF upload field
+  cards           JSONB NOT NULL DEFAULT '[]',-- Array of card slugs available
+  system_prompt_key TEXT NOT NULL,            -- Key into SYSTEM_PROMPTS in backend
+  is_corporate    BOOLEAN DEFAULT FALSE,
+  created_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─────────────────────────────────────────
+-- 2. PROFILES TABLE (extends Supabase auth.users)
+-- ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS profiles (
+  id              UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  full_name       TEXT,
+  product_id      INTEGER REFERENCES products(id),
+  questions_used  INTEGER DEFAULT 0,
+  questions_reset TIMESTAMPTZ DEFAULT DATE_TRUNC('month', NOW()),
+  created_at      TIMESTAMPTZ DEFAULT NOW(),
+  updated_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─────────────────────────────────────────
+-- 3. SESSIONS TABLE
+-- ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS sessions (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id         UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  product_id      INTEGER REFERENCES products(id),
+  created_at      TIMESTAMPTZ DEFAULT NOW(),
+  last_active     TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─────────────────────────────────────────
+-- 4. PDF DOCUMENTS TABLE (for RAG)
+-- ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS pdf_documents (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  session_id      UUID REFERENCES sessions(id) ON DELETE CASCADE,
+  user_id         UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  doc_label       TEXT NOT NULL,             -- e.g. 'DMIT Report', 'Recommendation Report'
+  doc_index       INTEGER NOT NULL DEFAULT 0,-- 0-based index for this product's PDF slots
+  original_name   TEXT,
+  chunk_count     INTEGER DEFAULT 0,
+  created_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─────────────────────────────────────────
+-- 5. PDF CHUNKS TABLE (RAG vector store)
+-- ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS pdf_chunks (
+  id              BIGSERIAL PRIMARY KEY,
+  document_id     UUID REFERENCES pdf_documents(id) ON DELETE CASCADE,
+  session_id      UUID REFERENCES sessions(id) ON DELETE CASCADE,
+  chunk_index     INTEGER NOT NULL,
+  content         TEXT NOT NULL,
+  embedding       vector(384),              -- 384-dim for all-MiniLM-L6-v2 (free, local)
+  created_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─────────────────────────────────────────
+-- 6. CHAT HISTORY TABLE
+-- ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS chat_history (
+  id              BIGSERIAL PRIMARY KEY,
+  session_id      UUID REFERENCES sessions(id) ON DELETE CASCADE,
+  user_id         UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  card_mode       TEXT NOT NULL,
+  role            TEXT NOT NULL CHECK (role IN ('user', 'assistant')),
+  content         TEXT NOT NULL,
+  created_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─────────────────────────────────────────
+-- 7. USAGE LOGS TABLE
+-- ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS usage_logs (
+  id              BIGSERIAL PRIMARY KEY,
+  user_id         UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  session_id      UUID REFERENCES sessions(id),
+  card_mode       TEXT,
+  created_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ─────────────────────────────────────────
+-- ROW LEVEL SECURITY (RLS)
+-- ─────────────────────────────────────────
+ALTER TABLE profiles        ENABLE ROW LEVEL SECURITY;
+ALTER TABLE sessions        ENABLE ROW LEVEL SECURITY;
+ALTER TABLE pdf_documents   ENABLE ROW LEVEL SECURITY;
+ALTER TABLE pdf_chunks      ENABLE ROW LEVEL SECURITY;
+ALTER TABLE chat_history    ENABLE ROW LEVEL SECURITY;
+ALTER TABLE usage_logs      ENABLE ROW LEVEL SECURITY;
+
+-- Profiles: users can only see/edit their own
+CREATE POLICY "profiles_own" ON profiles
+  FOR ALL USING (auth.uid() = id);
+
+-- Sessions: users can only see their own
+CREATE POLICY "sessions_own" ON sessions
+  FOR ALL USING (auth.uid() = user_id);
+
+-- PDF documents: users can only see their own
+CREATE POLICY "pdf_docs_own" ON pdf_documents
+  FOR ALL USING (auth.uid() = user_id);
+
+-- PDF chunks: users can only see their own session's chunks
+CREATE POLICY "pdf_chunks_own" ON pdf_chunks
+  FOR ALL USING (
+    session_id IN (SELECT id FROM sessions WHERE user_id = auth.uid())
+  );
+
+-- Chat history: users can only see their own
+CREATE POLICY "chat_own" ON chat_history
+  FOR ALL USING (auth.uid() = user_id);
+
+-- Usage logs: users can only see their own
+CREATE POLICY "usage_own" ON usage_logs
+  FOR ALL USING (auth.uid() = user_id);
+
+-- Products table is public read (no RLS needed)
+-- ─────────────────────────────────────────
+
+-- ─────────────────────────────────────────
+-- VECTOR SIMILARITY SEARCH FUNCTION
+-- ─────────────────────────────────────────
+CREATE OR REPLACE FUNCTION match_chunks(
+  query_embedding vector(384),
+  match_session_id UUID,
+  match_count INT DEFAULT 6
+)
+RETURNS TABLE (
+  content TEXT,
+  doc_label TEXT,
+  similarity FLOAT
+)
+LANGUAGE SQL STABLE AS $$
+  SELECT
+    pc.content,
+    pd.doc_label,
+    1 - (pc.embedding <=> query_embedding) AS similarity
+  FROM pdf_chunks pc
+  JOIN pdf_documents pd ON pc.document_id = pd.id
+  WHERE pc.session_id = match_session_id
+  ORDER BY pc.embedding <=> query_embedding
+  LIMIT match_count;
+$$;
+
+-- ─────────────────────────────────────────
+-- AUTO-CREATE PROFILE ON SIGNUP TRIGGER
+-- ─────────────────────────────────────────
+CREATE OR REPLACE FUNCTION handle_new_user()
+RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER AS $$
+BEGIN
+  INSERT INTO profiles (id, full_name)
+  VALUES (NEW.id, NEW.raw_user_meta_data->>'full_name');
+  RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION handle_new_user();
+
+-- ─────────────────────────────────────────
+-- SEED: PRODUCTS DATA
+-- ─────────────────────────────────────────
+INSERT INTO products (slug, name, required_pdfs, pdf_labels, cards, system_prompt_key, is_corporate) VALUES
+
+('dmit', 'DMIT', 2,
+ '["DMIT Report", "Recommendation Report"]',
+ '["understand_report","career_roadmap","college_finder","action_plan","parent_guide"]',
+ 'dmit', FALSE),
+
+('career_combo', 'Career Planning (Combo)', 3,
+ '["DMIT Report", "Psychometric Report", "Recommendation Report"]',
+ '["understand_report","career_roadmap","college_finder","action_plan","parent_guide","profile_insights"]',
+ 'career_combo', FALSE),
+
+('psychometric', 'Psychometric Assessment', 2,
+ '["Psychometric Report", "Recommendation Report"]',
+ '["understand_report","strengths_weaknesses","learning_style","action_plan","parent_guide"]',
+ 'psychometric', FALSE),
+
+('polaris', 'Polaris (Corporate)', 2,
+ '["Polaris Report", "Recommendation Report"]',
+ '["understand_report","career_growth","skill_gap","workplace_behavior"]',
+ 'polaris', TRUE),
+
+('polaris_combo', 'Polaris Combo', 3,
+ '["DMIT Report", "Polaris Report", "Recommendation Report"]',
+ '["understand_report","career_roadmap","skill_development","personality_insights","action_plan"]',
+ 'polaris_combo', TRUE),
+
+('best', 'BEST (Engineering Sorter)', 2,
+ '["BEST Report", "Recommendation Report"]',
+ '["understand_report","engineering_branch","skill_requirements","career_path"]',
+ 'best', FALSE),
+
+('best_combo', 'BEST Combo', 3,
+ '["DMIT Report", "BEST Report", "Recommendation Report"]',
+ '["understand_report","career_roadmap","engineering_specialization","college_finder","action_plan"]',
+ 'best_combo', FALSE),
+
+('tycoon', 'Tycoon (Standalone)', 2,
+ '["Tycoon Report", "Recommendation Report"]',
+ '["understand_report","entrepreneur_profile","business_skills","real_world_application"]',
+ 'tycoon', FALSE),
+
+('tycoon_combo', 'Tycoon Combo', 3,
+ '["DMIT Report", "Tycoon Report", "Recommendation Report"]',
+ '["understand_report","career_roadmap","entrepreneur_path","skill_development","action_plan"]',
+ 'tycoon_combo', FALSE),
+
+('hiring', 'Hiring Assessment', 4,
+ '["Job Description", "Candidate Resume", "HPACT Report", "Recommendation Report"]',
+ '["candidate_evaluation","job_fit","strengths_gaps","hiring_recommendation"]',
+ 'hiring', TRUE),
+
+('hiring_comparison', 'Hiring Assessment (Comparison)', 10,
+ '["Job Description", "Resume 1", "Resume 2", "Resume 3", "HPACT Report 1", "HPACT Report 2", "HPACT Report 3", "Recommendation Report 1", "Recommendation Report 2", "Recommendation Report 3"]',
+ '["candidate_comparison","ranking_dashboard","strength_comparison","final_recommendation"]',
+ 'hiring_comparison', TRUE)
+
+ON CONFLICT (slug) DO NOTHING;
+
+-- ─────────────────────────────────────────
+-- INDEX for faster vector search
+-- ─────────────────────────────────────────
+CREATE INDEX IF NOT EXISTS pdf_chunks_session_idx ON pdf_chunks(session_id);
+CREATE INDEX IF NOT EXISTS pdf_chunks_embedding_idx ON pdf_chunks
+  USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+
+-- ─────────────────────────────────────────
+-- DONE ✅
+-- ─────────────────────────────────────────
+SELECT 'Schema created successfully' AS status;

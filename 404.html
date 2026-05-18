@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found · Bishop by Brain Checker</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-deep:  #0f1c30;
+  --navy-mid:   #243657;
+  --teal:       #00b4d8;
+  --teal-dark:  #0096b5;
+  --white:      #ffffff;
+  --gray-400:   #94a3b8;
+  --gray-600:   #64748b;
+  --glow-teal:  0 0 60px rgba(0,180,216,0.15);
+  --fh: 'Poppins', sans-serif;
+  --fb: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--fb);
+  background: var(--navy-deep);
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+/* Ambient background mesh matching index.html */
+.bg-mesh {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,180,216,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,180,216,0.05) 0%, transparent 60%),
+    linear-gradient(160deg, var(--navy-deep) 0%, #0d2240 50%, var(--navy-deep) 100%);
+}
+
+/* Animated grid lines in background */
+.bg-grid {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(0,180,216,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,216,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+}
+@keyframes gridShift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(60px, 60px); }
+}
+
+.card {
+  position: relative; z-index: 1;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 26px;
+  padding: 3rem 2.5rem;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25), var(--glow-teal);
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Big 404 number */
+.error-code {
+  font-family: var(--fh);
+  font-size: clamp(5rem, 18vw, 8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--teal) 0%, #48cae4 50%, rgba(0,180,216,0.4) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.25rem;
+  animation: pulse 3s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.8; }
+}
+
+/* Brain icon */
+.brain-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.error-title {
+  font-family: var(--fh);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.error-sub {
+  font-size: 14px;
+  color: var(--gray-400);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,180,216,0.25), transparent);
+  margin: 1.75rem 0;
+}
+
+.btn-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: var(--teal);
+  color: var(--navy-deep);
+  border: none;
+  border-radius: 12px;
+  font-family: var(--fh);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  letter-spacing: -0.01em;
+}
+.btn-home:hover {
+  background: var(--teal-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,180,216,0.4);
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 22px;
+  background: rgba(255,255,255,0.07);
+  color: var(--gray-400);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  font-family: var(--fh);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-left: 10px;
+}
+.btn-back:hover {
+  background: rgba(255,255,255,0.12);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; }
+
+/* Brand strip at top of card */
+.brand-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+}
+.brand-strip img {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1.5px solid var(--teal);
+}
+.brand-name {
+  font-family: var(--fh);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+}
+.brand-tagline {
+  font-size: 10px;
+  color: var(--teal);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Footer note */
+.footer-note {
+  position: relative; z-index: 1;
+  margin-top: 2rem;
+  font-size: 11px;
+  color: var(--gray-600);
+  text-align: center;
+  line-height: 1.6;
+}
+.footer-note a {
+  color: var(--teal);
+  text-decoration: none;
+}
+.footer-note a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="bg-mesh"></div>
+<div class="bg-grid"></div>
+
+<div class="card">
+
+  <div class="brand-strip">
+    <img src="/assets/logo.jpg" alt="Brain Checker" onerror="this.style.display='none'">
+    <div>
+      <div class="brand-name">Bishop by Brain Checker</div>
+      <div class="brand-tagline">Post-Counseling AI</div>
+    </div>
+  </div>
+
+  <span class="brain-icon">🧠</span>
+  <div class="error-code">404</div>
+
+  <div class="error-title">This page doesn't exist</div>
+  <div class="error-sub">
+    The page you're looking for may have been moved, deleted, or
+    the link may be incorrect. Don't worry — your session and
+    reports are safe.
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="actions">
+    <a class="btn-home" href="/">
+      🏠 Go to Bishop
+    </a>
+    <a class="btn-back" href="javascript:history.back()">
+      ← Go back
+    </a>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  Need help? Contact us at
+  <a href="mailto:support@brainchecker.in">support@brainchecker.in</a>
+  &nbsp;·&nbsp;
+  <a href="/privacy">Privacy Policy</a>
+  &nbsp;·&nbsp;
+  <a href="/terms">Terms of Service</a>
+</div>
+
+</body>
+</html>

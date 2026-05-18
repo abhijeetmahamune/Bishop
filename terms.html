@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service · Bishop by Brain Checker</title>
+<meta name="description" content="Terms of Service for Bishop by Brain Checker — AI Post-Counseling System.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-deep:  #0f1c30;
+  --navy-mid:   #1e3050;
+  --teal:       #00b4d8;
+  --teal-light: #e0f7fc;
+  --white:      #ffffff;
+  --gray-300:   #cbd5e1;
+  --gray-400:   #94a3b8;
+  --gray-600:   #64748b;
+  --warning:    #f59e0b;
+  --fh: 'Poppins', sans-serif;
+  --fb: 'DM Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fb);
+  background: var(--navy-deep);
+  color: var(--gray-300);
+  line-height: 1.8;
+}
+
+.bg-mesh {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 50% 40% at 85% 10%, rgba(0,180,216,0.05) 0%, transparent 70%),
+              linear-gradient(170deg, var(--navy-deep) 0%, #0c1e38 100%);
+}
+
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(15,28,48,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 0 2rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo  { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; border: 1.5px solid var(--teal); }
+.nav-name  { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--white); }
+.nav-sub   { font-size: 10px; color: var(--teal); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+.nav-back  {
+  font-size: 12px; font-weight: 600; color: var(--gray-400);
+  text-decoration: none; padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 99px;
+  transition: all 0.2s;
+}
+.nav-back:hover { color: var(--white); border-color: rgba(255,255,255,0.25); }
+
+.page-wrap {
+  position: relative; z-index: 1;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+
+.page-header { margin-bottom: 3rem; }
+.page-eyebrow {
+  display: inline-block;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal); background: rgba(0,180,216,0.1);
+  border: 1px solid rgba(0,180,216,0.25); border-radius: 99px;
+  padding: 3px 12px; margin-bottom: 14px;
+}
+.page-title {
+  font-family: var(--fh);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.page-meta { font-size: 13px; color: var(--gray-600); display: flex; gap: 16px; flex-wrap: wrap; }
+.page-meta span { display: flex; align-items: center; gap: 5px; }
+
+/* ── AI Disclaimer banner — most important thing on this page ── */
+.ai-disclaimer {
+  background: rgba(245,158,11,0.08);
+  border: 1.5px solid rgba(245,158,11,0.35);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.ai-disclaimer-title {
+  font-family: var(--fh);
+  font-size: 13px; font-weight: 700; color: var(--warning);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 7px;
+}
+.ai-disclaimer p { font-size: 13px; color: var(--gray-300); margin-bottom: 6px; }
+.ai-disclaimer p:last-child { margin-bottom: 0; }
+
+.toc {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2.5rem;
+}
+.toc-title { font-family: var(--fh); font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.toc ol { padding-left: 1.2rem; }
+.toc li { margin-bottom: 5px; }
+.toc a  { font-size: 13px; color: var(--gray-400); text-decoration: none; transition: color 0.15s; }
+.toc a:hover { color: var(--teal); }
+
+.section { margin-bottom: 2.75rem; }
+.section-anchor { display: block; height: 72px; margin-top: -72px; visibility: hidden; }
+
+h2 {
+  font-family: var(--fh);
+  font-size: 1.15rem; font-weight: 700; color: var(--white);
+  margin-bottom: 1rem; padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; gap: 10px;
+}
+.h2-num {
+  width: 26px; height: 26px; border-radius: 8px;
+  background: rgba(0,180,216,0.15); color: var(--teal);
+  font-size: 11px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+p { margin-bottom: 1rem; font-size: 14px; color: var(--gray-300); }
+p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 1.4rem; margin-bottom: 1rem; }
+li { font-size: 14px; color: var(--gray-300); margin-bottom: 6px; line-height: 1.7; }
+strong { color: var(--white); font-weight: 500; }
+a { color: var(--teal); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.box {
+  border-radius: 10px; padding: 14px 18px;
+  margin: 1.2rem 0; font-size: 13px; line-height: 1.65;
+}
+.box-info    { background: rgba(0,180,216,0.07); border: 1px solid rgba(0,180,216,0.2); }
+.box-warning { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); color: var(--gray-300); }
+.box-warning strong { color: var(--warning); }
+
+.contact-card {
+  background: rgba(0,180,216,0.07);
+  border: 1px solid rgba(0,180,216,0.2);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  margin-top: 1rem;
+}
+.contact-card h3 { font-family: var(--fh); font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.contact-card p  { font-size: 13px; margin-bottom: 6px; }
+
+.page-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  font-size: 12px; color: var(--gray-600);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.page-footer a { color: var(--gray-400); }
+.page-footer a:hover { color: var(--teal); }
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+
+<nav class="navbar">
+  <a class="nav-brand" href="/">
+    <img src="/assets/logo.jpg" class="nav-logo" alt="BC" onerror="this.style.display='none'">
+    <div>
+      <div class="nav-name">Bishop by Brain Checker</div>
+      <div class="nav-sub">Post-Counseling AI</div>
+    </div>
+  </a>
+  <a class="nav-back" href="/">← Back to App</a>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-header">
+    <span class="page-eyebrow">Legal Document</span>
+    <h1 class="page-title">Terms of Service</h1>
+    <div class="page-meta">
+      <span>📅 Effective: 1 June 2025</span>
+      <span>🔄 Last updated: 1 June 2025</span>
+      <span>📍 Governed by Indian Law</span>
+    </div>
+  </div>
+
+  <!-- AI DISCLAIMER — most important, shown first -->
+  <div class="ai-disclaimer">
+    <div class="ai-disclaimer-title">⚠️ Important: About AI-Generated Guidance</div>
+    <p>
+      Bishop is an AI-powered assistant designed to help you understand your Brain Checker
+      assessment reports. The information it provides is <strong>for educational and
+      informational purposes only</strong>.
+    </p>
+    <p>
+      <strong>Bishop does not replace professional counseling.</strong>
+      AI responses may be incomplete, imprecise, or not applicable to your specific situation.
+      Always refer to the guidance of your Brain Checker counselor for final career, academic,
+      or professional decisions.
+    </p>
+    <p>
+      <strong>Bishop is not a medical or psychological diagnostic tool.</strong>
+      Nothing in this application constitutes medical, psychological, or clinical advice.
+    </p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#t1">Acceptance of these terms</a></li>
+      <li><a href="#t2">Description of the service</a></li>
+      <li><a href="#t3">Eligibility and account registration</a></li>
+      <li><a href="#t4">Acceptable use</a></li>
+      <li><a href="#t5">AI-generated content — important limitations</a></li>
+      <li><a href="#t6">Your content and PDF reports</a></li>
+      <li><a href="#t7">Usage limits</a></li>
+      <li><a href="#t8">Intellectual property</a></li>
+      <li><a href="#t9">Disclaimer of warranties</a></li>
+      <li><a href="#t10">Limitation of liability</a></li>
+      <li><a href="#t11">Indemnification</a></li>
+      <li><a href="#t12">Termination</a></li>
+      <li><a href="#t13">Governing law and disputes</a></li>
+      <li><a href="#t14">Changes to these terms</a></li>
+      <li><a href="#t15">Contact us</a></li>
+    </ol>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <span class="section-anchor" id="t1"></span>
+    <h2><span class="h2-num">1</span> Acceptance of these terms</h2>
+    <p>
+      By accessing or using Bishop ("the Service"), you agree to be bound by these
+      Terms of Service ("Terms") and our <a href="/privacy">Privacy Policy</a>.
+      These Terms form a legally binding agreement between you and
+      <strong>Brain Checker</strong> ("we", "us", or "our").
+    </p>
+    <p>
+      If you do not agree to these Terms, please do not use the Service.
+    </p>
+    <p>
+      If you are using Bishop on behalf of an organisation (such as a school or employer),
+      you represent that you have the authority to bind that organisation to these Terms.
+    </p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <span class="section-anchor" id="t2"></span>
+    <h2><span class="h2-num">2</span> Description of the service</h2>
+    <p>
+      Bishop is an AI-powered post-counseling assistant that allows Brain Checker clients
+      to upload their assessment reports (DMIT, Psychometric, Polaris, BEST, Tycoon,
+      Hiring assessments) and ask questions about them via a chat interface.
+    </p>
+    <p>
+      The Service is provided as a supplementary tool to Brain Checker's professional
+      counseling services. It is not a standalone counseling service.
+    </p>
+    <p>
+      The Service uses the following third-party infrastructure: Supabase for database
+      and authentication, OpenRouter for AI model inference, and Render for cloud hosting.
+    </p>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <span class="section-anchor" id="t3"></span>
+    <h2><span class="h2-num">3</span> Eligibility and account registration</h2>
+    <ul>
+      <li>You must be at least 18 years old to create an account. If you are under 18, a parent or guardian must create and manage the account.</li>
+      <li>You must provide accurate information during signup (real name and working email address).</li>
+      <li>You are responsible for keeping your password confidential. Do not share your account with others.</li>
+      <li>You may only create one account per person. Multiple accounts for the same person are not permitted.</li>
+      <li>Access to Bishop is provided to Brain Checker clients only. Creating an account without being a Brain Checker client is not permitted.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <span class="section-anchor" id="t4"></span>
+    <h2><span class="h2-num">4</span> Acceptable use</h2>
+    <p>You agree to use Bishop only for its intended purpose — understanding your Brain Checker assessment reports. You agree NOT to:</p>
+    <ul>
+      <li>Upload documents that are not Brain Checker assessment reports (e.g. legal contracts, other companies' documents, personal files unrelated to counseling).</li>
+      <li>Attempt to extract, scrape, or systematically copy data from the Service.</li>
+      <li>Use the Service to generate content for purposes other than personal career counseling (e.g. for resale, academic fraud, or commercial use).</li>
+      <li>Attempt to reverse-engineer, decompile, or probe the security of the Service.</li>
+      <li>Use automated scripts, bots, or other means to send requests to the Service.</li>
+      <li>Upload malicious files, including PDFs containing embedded scripts or malware.</li>
+      <li>Attempt to access another user's account or data.</li>
+      <li>Use the Service in any way that violates applicable Indian law or international law.</li>
+    </ul>
+
+    <div class="box box-warning">
+      <strong>Misuse may result in account suspension.</strong>
+      We reserve the right to suspend or terminate accounts that violate these rules
+      without notice or refund.
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <span class="section-anchor" id="t5"></span>
+    <h2><span class="h2-num">5</span> AI-generated content — important limitations</h2>
+    <p>
+      Bishop uses large language models (LLMs) accessed via OpenRouter to generate
+      responses based on your uploaded reports. You acknowledge and agree that:
+    </p>
+    <ul>
+      <li><strong>AI responses are not always accurate.</strong> The AI may make mistakes, misinterpret data in your report, or provide outdated information.</li>
+      <li><strong>AI responses are not professional advice.</strong> Nothing the AI says constitutes career counseling, psychological assessment, medical advice, legal advice, or financial advice.</li>
+      <li><strong>The AI does not have access to information outside your uploaded reports</strong> (for report-specific questions) and its general training data. It cannot access the internet or real-time information.</li>
+      <li><strong>College and career suggestions</strong> provided by the AI are indicative only. Entrance exam cutoffs, college rankings, and salary data may be outdated. Always verify with official sources.</li>
+      <li><strong>For Hiring Assessments:</strong> AI hiring recommendations are one data point only. Hiring decisions must involve qualified HR professionals and must comply with applicable employment law. Brain Checker is not liable for hiring decisions made based on AI output.</li>
+      <li>Always consult your Brain Checker counselor for authoritative guidance based on your complete assessment.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section">
+    <span class="section-anchor" id="t6"></span>
+    <h2><span class="h2-num">6</span> Your content and PDF reports</h2>
+    <p>
+      You retain ownership of the PDF reports you upload and the chat conversations
+      you have through the Service.
+    </p>
+    <p>
+      By uploading a report, you grant Brain Checker a limited, non-exclusive licence
+      to process the report's content for the sole purpose of providing you with
+      AI-generated analysis responses. We do not use your report content to train AI models.
+    </p>
+    <p>
+      You represent that you have the right to upload the reports you submit (i.e. they
+      are your own Brain Checker reports or you have been given permission to use them
+      by the person they belong to).
+    </p>
+    <p>
+      You must not upload reports that contain sensitive third-party personal data
+      without the explicit consent of the individuals whose data appears in the report
+      (relevant for Hiring Assessments — candidate data must be handled in compliance
+      with applicable privacy law).
+    </p>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="section">
+    <span class="section-anchor" id="t7"></span>
+    <h2><span class="h2-num">7</span> Usage limits</h2>
+    <p>
+      The Service enforces a monthly question limit per account (currently
+      <strong>40 questions per calendar month</strong>). This limit resets automatically
+      on the 1st of each month.
+    </p>
+    <p>
+      The limit exists to ensure fair access for all Brain Checker clients. If you
+      regularly need more questions, please contact Brain Checker support.
+    </p>
+    <p>
+      Brain Checker reserves the right to adjust usage limits at any time with
+      reasonable notice.
+    </p>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="section">
+    <span class="section-anchor" id="t8"></span>
+    <h2><span class="h2-num">8</span> Intellectual property</h2>
+    <p>
+      The Bishop platform — including its design, code, prompts, and brand identity —
+      is the intellectual property of Brain Checker and is protected by applicable law.
+    </p>
+    <p>
+      The Brain Checker assessment reports that you upload remain the intellectual
+      property of Brain Checker (the counseling organisation that created them).
+      You are licensed to use them for your own counseling purposes.
+    </p>
+    <p>
+      You may not copy, reproduce, distribute, or create derivative works based on
+      the Bishop platform or its content without our written permission.
+    </p>
+  </div>
+
+  <!-- SECTION 9 -->
+  <div class="section">
+    <span class="section-anchor" id="t9"></span>
+    <h2><span class="h2-num">9</span> Disclaimer of warranties</h2>
+    <p>
+      The Service is provided <strong>"as is" and "as available"</strong> without any
+      warranty of any kind, express or implied, including but not limited to warranties
+      of merchantability, fitness for a particular purpose, accuracy, or non-infringement.
+    </p>
+    <p>We do not warrant that:</p>
+    <ul>
+      <li>The Service will be uninterrupted, error-free, or available at all times.</li>
+      <li>AI-generated responses will be accurate, complete, or suitable for your needs.</li>
+      <li>The Service will meet your specific expectations or requirements.</li>
+    </ul>
+    <p>
+      Use of the Service is at your own risk. Brain Checker is not responsible for
+      decisions made based on AI output from the Service.
+    </p>
+  </div>
+
+  <!-- SECTION 10 -->
+  <div class="section">
+    <span class="section-anchor" id="t10"></span>
+    <h2><span class="h2-num">10</span> Limitation of liability</h2>
+    <p>
+      To the maximum extent permitted by Indian law, Brain Checker shall not be liable
+      for any indirect, incidental, special, consequential, or punitive damages arising
+      from your use of or inability to use the Service, including but not limited to:
+    </p>
+    <ul>
+      <li>Damages arising from reliance on AI-generated career, academic, or hiring recommendations.</li>
+      <li>Loss of data due to technical failures.</li>
+      <li>Decisions made based on incorrect or incomplete AI output.</li>
+    </ul>
+    <p>
+      Brain Checker's total cumulative liability to you for any claim arising from
+      your use of the Service shall not exceed ₹5,000 (Indian Rupees five thousand)
+      or the amount you paid for the counseling package that included access to
+      Bishop, whichever is lower.
+    </p>
+  </div>
+
+  <!-- SECTION 11 -->
+  <div class="section">
+    <span class="section-anchor" id="t11"></span>
+    <h2><span class="h2-num">11</span> Indemnification</h2>
+    <p>
+      You agree to indemnify and hold Brain Checker, its officers, employees, and
+      partners harmless from any claims, damages, or expenses (including reasonable
+      legal fees) arising from:
+    </p>
+    <ul>
+      <li>Your violation of these Terms.</li>
+      <li>Your misuse of the Service.</li>
+      <li>Your violation of any third party's rights in connection with your use of the Service.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 12 -->
+  <div class="section">
+    <span class="section-anchor" id="t12"></span>
+    <h2><span class="h2-num">12</span> Termination</h2>
+    <p>
+      You may stop using the Service and request account deletion at any time by
+      emailing <a href="mailto:support@brainchecker.in">support@brainchecker.in</a>.
+    </p>
+    <p>
+      Brain Checker may suspend or terminate your access to the Service at any time,
+      with or without notice, if:
+    </p>
+    <ul>
+      <li>You violate these Terms.</li>
+      <li>Your Brain Checker counseling package expires or is revoked.</li>
+      <li>We discontinue the Service.</li>
+    </ul>
+    <p>
+      Upon termination, your right to use the Service ceases immediately. We will
+      delete your account data in accordance with our <a href="/privacy">Privacy Policy</a>.
+    </p>
+  </div>
+
+  <!-- SECTION 13 -->
+  <div class="section">
+    <span class="section-anchor" id="t13"></span>
+    <h2><span class="h2-num">13</span> Governing law and disputes</h2>
+    <p>
+      These Terms are governed by and construed in accordance with the laws of India.
+      Any disputes arising from these Terms or your use of the Service shall be subject
+      to the exclusive jurisdiction of the courts in India.
+    </p>
+    <p>
+      We encourage you to contact us first at
+      <a href="mailto:support@brainchecker.in">support@brainchecker.in</a>
+      before initiating any formal dispute. Most issues can be resolved quickly and informally.
+    </p>
+  </div>
+
+  <!-- SECTION 14 -->
+  <div class="section">
+    <span class="section-anchor" id="t14"></span>
+    <h2><span class="h2-num">14</span> Changes to these terms</h2>
+    <p>
+      We may update these Terms from time to time. When we make significant changes,
+      we will update the "Last updated" date at the top of this page.
+    </p>
+    <p>
+      Continued use of the Service after a change to the Terms constitutes your
+      acceptance of the revised Terms. If you do not accept the revised Terms,
+      please stop using the Service and contact us to delete your account.
+    </p>
+  </div>
+
+  <!-- SECTION 15 -->
+  <div class="section">
+    <span class="section-anchor" id="t15"></span>
+    <h2><span class="h2-num">15</span> Contact us</h2>
+    <p>For any questions about these Terms:</p>
+    <div class="contact-card">
+      <h3>Brain Checker — Legal Contact</h3>
+      <p>📧 Email: <a href="mailto:support@brainchecker.in">support@brainchecker.in</a></p>
+      <p>📍 India</p>
+      <p style="margin-top:10px;font-size:12px;color:var(--gray-600);">
+        We aim to respond to all legal queries within 14 business days.
+      </p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>© 2025 Brain Checker. All rights reserved.</span>
+    <span>
+      <a href="/">Bishop App</a> &nbsp;·&nbsp;
+      <a href="/privacy">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="/terms">Terms of Service</a>
+    </span>
+  </div>
+
+</div>
+</body>
+</html>
