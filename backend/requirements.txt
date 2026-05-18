@@ -1,8 +1,5 @@
-# # ─────────────────────────────────────────
-# # Brain Checker AI – Python Dependencies
-# # Verified compatible versions (no conflicts)
-# # Install: pip install -r requirements.txt
-# # ─────────────────────────────────────────
+# Brain Checker AI - Python Dependencies
+# Python 3.11 required
 
 fastapi==0.115.5
 uvicorn==0.32.1
@@ -18,5 +15,3 @@ pdfplumber==0.11.4
 supabase==2.10.0
 sentence-transformers==3.3.1
 numpy==1.26.4
-torch==2.2.2
-transformers==4.44.2
