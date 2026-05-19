@@ -134,3 +134,8 @@ print(
     f"  ├─ CORS origins      : {ALLOWED_ORIGINS}\n"
     f"  └─ Embedding model   : {EMBEDDING_MODEL}\n"
 )
+HF_TOKEN: str = os.getenv("HF_TOKEN", "")
+HF_API_URL: str = os.getenv(
+    "HF_API_URL",
+    "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
+)
