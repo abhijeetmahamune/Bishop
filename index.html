@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -8,531 +8,675 @@
 <meta property="og:title" content="Bishop by Brain Checker">
 <meta property="og:description" content="AI-powered post-counseling assistant. Decode your Brain Checker assessment reports.">
 <meta property="og:image" content="/assets/bishop_BC.png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
-   DESIGN TOKENS
-═══════════════════════════════════════════ */
-:root {
-  --navy-deep:  #000204;
-  --navy-mid:   #243657;
-  --navy-light: #2e4470;
-  --teal:       #00b4d8;
-  --teal-dark:  #0096b5;
-  --teal-light: #e0f7fc;
-  --white:      #ffffff;
-  --gray-400:   #94a3b8;
-  --gray-600:   #64748b;
-  --gray-800:   #334155;
-  --success:    #10b981;
-  --error:      #ef4444;
-  --warning:    #f59e0b;
-  --info:       #3b82f6;
-  --shadow-md:  0 4px 16px rgba(0,0,0,0.18);
-  --shadow-lg:  0 10px 40px rgba(0,0,0,0.22);
-  --glow-teal:  0 0 40px rgba(0,180,216,0.18);
-  --r-sm:  6px;
+
+/* ═══════════════════════════════════════════════════════
+   DESIGN TOKENS — DARK MODE (default, matches admin site)
+═══════════════════════════════════════════════════════ */
+:root,
+[data-theme="dark"] {
+  /* Brand */
+  --teal:        #00b4d8;
+  --teal-dark:   #0096b5;
+  --teal-glow:   rgba(0,180,216,0.18);
+  --teal-subtle: rgba(0,180,216,0.08);
+
+  /* Backgrounds */
+  --bg-root:     #060d18;
+  --bg-surface:  #0c1829;
+  --bg-card:     #0f1f35;
+  --bg-overlay:  rgba(6,13,24,0.97);
+  --bg-input:    rgba(255,255,255,0.055);
+  --bg-hover:    rgba(255,255,255,0.05);
+  --bg-mesh-1:   rgba(0,180,216,0.06);
+  --bg-mesh-2:   rgba(0,180,216,0.03);
+
+  /* Borders */
+  --border:      rgba(255,255,255,0.08);
+  --border-md:   rgba(255,255,255,0.12);
+  --border-teal: rgba(0,180,216,0.35);
+
+  /* Text */
+  --text-primary:   #f0f4f8;
+  --text-secondary: #8fa5bf;
+  --text-muted:     #506070;
+  --text-teal:      #00b4d8;
+
+  /* Status */
+  --success:  #10b981;
+  --error:    #ef4444;
+  --warning:  #f59e0b;
+  --info:     #3b82f6;
+
+  /* Shadows */
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.25);
+  --shadow-md:  0 4px 20px rgba(0,0,0,0.35);
+  --shadow-lg:  0 12px 48px rgba(0,0,0,0.45);
+  --glow-teal:  0 0 48px rgba(0,180,216,0.14);
+
+  /* Sidebar */
+  --sidebar-bg: #080f1d;
+  --sidebar-border: rgba(255,255,255,0.06);
+
+  /* Chat */
+  --chat-bg:        #080f1c;
+  --ai-bubble-bg:   rgba(255,255,255,0.05);
+  --ai-bubble-border: rgba(255,255,255,0.08);
+  --user-bubble-bg: linear-gradient(135deg, #0096b5, #00b4d8);
+
+  /* Radius */
+  --r-xs:  4px;
+  --r-sm:  8px;
   --r-md:  12px;
-  --r-lg:  18px;
-  --r-xl:  26px;
-  --r-full:9999px;
+  --r-lg:  16px;
+  --r-xl:  22px;
+  --r-2xl: 28px;
+  --r-full: 9999px;
+
+  /* Typography */
   --fh: 'Poppins', sans-serif;
   --fb: 'DM Sans', sans-serif;
-  --nav-h: 56px;
-  --mob-drawer-h: 52px;
+
+  /* Layout */
+  --nav-h: 58px;
+  --sidebar-w: 244px;
+  --mob-bar-h: 54px;
 }
 
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
+   LIGHT MODE — Matches admin dashboard aesthetic
+═══════════════════════════════════════════════════════ */
+[data-theme="light"] {
+  --teal:        #0096b5;
+  --teal-dark:   #007a96;
+  --teal-glow:   rgba(0,150,181,0.12);
+  --teal-subtle: rgba(0,150,181,0.07);
+
+  --bg-root:     #f0f4f8;
+  --bg-surface:  #ffffff;
+  --bg-card:     #ffffff;
+  --bg-overlay:  rgba(255,255,255,0.98);
+  --bg-input:    #f8fafc;
+  --bg-hover:    rgba(0,0,0,0.03);
+  --bg-mesh-1:   rgba(0,150,181,0.04);
+  --bg-mesh-2:   rgba(0,150,181,0.02);
+
+  --border:      rgba(0,0,0,0.08);
+  --border-md:   rgba(0,0,0,0.12);
+  --border-teal: rgba(0,150,181,0.3);
+
+  --text-primary:   #0f1f35;
+  --text-secondary: #4a6070;
+  --text-muted:     #94a3b8;
+  --text-teal:      #0096b5;
+
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.08);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.1);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.14);
+  --glow-teal:  0 0 32px rgba(0,150,181,0.1);
+
+  --sidebar-bg:      #ffffff;
+  --sidebar-border:  rgba(0,0,0,0.08);
+
+  --chat-bg:          #f8fafc;
+  --ai-bubble-bg:     #ffffff;
+  --ai-bubble-border: rgba(0,0,0,0.08);
+  --user-bubble-bg:   linear-gradient(135deg, #007a96, #0096b5);
+}
+
+/* ═══════════════════════════════════════════════════════
    RESET & BASE
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; width: 100%; }
 
 body {
   font-family: var(--fb);
-  background: var(--navy-deep);
-  color: var(--white);
+  background: var(--bg-root);
+  color: var(--text-primary);
   overflow: hidden;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Global scrollbar hide — all scrollable areas */
-* { scrollbar-width: none; }
-*::-webkit-scrollbar { display: none; }
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+*::-webkit-scrollbar { width: 5px; height: 5px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: var(--border-md); border-radius: 3px; }
 
-/* ═══════════════════════════════════════════
-   BACKGROUND
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   BACKGROUND MESH
+═══════════════════════════════════════════════════════ */
 .bg-mesh {
   position: fixed; inset: 0; pointer-events: none; z-index: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,180,216,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,180,216,0.04) 0%, transparent 60%),
-    linear-gradient(160deg, var(--navy-deep) 0%, #0d2240 50%, var(--navy-deep) 100%);
+    radial-gradient(ellipse 55% 45% at 15% 15%, var(--bg-mesh-1) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 35% at 85% 85%, var(--bg-mesh-2) 0%, transparent 55%);
+  transition: opacity 0.3s;
 }
 
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    SCREENS
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════════════ */
 .screen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  flex-direction: column;
-  overflow: hidden;
+  display: none; position: fixed; inset: 0; z-index: 1;
+  flex-direction: column; overflow: hidden;
 }
 .screen.active { display: flex; }
 
-/* ═══════════════════════════════════════════
-   NAVBAR
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   THEME TOGGLE BUTTON
+═══════════════════════════════════════════════════════ */
+.theme-btn {
+  width: 34px; height: 34px; border-radius: var(--r-sm);
+  background: var(--bg-hover); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; flex-shrink: 0;
+}
+.theme-btn:hover { background: var(--teal-subtle); color: var(--teal); border-color: var(--border-teal); }
+
+/* ═══════════════════════════════════════════════════════
+   NAVBAR — Matches admin dashboard style
+═══════════════════════════════════════════════════════ */
 .navbar {
-  background: rgba(10,20,36,0.97);
+  background: var(--bg-overlay);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  padding: 0 1.25rem;
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
   height: var(--nav-h);
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 20;
-  gap: 8px;
+  gap: 10px;
+  transition: background 0.3s, border-color 0.3s;
 }
 
 .navbar-brand {
-  display: flex; align-items: center; gap: 9px;
-  min-width: 0; flex-shrink: 1; overflow: hidden;
+  display: flex; align-items: center; gap: 10px;
+  min-width: 0; flex-shrink: 1; overflow: hidden; text-decoration: none;
 }
 .navbar-logo {
-  width: 32px; height: 32px; border-radius: 8px;
+  width: 34px; height: 34px; border-radius: var(--r-sm);
   object-fit: cover; flex-shrink: 0;
-  border: 1.5px solid rgba(0,180,216,0.35);
+  border: 1.5px solid var(--border-teal);
+  box-shadow: 0 0 12px var(--teal-glow);
 }
 .brand-text { min-width: 0; overflow: hidden; }
 .brand-main {
-  font-family: var(--fh); font-size: 13px; font-weight: 800;
-  color: var(--white); letter-spacing: -0.01em;
+  font-family: var(--fh); font-size: 14px; font-weight: 700;
+  color: var(--text-primary); letter-spacing: -0.01em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .brand-sub {
-  font-size: 9.5px; color: var(--teal); font-weight: 600;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  white-space: nowrap;
+  font-size: 10px; color: var(--text-teal); font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase; white-space: nowrap;
 }
 .navbar-right {
   display: flex; align-items: center; gap: 8px; flex-shrink: 0;
 }
 .navbar-user {
-  font-size: 11.5px; color: var(--gray-400);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  max-width: 120px;
+  font-size: 12px; color: var(--text-secondary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px;
 }
-.navbar-user strong { color: var(--white); }
+.navbar-user strong { color: var(--text-primary); font-weight: 600; }
 
 .btn-logout {
-  padding: 5px 12px; background: transparent;
-  border: 1px solid rgba(255,255,255,0.14); border-radius: var(--r-full);
-  color: var(--gray-400); font-size: 11.5px; font-weight: 600; cursor: pointer;
-  transition: all 0.2s; font-family: var(--fb); white-space: nowrap; flex-shrink: 0;
+  padding: 6px 14px; background: transparent;
+  border: 1px solid var(--border); border-radius: var(--r-full);
+  color: var(--text-secondary); font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; font-family: var(--fb);
+  white-space: nowrap; flex-shrink: 0;
 }
-.btn-logout:hover { border-color: var(--error); color: var(--error); }
+.btn-logout:hover { border-color: var(--error); color: var(--error); background: rgba(239,68,68,0.06); }
 
 .btn-secondary {
-  padding: 6px 13px; background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.13); border-radius: var(--r-md);
-  color: var(--white); font-size: 11.5px; font-weight: 600; cursor: pointer;
-  transition: all 0.2s; font-family: var(--fb); white-space: nowrap; flex-shrink: 0;
+  padding: 6px 14px; background: var(--bg-hover);
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  color: var(--text-primary); font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; font-family: var(--fb);
+  white-space: nowrap; flex-shrink: 0;
 }
-.btn-secondary:hover { background: rgba(255,255,255,0.13); }
+.btn-secondary:hover { background: var(--teal-subtle); border-color: var(--border-teal); color: var(--teal); }
 
-/* ═══════════════════════════════════════════
-   ALERT / TOAST SYSTEM
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   ALERTS & TOAST
+═══════════════════════════════════════════════════════ */
 .alert {
   padding: 10px 14px; border-radius: var(--r-sm);
   font-size: 13px; margin-bottom: 1rem; display: none; line-height: 1.5;
+  animation: fadeIn 0.2s ease;
 }
-.alert.error   { background: rgba(239,68,68,0.12); color: #fca5a5; border-left: 3px solid var(--error); display: block; }
-.alert.success { background: rgba(16,185,129,0.12); color: #6ee7b7; border-left: 3px solid var(--success); display: block; }
-.alert.info    { background: rgba(59,130,246,0.12); color: #93c5fd; border-left: 3px solid var(--info); display: block; }
-.alert.warning { background: rgba(245,158,11,0.12); color: #fcd34d; border-left: 3px solid var(--warning); display: block; }
+.alert.error   { background: rgba(239,68,68,0.1); color: #fca5a5; border-left: 3px solid var(--error); display: block; }
+.alert.success { background: rgba(16,185,129,0.1); color: #6ee7b7; border-left: 3px solid var(--success); display: block; }
+.alert.info    { background: rgba(59,130,246,0.1); color: #93c5fd; border-left: 3px solid var(--info); display: block; }
+.alert.warning { background: rgba(245,158,11,0.1); color: #fcd34d; border-left: 3px solid var(--warning); display: block; }
 
-/* Toast — for upload/chat errors that aren't in the auth form */
 #toast {
-  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-  z-index: 9999; max-width: 360px; width: calc(100% - 2rem);
-  padding: 10px 16px; border-radius: var(--r-md); font-size: 13px;
+  position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+  z-index: 9999; max-width: 380px; width: calc(100% - 2rem);
+  padding: 11px 18px; border-radius: var(--r-md); font-size: 13px;
   line-height: 1.5; font-family: var(--fb); text-align: center;
   opacity: 0; pointer-events: none; transition: opacity 0.25s;
+  font-weight: 500;
 }
 #toast.show { opacity: 1; pointer-events: auto; }
-#toast.t-error   { background: rgba(15,5,5,0.95); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
-#toast.t-success { background: rgba(5,15,10,0.95); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.4); }
-#toast.t-info    { background: rgba(5,10,20,0.95); color: #93c5fd; border: 1px solid rgba(59,130,246,0.4); }
-#toast.t-warning { background: rgba(15,10,5,0.95); color: #fcd34d; border: 1px solid rgba(245,158,11,0.4); }
+#toast.t-error   { background: var(--bg-surface); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); box-shadow: var(--shadow-md); }
+#toast.t-success { background: var(--bg-surface); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.4); box-shadow: var(--shadow-md); }
+#toast.t-info    { background: var(--bg-surface); color: #93c5fd; border: 1px solid rgba(59,130,246,0.4); box-shadow: var(--shadow-md); }
+#toast.t-warning { background: var(--bg-surface); color: #fcd34d; border: 1px solid rgba(245,158,11,0.4); box-shadow: var(--shadow-md); }
 
-/* ═══════════════════════════════════════════
-   AUTH SCREEN
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   SPINNER
+═══════════════════════════════════════════════════════ */
+.spinner {
+  display: inline-block; width: 14px; height: 14px;
+  border: 2px solid var(--border-md); border-top-color: currentColor;
+  border-radius: 50%; animation: spin 0.65s linear infinite;
+  vertical-align: middle; margin-right: 5px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ═══════════════════════════════════════════════════════
+   AUTH SCREEN — Clean card style like admin dashboard
+═══════════════════════════════════════════════════════ */
 #screen-auth {
   align-items: center; justify-content: center;
   padding: 1.5rem; overflow-y: auto;
+  background: var(--bg-root);
+}
+
+.auth-wrapper {
+  width: 100%; max-width: 420px; z-index: 1;
+  animation: slideUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
 }
 
 .auth-card {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
   border-radius: var(--r-xl);
-  padding: 2.25rem 2rem;
-  width: 100%; max-width: 420px;
-  z-index: 1;
+  padding: 2.5rem 2rem;
   box-shadow: var(--shadow-lg), var(--glow-teal);
-  animation: slideUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
-}
-@keyframes slideUp {
-  from { opacity:0; transform:translateY(22px); }
-  to   { opacity:1; transform:translateY(0); }
+  transition: background 0.3s, border-color 0.3s;
 }
 
-.auth-logo {
-  display: flex; align-items: center; justify-content: center;
-  gap: 12px; margin-bottom: 6px;
+.auth-header {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  margin-bottom: 8px;
 }
 .auth-logo-img {
-  width: 52px; height: 52px; border-radius: 14px;
-  object-fit: cover; border: 2px solid rgba(0,180,216,0.4);
+  width: 52px; height: 52px; border-radius: var(--r-md);
+  object-fit: cover; border: 2px solid var(--border-teal);
+  box-shadow: 0 0 20px var(--teal-glow);
 }
-.auth-logo-text .brand-main { font-size: 1.2rem; }
-.auth-logo-text .brand-sub  { font-size: 10px; }
+.auth-logo-text .brand-main { font-size: 1.15rem; }
+.auth-logo-text .brand-sub  { font-size: 9.5px; }
 
 .auth-tagline {
-  text-align: center; font-size: 11px; color: var(--gray-400);
-  margin-bottom: 1.6rem; font-style: italic; letter-spacing: 0.01em;
+  text-align: center; font-size: 12px; color: var(--text-muted);
+  margin-bottom: 1.75rem; font-style: italic; letter-spacing: 0.01em;
+}
+
+/* Theme toggle in auth */
+.auth-theme-row {
+  display: flex; justify-content: flex-end; margin-bottom: 1rem;
 }
 
 .auth-tabs {
-  display: flex; background: rgba(255,255,255,0.06);
-  border-radius: var(--r-md); padding: 4px; margin-bottom: 1.4rem; gap: 4px;
+  display: flex; background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 4px; margin-bottom: 1.5rem; gap: 4px;
 }
 .auth-tab {
-  flex: 1; padding: 8px; border: none; background: transparent;
+  flex: 1; padding: 9px; border: none; background: transparent;
   border-radius: var(--r-sm); font-family: var(--fh); font-size: 13px;
-  font-weight: 600; color: var(--gray-400); cursor: pointer; transition: all 0.2s;
+  font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.2s;
 }
 .auth-tab.active {
-  background: var(--teal); color: var(--navy-deep);
-  box-shadow: 0 2px 10px rgba(0,180,216,0.4);
+  background: var(--teal); color: #fff;
+  box-shadow: 0 2px 10px var(--teal-glow);
 }
 
-.form-group { margin-bottom: 0.9rem; }
+.form-group { margin-bottom: 1rem; }
 .form-label {
-  display: block; font-size: 10.5px; font-weight: 700; color: var(--gray-400);
-  margin-bottom: 5px; letter-spacing: 0.06em; text-transform: uppercase;
+  display: block; font-size: 11px; font-weight: 700; color: var(--text-secondary);
+  margin-bottom: 6px; letter-spacing: 0.07em; text-transform: uppercase;
 }
 .form-input {
-  width: 100%; padding: 11px 13px;
-  background: rgba(255,255,255,0.06);
-  border: 1.5px solid rgba(255,255,255,0.11);
+  width: 100%; padding: 11px 14px;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
   border-radius: var(--r-md);
-  font-family: var(--fb); font-size: 14px; color: var(--white);
+  font-family: var(--fb); font-size: 14px; color: var(--text-primary);
   outline: none; transition: all 0.2s;
 }
-.form-input::placeholder { color: rgba(255,255,255,0.22); }
+.form-input::placeholder { color: var(--text-muted); }
 .form-input:focus {
-  border-color: var(--teal); background: rgba(0,180,216,0.07);
-  box-shadow: 0 0 0 3px rgba(0,180,216,0.14);
+  border-color: var(--teal); background: var(--teal-subtle);
+  box-shadow: 0 0 0 3px var(--teal-glow);
 }
 
 .btn-primary {
-  width: 100%; padding: 13px; background: var(--teal); color: var(--navy-deep);
-  border: none; border-radius: var(--r-md); font-family: var(--fh); font-size: 14px;
-  font-weight: 700; cursor: pointer; transition: all 0.2s;
+  width: 100%; padding: 13px; background: var(--teal); color: #fff;
+  border: none; border-radius: var(--r-md); font-family: var(--fh);
+  font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s;
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  margin-top: 0.25rem;
+  margin-top: 0.25rem; letter-spacing: 0.01em;
 }
 .btn-primary:hover:not(:disabled) {
-  background: var(--teal-dark); transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0,180,216,0.4);
+  background: var(--teal-dark); transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--teal-glow);
 }
+.btn-primary:active:not(:disabled) { transform: translateY(0); }
 .btn-primary:disabled {
-  background: rgba(255,255,255,0.08); color: var(--gray-600);
-  cursor: not-allowed; transform: none;
+  background: var(--bg-hover); color: var(--text-muted);
+  cursor: not-allowed; transform: none; box-shadow: none;
 }
 
-.auth-footer-links {
-  display: flex; justify-content: center; gap: 14px;
-  margin-top: 1.2rem; flex-wrap: wrap;
+.auth-footer {
+  display: flex; justify-content: center; gap: 16px;
+  margin-top: 1.4rem; flex-wrap: wrap; padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
 }
-.auth-footer-links a {
-  font-size: 11px; color: var(--gray-600); text-decoration: none;
-  transition: color 0.15s;
+.auth-footer a {
+  font-size: 11.5px; color: var(--text-muted); text-decoration: none; transition: color 0.15s;
 }
-.auth-footer-links a:hover { color: var(--teal); }
+.auth-footer a:hover { color: var(--teal); }
 
 .signup-legal {
-  font-size: 10.5px; color: var(--gray-600); text-align: center;
-  margin-top: 10px; line-height: 1.6;
+  font-size: 11px; color: var(--text-muted); text-align: center;
+  margin-top: 12px; line-height: 1.6;
 }
 .signup-legal a { color: var(--teal); text-decoration: none; }
 .signup-legal a:hover { text-decoration: underline; }
 
-/* ═══════════════════════════════════════════
-   SPINNER
-═══════════════════════════════════════════ */
-.spinner {
-  display: inline-block; width: 14px; height: 14px;
-  border: 2px solid rgba(255,255,255,0.3); border-top-color: currentColor;
-  border-radius: 50%; animation: spin 0.65s linear infinite;
-  vertical-align: middle; margin-right: 4px;
+@keyframes slideUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 
-/* ═══════════════════════════════════════════
-   PRODUCT SELECTION SCREEN
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   PAGE LAYOUT (Products + Upload screens)
+═══════════════════════════════════════════════════════ */
 .page-content {
   flex: 1; max-width: 1100px; margin: 0 auto;
-  padding: 1.75rem 1.25rem; width: 100%; overflow-y: auto;
+  padding: 2rem 1.5rem; width: 100%; overflow-y: auto;
 }
-.page-eyebrow {
-  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--teal); margin-bottom: 4px;
+.upload-content {
+  flex: 1; max-width: 640px; margin: 0 auto;
+  padding: 2rem 1.5rem; width: 100%; overflow-y: auto;
+}
+
+.step-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--teal-subtle); border: 1px solid var(--border-teal);
+  padding: 4px 12px; border-radius: var(--r-full);
+  font-size: 11px; font-weight: 700; color: var(--teal);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px;
 }
 .page-title {
-  font-family: var(--fh); font-size: clamp(1.25rem, 3vw, 1.7rem);
-  font-weight: 800; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px;
+  font-family: var(--fh); font-size: clamp(1.3rem, 3vw, 1.75rem);
+  font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em;
+  margin-bottom: 6px;
 }
-.page-sub { font-size: 13.5px; color: var(--gray-400); margin-bottom: 1.75rem; }
+.page-sub { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 2rem; }
 
 .section-label {
-  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--gray-400); margin-bottom: 10px;
-  display: flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
 }
-.section-label::after { content:''; flex:1; height:1px; background:rgba(255,255,255,0.07); }
+.section-label::after { content:''; flex:1; height:1px; background: var(--border); }
 
+/* ═══════════════════════════════════════════════════════
+   PRODUCT CARDS — Admin dashboard card style
+═══════════════════════════════════════════════════════ */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
-  gap: 10px; margin-bottom: 1.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px; margin-bottom: 2rem;
 }
 
 .product-card {
-  background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.09);
-  border-radius: var(--r-lg); padding: 16px; cursor: pointer;
-  transition: all 0.22s ease; position: relative; overflow: hidden;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 18px 16px;
+  cursor: pointer; transition: all 0.22s ease;
+  position: relative; overflow: hidden;
 }
-.product-card.loading { pointer-events: none; opacity: 0.6; }
+.product-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--teal), transparent);
+  opacity: 0; transition: opacity 0.2s;
+}
 .product-card:hover {
-  border-color: var(--teal); background: rgba(0,180,216,0.07);
+  border-color: var(--border-teal); background: var(--teal-subtle);
   transform: translateY(-3px); box-shadow: var(--shadow-md), var(--glow-teal);
 }
-.product-card-icon { font-size: 24px; margin-bottom: 9px; }
+.product-card:hover::before { opacity: 1; }
+.product-card.loading { pointer-events: none; opacity: 0.6; }
+
+.product-card-icon { font-size: 26px; margin-bottom: 10px; }
 .product-card-name {
-  font-family: var(--fh); font-size: 13px; font-weight: 700;
-  color: var(--white); margin-bottom: 7px; line-height: 1.3;
+  font-family: var(--fh); font-size: 13.5px; font-weight: 700;
+  color: var(--text-primary); margin-bottom: 10px; line-height: 1.3;
 }
-.product-card-badges { display: flex; gap: 4px; flex-wrap: wrap; }
-.badge { font-size: 9.5px; font-weight: 600; padding: 2px 7px; border-radius: var(--r-full); }
-.badge-pdf  { background: rgba(0,180,216,0.15); color: var(--teal); border: 1px solid rgba(0,180,216,0.3); }
-.badge-cards{ background: rgba(255,255,255,0.07); color: var(--gray-400); border: 1px solid rgba(255,255,255,0.11); }
-.badge-corp { background: rgba(245,158,11,0.15); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
+.product-card-badges { display: flex; gap: 5px; flex-wrap: wrap; }
+.badge {
+  font-size: 10px; font-weight: 600; padding: 3px 8px;
+  border-radius: var(--r-full); white-space: nowrap;
+}
+.badge-pdf   { background: var(--teal-subtle); color: var(--teal); border: 1px solid var(--border-teal); }
+.badge-cards { background: var(--bg-hover); color: var(--text-secondary); border: 1px solid var(--border); }
+.badge-corp  { background: rgba(245,158,11,0.1); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
 
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    UPLOAD SCREEN
-═══════════════════════════════════════════ */
-.upload-content {
-  flex: 1; max-width: 640px; margin: 0 auto;
-  padding: 1.75rem 1.25rem; width: 100%; overflow-y: auto;
-}
-
+═══════════════════════════════════════════════════════ */
 .upload-badge {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(0,180,216,0.1); border: 1px solid rgba(0,180,216,0.25);
-  padding: 4px 13px; border-radius: var(--r-full);
-  font-size: 12px; font-weight: 600; color: var(--teal); margin-bottom: 1.4rem;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--teal-subtle); border: 1px solid var(--border-teal);
+  padding: 5px 14px; border-radius: var(--r-full);
+  font-size: 12.5px; font-weight: 600; color: var(--teal); margin-bottom: 1.6rem;
 }
 
-.upload-slots { margin-bottom: 1.6rem; }
+.upload-slots { margin-bottom: 1.75rem; display: flex; flex-direction: column; gap: 10px; }
 
 .upload-slot {
-  background: rgba(255,255,255,0.04);
-  border: 1.5px dashed rgba(255,255,255,0.14);
-  border-radius: var(--r-lg); padding: 14px 16px; margin-bottom: 9px;
-  display: flex; align-items: center; gap: 13px;
+  background: var(--bg-card); border: 1.5px dashed var(--border-md);
+  border-radius: var(--r-lg); padding: 15px 18px;
+  display: flex; align-items: center; gap: 14px;
   cursor: pointer; transition: all 0.2s ease; user-select: none;
 }
 .upload-slot:hover:not(.slot-uploading) {
-  border-color: var(--teal); background: rgba(0,180,216,0.06);
+  border-color: var(--teal); background: var(--teal-subtle); border-style: dashed;
 }
 .upload-slot.slot-done {
-  border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.05); border-style: solid;
+  border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.05);
+  border-style: solid;
 }
 .upload-slot.slot-uploading {
-  border-color: var(--teal); background: rgba(0,180,216,0.06);
-  cursor: wait; pointer-events: none;
+  border-color: var(--teal); background: var(--teal-subtle);
+  border-style: solid; cursor: wait; pointer-events: none;
 }
 .upload-slot.slot-error {
-  border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.04); border-style: solid;
+  border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.04);
+  border-style: solid;
 }
 
 .slot-icon {
-  width: 40px; height: 40px; border-radius: var(--r-md);
+  width: 44px; height: 44px; border-radius: var(--r-md);
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0; background: rgba(255,255,255,0.06);
+  font-size: 20px; flex-shrink: 0; background: var(--bg-hover);
+  border: 1px solid var(--border); transition: all 0.2s;
 }
-.slot-done  .slot-icon { background: rgba(16,185,129,0.14); }
-.slot-uploading .slot-icon { background: rgba(0,180,216,0.12); }
-.slot-error .slot-icon { background: rgba(239,68,68,0.12); }
+.slot-done     .slot-icon { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); }
+.slot-uploading .slot-icon { background: var(--teal-subtle); border-color: var(--border-teal); }
+.slot-error    .slot-icon { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); }
 
 .slot-info { flex: 1; min-width: 0; }
-.slot-label { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
-.slot-meta  { font-size: 11px; color: var(--gray-400); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.slot-label {
+  font-family: var(--fh); font-size: 13.5px; font-weight: 700;
+  color: var(--text-primary); margin-bottom: 3px;
+}
+.slot-meta { font-size: 11.5px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; }
 .slot-meta.ok  { color: var(--success); }
-.slot-meta.err { color: #fca5a5; white-space: normal; }
+.slot-meta.err { color: #fca5a5; white-space: normal; font-size: 11px; }
 
 .slot-badge {
-  font-size: 9.5px; font-weight: 700; padding: 2px 8px;
+  font-size: 10px; font-weight: 700; padding: 3px 9px;
   border-radius: var(--r-full); flex-shrink: 0;
-  background: rgba(0,180,216,0.14); color: var(--teal); border: 1px solid rgba(0,180,216,0.3);
+  background: var(--teal-subtle); color: var(--teal); border: 1px solid var(--border-teal);
 }
+.slot-error .slot-badge { background: rgba(239,68,68,0.1); color: #fca5a5; border-color: rgba(239,68,68,0.3); }
+.slot-done  .slot-badge { background: rgba(16,185,129,0.1); color: var(--success); border-color: rgba(16,185,129,0.3); }
 
 .progress-row {
   display: flex; justify-content: space-between; align-items: center;
-  font-size: 13px; color: var(--gray-400); margin-bottom: 7px;
+  font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;
 }
-.progress-row strong { color: var(--white); }
+.progress-row strong { color: var(--text-primary); }
 .progress-bar {
-  background: rgba(255,255,255,0.07); border-radius: var(--r-full);
-  height: 5px; overflow: hidden; margin-bottom: 1.4rem;
+  background: var(--bg-hover); border-radius: var(--r-full);
+  height: 6px; overflow: hidden; margin-bottom: 1.6rem;
+  border: 1px solid var(--border);
 }
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--teal), #48cae4);
+  background: linear-gradient(90deg, var(--teal-dark), var(--teal));
   border-radius: var(--r-full); transition: width 0.4s ease;
 }
 
 .btn-start {
-  width: 100%; padding: 13px; background: var(--teal); color: var(--navy-deep);
-  border: none; border-radius: var(--r-md); font-family: var(--fh); font-size: 14px;
-  font-weight: 700; cursor: pointer; transition: all 0.2s;
+  width: 100%; padding: 14px; background: var(--teal); color: #fff;
+  border: none; border-radius: var(--r-md); font-family: var(--fh);
+  font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s;
   display: flex; align-items: center; justify-content: center; gap: 8px;
 }
 .btn-start:hover:not(:disabled) {
-  background: var(--teal-dark); transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0,180,216,0.4);
+  background: var(--teal-dark); transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--teal-glow);
 }
 .btn-start:disabled {
-  background: rgba(255,255,255,0.08); color: var(--gray-600);
-  cursor: not-allowed; transform: none;
+  background: var(--bg-hover); color: var(--text-muted);
+  cursor: not-allowed; transform: none; border: 1px solid var(--border);
 }
-
 .upload-note {
-  text-align: center; font-size: 10.5px; color: var(--gray-600);
-  margin-top: 0.9rem; line-height: 1.55;
+  text-align: center; font-size: 11px; color: var(--text-muted);
+  margin-top: 1rem; line-height: 1.6; padding: 0 1rem;
 }
 
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    DASHBOARD LAYOUT
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════════════ */
 .dashboard-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
 .dashboard-body    { flex: 1; display: flex; overflow: hidden; min-height: 0; }
 
-/* ── Sidebar (desktop) ── */
+/* ── Sidebar — matches admin panel nav style ── */
 .sidebar {
-  width: 234px; flex-shrink: 0;
-  background: rgba(6,14,26,0.94);
-  border-right: 1px solid rgba(255,255,255,0.07);
+  width: var(--sidebar-w); flex-shrink: 0;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
   display: flex; flex-direction: column;
   overflow-y: auto; overflow-x: hidden;
+  transition: background 0.3s, border-color 0.3s;
 }
 
-.sb-section { padding: 14px 13px 0; }
+.sb-header {
+  padding: 16px 14px 12px;
+  border-bottom: 1px solid var(--border);
+}
 .sb-product-tag {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--teal); margin-bottom: 3px;
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 4px;
 }
 .sb-product-name {
-  font-family: var(--fh); font-size: 13px; font-weight: 700;
-  color: var(--white); line-height: 1.35;
+  font-family: var(--fh); font-size: 13.5px; font-weight: 700;
+  color: var(--text-primary); line-height: 1.35;
 }
-.sb-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 12px 13px 8px; }
-.sb-label {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em;
-  text-transform: uppercase; color: var(--gray-600); padding: 0 13px; margin-bottom: 3px;
+
+.sb-nav { flex: 1; padding: 10px 0; }
+.sb-nav-label {
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted);
+  padding: 8px 14px 4px;
 }
 
 .card-btn {
-  width: 100%; display: flex; align-items: center; gap: 9px;
-  padding: 9px 13px; background: transparent; border: none;
-  color: var(--gray-400); font-family: var(--fb); font-size: 12.5px;
+  width: 100%; display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px; background: transparent; border: none; border-left: 2px solid transparent;
+  color: var(--text-secondary); font-family: var(--fb); font-size: 13px;
   font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: left;
 }
-.card-btn:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+.card-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
 .card-btn.active {
-  background: rgba(0,180,216,0.11); color: var(--teal);
-  border-right: 2px solid var(--teal); font-weight: 600;
+  background: var(--teal-subtle); color: var(--teal);
+  border-left-color: var(--teal); font-weight: 600;
 }
 .card-btn-icon {
-  width: 26px; height: 26px; border-radius: 7px;
-  background: rgba(255,255,255,0.06);
+  width: 28px; height: 28px; border-radius: var(--r-sm);
+  background: var(--bg-hover); border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  font-size: 12px; flex-shrink: 0;
+  font-size: 13px; flex-shrink: 0; transition: all 0.15s;
 }
-.card-btn.active .card-btn-icon { background: rgba(0,180,216,0.2); }
+.card-btn.active .card-btn-icon {
+  background: var(--teal-subtle); border-color: var(--border-teal);
+}
 
-.usage-meter {
-  margin-top: auto; padding: 12px 13px;
-  border-top: 1px solid rgba(255,255,255,0.06);
+.sb-footer {
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
 }
 .usage-label {
-  font-size: 10.5px; color: var(--gray-400); margin-bottom: 5px;
-  display: flex; justify-content: space-between;
+  font-size: 11px; color: var(--text-secondary); margin-bottom: 6px;
+  display: flex; justify-content: space-between; align-items: center;
 }
-.usage-bar { background: rgba(255,255,255,0.08); border-radius: var(--r-full); height: 4px; overflow: hidden; }
+.usage-label strong { color: var(--text-primary); font-size: 12px; }
+.usage-bar { background: var(--bg-hover); border-radius: var(--r-full); height: 5px; overflow: hidden; margin-bottom: 12px; }
 .usage-fill { height: 100%; background: var(--teal); border-radius: var(--r-full); transition: width 0.4s; }
 
-.sidebar-footer {
-  padding: 8px 13px 13px;
-  display: flex; gap: 10px; flex-wrap: wrap;
+.sb-links {
+  display: flex; gap: 12px; flex-wrap: wrap;
 }
-.sidebar-footer a {
-  font-size: 10px; color: var(--gray-600); text-decoration: none;
-  transition: color 0.15s;
+.sb-links a {
+  font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s;
 }
-.sidebar-footer a:hover { color: var(--teal); }
+.sb-links a:hover { color: var(--teal); }
 
 /* ── Chat panel ── */
 .chat-panel {
   flex: 1; display: flex; flex-direction: column;
-  overflow: hidden; min-width: 0; background: #080f1c;
+  overflow: hidden; min-width: 0; background: var(--chat-bg);
+  transition: background 0.3s;
 }
 
 .chat-topbar {
-  padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.07);
-  display: flex; align-items: center; gap: 10px;
-  background: rgba(6,14,26,0.85); flex-shrink: 0;
+  padding: 10px 18px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg-overlay); flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s;
 }
 .ct-icon {
-  width: 34px; height: 34px; border-radius: 9px;
-  background: rgba(0,180,216,0.14); display: flex;
-  align-items: center; justify-content: center;
-  font-size: 16px; flex-shrink: 0; overflow: hidden;
+  width: 36px; height: 36px; border-radius: var(--r-md);
+  background: var(--teal-subtle); border: 1px solid var(--border-teal);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0; overflow: hidden;
 }
-.ct-icon img { width: 22px; height: 22px; object-fit: contain; border-radius: 4px; }
-.ct-title { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--white); }
-.ct-sub   { font-size: 10.5px; color: var(--gray-400); margin-top: 1px; }
-.ct-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.ct-icon img { width: 24px; height: 24px; object-fit: contain; }
+.ct-info { min-width: 0; flex: 1; }
+.ct-title { font-family: var(--fh); font-size: 13.5px; font-weight: 700; color: var(--text-primary); }
+.ct-sub   { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+.ct-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
 .online-dot {
-  width: 7px; height: 7px; background: var(--success); border-radius: 50%;
-  animation: pulse-dot 2.2s infinite;
+  width: 8px; height: 8px; background: var(--success); border-radius: 50%;
+  animation: pulse-dot 2.5s infinite;
 }
 @keyframes pulse-dot {
   0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,0.4);}
@@ -540,320 +684,336 @@ body {
 }
 
 .feedback-btn {
-  font-size: 11px; color: var(--gray-600); background: none; border: none;
-  cursor: pointer; padding: 4px 6px; border-radius: var(--r-sm);
-  transition: all 0.15s; font-family: var(--fb);
+  font-size: 11.5px; color: var(--text-secondary); background: var(--bg-hover);
+  border: 1px solid var(--border); cursor: pointer; padding: 5px 10px;
+  border-radius: var(--r-sm); transition: all 0.15s; font-family: var(--fb);
 }
-.feedback-btn:hover { color: var(--teal); background: rgba(0,180,216,0.08); }
+.feedback-btn:hover { color: var(--teal); background: var(--teal-subtle); border-color: var(--border-teal); }
 
 /* ── Messages ── */
 .chat-messages {
   flex: 1; overflow-y: auto; overflow-x: hidden;
-  padding: 16px; display: flex; flex-direction: column;
-  gap: 13px; min-height: 0;
+  padding: 18px 20px; display: flex; flex-direction: column;
+  gap: 14px; min-height: 0;
 }
 
 .chat-welcome {
   display: flex; flex-direction: column; align-items: center;
-  justify-content: center; text-align: center; padding: 2.5rem 1.5rem;
-  color: var(--gray-600); flex: 1;
+  justify-content: center; text-align: center; padding: 3rem 2rem;
+  color: var(--text-muted); flex: 1; min-height: 60%;
 }
 .chat-welcome-logo {
-  width: 72px; height: 72px; object-fit: contain; margin-bottom: 16px;
-  opacity: 0.7; border-radius: 16px;
+  width: 68px; height: 68px; object-fit: contain; margin-bottom: 18px;
+  opacity: 0.6; border-radius: var(--r-lg);
 }
 .chat-welcome-title {
   font-family: var(--fh); font-size: 1rem; font-weight: 700;
-  color: var(--gray-400); margin-bottom: 6px;
+  color: var(--text-secondary); margin-bottom: 8px;
 }
-.chat-welcome-sub { font-size: 13px; max-width: 240px; line-height: 1.55; }
+.chat-welcome-sub { font-size: 13px; max-width: 260px; line-height: 1.6; }
 
-.msg { display: flex; gap: 8px; }
+.msg { display: flex; gap: 10px; max-width: 100%; }
 .msg.user { flex-direction: row-reverse; }
 
 .msg-avatar {
-  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700; overflow: hidden;
+  font-size: 11px; font-weight: 700; overflow: hidden; align-self: flex-end;
 }
-.msg-avatar.ai   { background: linear-gradient(135deg,var(--teal),#48cae4); }
-.msg-avatar.ai img { width: 18px; height: 18px; object-fit: contain; border-radius: 3px; }
-.msg-avatar.user { background: var(--navy-light); color: var(--white); font-size: 9px; }
+.msg-avatar.ai   { background: var(--teal-subtle); border: 1.5px solid var(--border-teal); }
+.msg-avatar.ai img { width: 18px; height: 18px; object-fit: contain; }
+.msg-avatar.user { background: var(--teal); color: #fff; font-size: 10px; }
 
-.msg-body { max-width: calc(100% - 40px); }
-.msg.user .msg-body { align-items: flex-end; display: flex; flex-direction: column; }
+.msg-body { max-width: min(72%, 580px); display: flex; flex-direction: column; }
+.msg.user .msg-body { align-items: flex-end; }
 
 .msg-bubble {
-  padding: 9px 13px; border-radius: 13px;
-  font-size: 13.5px; line-height: 1.65;
+  padding: 10px 14px; border-radius: 14px;
+  font-size: 13.5px; line-height: 1.7; word-break: break-word;
 }
-.msg-bubble p { margin-bottom: 6px; }
+.msg-bubble p { margin-bottom: 7px; }
 .msg-bubble p:last-child { margin-bottom: 0; }
+.msg-bubble strong { font-weight: 700; }
+.msg-bubble ul, .msg-bubble ol { padding-left: 1.4em; margin: 6px 0; }
+.msg-bubble li { margin-bottom: 3px; }
+.msg-bubble table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 8px 0; }
+.msg-bubble th, .msg-bubble td { padding: 6px 10px; border: 1px solid var(--border-md); text-align: left; }
+.msg-bubble th { background: var(--teal-subtle); font-weight: 700; }
+
 .msg.ai   .msg-bubble {
-  background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 4px 13px 13px 13px; color: rgba(255,255,255,0.91);
+  background: var(--ai-bubble-bg); border: 1px solid var(--ai-bubble-border);
+  border-radius: 4px 14px 14px 14px; color: var(--text-primary);
 }
 .msg.user .msg-bubble {
-  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
-  color: var(--navy-deep); border-radius: 13px 4px 13px 13px; font-weight: 500;
+  background: var(--user-bubble-bg);
+  color: #fff; border-radius: 14px 4px 14px 14px; font-weight: 500;
 }
-.msg-time { font-size: 9.5px; color: var(--gray-600); margin-top: 3px; padding: 0 2px; }
+.msg-time { font-size: 9.5px; color: var(--text-muted); margin-top: 4px; padding: 0 2px; }
 
 .disclaimer {
-  font-size: 10.5px; color: var(--gray-600); font-style: italic;
-  margin-top: 6px; padding: 5px 9px;
+  font-size: 11px; color: var(--text-muted); font-style: italic;
+  margin-top: 7px; padding: 6px 10px;
   background: rgba(245,158,11,0.06); border-left: 2px solid var(--warning);
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--r-xs) var(--r-xs) 0;
+  line-height: 1.5;
 }
 
-.chips-row { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+/* ── Card history switcher ── */
+.history-banner {
+  display: flex; align-items: center; gap: 8px; justify-content: center;
+  padding: 6px 14px; margin-bottom: 4px;
+  background: var(--teal-subtle); border: 1px solid var(--border-teal);
+  border-radius: var(--r-md); font-size: 11.5px; color: var(--teal); font-weight: 600;
+}
+
+/* ── Chips ── */
+.chips-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; padding-left: 40px; }
 .chip {
-  padding: 4px 12px; border-radius: var(--r-full); font-size: 11.5px;
+  padding: 5px 13px; border-radius: var(--r-full); font-size: 12px;
   font-weight: 500; cursor: pointer;
-  border: 1px solid rgba(0,180,216,0.35); background: rgba(0,180,216,0.07);
+  border: 1px solid var(--border-teal); background: var(--teal-subtle);
   color: var(--teal); transition: all 0.15s; white-space: nowrap;
 }
 .chip:hover {
-  background: var(--teal); color: var(--navy-deep);
+  background: var(--teal); color: #fff;
   border-color: var(--teal); transform: translateY(-1px);
 }
 
+/* ── Typing indicator ── */
 .typing-indicator {
-  display: flex; align-items: center; gap: 4px; padding: 9px 13px;
-  background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 4px 13px 13px 13px; width: fit-content;
+  display: flex; align-items: center; gap: 5px; padding: 10px 14px;
+  background: var(--ai-bubble-bg); border: 1px solid var(--ai-bubble-border);
+  border-radius: 4px 14px 14px 14px; width: fit-content;
 }
 .typing-dot {
-  width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--teal);
   animation: bounce-dot 1.2s infinite;
 }
 .typing-dot:nth-child(2){animation-delay:.2s;}
 .typing-dot:nth-child(3){animation-delay:.4s;}
 @keyframes bounce-dot {
-  0%,60%,100%{transform:translateY(0);opacity:.35;}
+  0%,60%,100%{transform:translateY(0);opacity:.3;}
   30%{transform:translateY(-5px);opacity:1;}
 }
 
 /* ── Chat input ── */
 .chat-input-area {
-  flex-shrink: 0; border-top: 1px solid rgba(255,255,255,0.07);
-  padding: 10px 14px 12px; background: rgba(6,14,26,0.92);
+  flex-shrink: 0; border-top: 1px solid var(--border);
+  padding: 12px 18px 14px; background: var(--bg-overlay);
+  transition: background 0.3s;
 }
 .input-row { display: flex; gap: 8px; align-items: flex-end; }
 
 .chat-input {
-  flex: 1; background: rgba(255,255,255,0.065);
-  border: 1.5px solid rgba(255,255,255,0.11); border-radius: var(--r-md);
-  padding: 10px 12px; font-family: var(--fb); font-size: 14px; color: var(--white);
-  resize: none; outline: none; min-height: 42px; max-height: 110px;
-  transition: border-color 0.2s; line-height: 1.5;
+  flex: 1; background: var(--bg-input);
+  border: 1.5px solid var(--border); border-radius: var(--r-md);
+  padding: 11px 14px; font-family: var(--fb); font-size: 14px;
+  color: var(--text-primary); resize: none; outline: none;
+  min-height: 44px; max-height: 110px; transition: all 0.2s; line-height: 1.5;
 }
-.chat-input::placeholder { color: rgba(255,255,255,0.22); }
-.chat-input:focus { border-color: var(--teal); background: rgba(0,180,216,0.06); }
+.chat-input::placeholder { color: var(--text-muted); }
+.chat-input:focus { border-color: var(--teal); background: var(--teal-subtle); box-shadow: 0 0 0 3px var(--teal-glow); }
 .chat-input:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .send-btn {
-  width: 42px; height: 42px; border-radius: var(--r-md); background: var(--teal);
+  width: 44px; height: 44px; border-radius: var(--r-md); background: var(--teal);
   border: none; cursor: pointer; display: flex; align-items: center;
-  justify-content: center; color: var(--navy-deep); font-size: 17px;
+  justify-content: center; color: #fff; font-size: 18px;
   transition: all 0.2s; flex-shrink: 0;
 }
 .send-btn:hover:not(:disabled) { background: var(--teal-dark); transform: scale(1.05); }
-.send-btn:disabled { background: rgba(255,255,255,0.07); cursor: not-allowed; color: var(--gray-600); }
+.send-btn:disabled { background: var(--bg-hover); cursor: not-allowed; color: var(--text-muted); border: 1px solid var(--border); }
 
-.input-hint { font-size: 10px; color: var(--gray-600); margin-top: 5px; text-align: center; }
+.input-hint {
+  font-size: 10px; color: var(--text-muted); margin-top: 6px; text-align: center;
+}
+.input-hint a { color: var(--text-muted); text-decoration: none; }
+.input-hint a:hover { color: var(--teal); }
 
 /* ── Animations ── */
-.fade-in { animation: fadeIn 0.26s ease forwards; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);} }
+.fade-in { animation: fadeIn 0.25s ease forwards; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);} }
 
-/* ── Hidden file input ── */
 .hidden-file { display: none; }
 
-/* ═══════════════════════════════════════════
-   MOBILE CARD DRAWER  (replaces hidden sidebar on mobile)
-   A bottom drawer that slides up with the card list
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   MOBILE CARD BAR
+═══════════════════════════════════════════════════════ */
 .mobile-card-bar {
-  display: none; /* hidden on desktop */
-  flex-shrink: 0; height: var(--mob-drawer-h);
-  background: rgba(6,14,26,0.97);
-  border-top: 1px solid rgba(255,255,255,0.08);
+  display: none; flex-shrink: 0; height: var(--mob-bar-h);
+  background: var(--bg-overlay);
+  border-top: 1px solid var(--border);
   overflow-x: auto; overflow-y: hidden;
-  align-items: center; gap: 6px;
-  padding: 0 10px;
-  z-index: 10;
+  align-items: center; gap: 7px; padding: 0 12px; z-index: 10;
 }
 .mob-card-chip {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 7px 12px; border-radius: var(--r-full); flex-shrink: 0;
-  border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05);
-  color: var(--gray-400); font-family: var(--fb); font-size: 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 13px; border-radius: var(--r-full); flex-shrink: 0;
+  border: 1px solid var(--border); background: var(--bg-hover);
+  color: var(--text-secondary); font-family: var(--fb); font-size: 12px;
   font-weight: 500; cursor: pointer; transition: all 0.18s; white-space: nowrap;
 }
-.mob-card-chip:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+.mob-card-chip:hover { background: var(--bg-hover); color: var(--text-primary); }
 .mob-card-chip.active {
-  background: rgba(0,180,216,0.18); border-color: var(--teal);
+  background: var(--teal-subtle); border-color: var(--border-teal);
   color: var(--teal); font-weight: 600;
 }
-.mob-card-chip-icon { font-size: 13px; }
 
-/* ═══════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   FEEDBACK MODAL
+═══════════════════════════════════════════════════════ */
+.modal-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 1.5rem;
+}
+.modal-backdrop.open { display: flex; }
+.modal-card {
+  background: var(--bg-surface); border: 1px solid var(--border-md);
+  border-radius: var(--r-xl); padding: 2rem; max-width: 420px; width: 100%;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.modal-title {
+  font-family: var(--fh); font-size: 16px; font-weight: 700;
+  color: var(--text-primary); margin-bottom: 6px;
+}
+.modal-sub { font-size: 12.5px; color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.5; }
+.modal-textarea {
+  width: 100%; padding: 11px 13px; background: var(--bg-input);
+  border: 1.5px solid var(--border); border-radius: var(--r-md);
+  font-family: var(--fb); font-size: 13px; color: var(--text-primary);
+  resize: none; outline: none; margin-bottom: 12px; transition: border-color 0.2s;
+}
+.modal-textarea:focus { border-color: var(--teal); }
+.modal-actions { display: flex; gap: 8px; }
+.modal-note { margin-top: 10px; font-size: 11px; color: var(--text-muted); text-align: center; }
+.modal-note a { color: var(--teal); text-decoration: none; }
 
-/* Tablet */
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  :root { --nav-h: 52px; }
-
+  :root { --nav-h: 52px; --sidebar-w: 0px; }
   .navbar { padding: 0 1rem; gap: 6px; }
-  .brand-main { font-size: 12px; }
-  .navbar-user { display: none; } /* hide "Welcome, Name" — too cramped */
-  .btn-secondary { padding: 5px 10px; font-size: 11px; }
-
-  .sidebar { display: none; } /* hidden — replaced by mobile-card-bar */
+  .brand-main { font-size: 13px; }
+  .navbar-user { display: none; }
+  .sidebar { display: none; }
   .mobile-card-bar { display: flex; }
-
-  /* Dashboard: chat fills screen, card bar is at bottom */
   .dashboard-body { flex-direction: column; }
   .chat-panel { flex: 1; min-height: 0; }
-
-  /* Reorder: chat messages, then input, then card bar at very bottom */
-  #screen-dashboard .dashboard-wrapper {
-    display: flex; flex-direction: column;
-  }
-  #screen-dashboard .dashboard-body {
-    flex: 1; min-height: 0; overflow: hidden;
-  }
-
   .products-grid { grid-template-columns: repeat(2, 1fr); }
   .page-content  { padding: 1.25rem 1rem; }
   .upload-content{ padding: 1.25rem 1rem; }
+  .chat-messages { padding: 14px 12px; }
+  .chips-row { padding-left: 0; }
 }
-
-/* Mobile */
 @media (max-width: 480px) {
-  .brand-main { font-size: 11.5px; }
-  .brand-sub  { font-size: 9px; }
-  .navbar-logo { width: 28px; height: 28px; }
-
   .products-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .product-card  { padding: 12px; }
-  .product-card-icon { font-size: 20px; margin-bottom: 7px; }
-  .product-card-name { font-size: 12px; }
-
+  .product-card  { padding: 13px; }
+  .product-card-icon { font-size: 22px; }
+  .product-card-name { font-size: 12.5px; }
   .auth-card { padding: 1.75rem 1.25rem; }
-  .auth-logo-img { width: 44px; height: 44px; }
-  .auth-logo-text .brand-main { font-size: 1rem; }
-
-  .chat-input-area { padding: 8px 10px 10px; }
-  .chat-messages   { padding: 12px 10px; gap: 10px; }
-  .msg-bubble { font-size: 13px; }
-
-  .mob-card-chip { padding: 6px 10px; font-size: 11.5px; }
+  .msg-body { max-width: 84%; }
 }
-
-/* Very small phones */
 @media (max-width: 360px) {
   .products-grid { grid-template-columns: 1fr; }
-  .brand-main { display: none; } /* just show logo on tiny phones */
 }
 </style>
 </head>
 <body>
 <div class="bg-mesh"></div>
-
-<!-- ═══════════════════════ TOAST ═══════════════════════ -->
 <div id="toast"></div>
 
-<!-- ═══════════════════════════════════════════════════
+<!-- ════════════════════════════════════════════
      SCREEN 1 — AUTH
-════════════════════════════════════════════════════ -->
+════════════════════════════════════════════ -->
 <div id="screen-auth" class="screen active">
-  <div class="auth-card">
+  <div class="auth-wrapper">
+    <div class="auth-card">
 
-    <div class="auth-logo">
-      <img src="assets/bishop_BC.png" class="auth-logo-img" alt="Bishop Brain Checker"
-           onerror="this.style.display='none'">
-      <div class="auth-logo-text">
-        <div class="brand-main">Bishop by Brain Checker</div>
-        <div class="brand-sub">Post-Counseling AI System</div>
+      <div class="auth-theme-row">
+        <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme" id="auth-theme-btn">🌙</button>
       </div>
+
+      <div class="auth-header">
+        <img src="assets/bishop_BC.png" class="auth-logo-img" alt="Bishop Brain Checker"
+             onerror="this.style.display='none'">
+        <div class="auth-logo-text">
+          <div class="brand-main">Bishop by Brain Checker</div>
+          <div class="brand-sub">Post-Counseling AI System</div>
+        </div>
+      </div>
+
+      <div class="auth-tagline">Decoding Brain Power, Unleashing Opportunities</div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+        <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <div id="auth-alert" class="alert"></div>
+
+      <!-- Login -->
+      <div id="login-form">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" id="login-email" type="email"
+                 placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" id="login-pass" type="password"
+                 placeholder="Your password" autocomplete="current-password"
+                 onkeydown="if(event.key==='Enter') doLogin()">
+        </div>
+        <button class="btn-primary" id="btn-login" onclick="doLogin()">Login to Bishop</button>
+      </div>
+
+      <!-- Signup -->
+      <div id="signup-form" style="display:none;">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" id="su-name" type="text"
+                 placeholder="Your full name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" id="su-email" type="email"
+                 placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" id="su-pass" type="password"
+                 placeholder="Min. 8 characters" autocomplete="new-password"
+                 onkeydown="if(event.key==='Enter') doSignup()">
+        </div>
+        <button class="btn-primary" id="btn-signup" onclick="doSignup()">Create Account</button>
+        <div class="signup-legal">
+          By signing up you agree to our
+          <a href="/terms" target="_blank">Terms of Service</a> and
+          <a href="/privacy" target="_blank">Privacy Policy</a>.
+        </div>
+      </div>
+
+      <div class="auth-footer">
+        <a href="/privacy" target="_blank">Privacy Policy</a>
+        <a href="/terms"   target="_blank">Terms of Service</a>
+        <a href="mailto:support@brainchecker.in">Support</a>
+      </div>
+
     </div>
-
-    <div class="auth-tagline">Decoding Brain Power, Unleashing Opportunities</div>
-
-    <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchTab('login')">Login</button>
-      <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
-    </div>
-
-    <div id="auth-alert" class="alert"></div>
-
-    <!-- Login form -->
-    <div id="login-form">
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input class="form-input" id="login-email" type="email"
-               placeholder="you@example.com" autocomplete="email">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Password</label>
-        <input class="form-input" id="login-pass" type="password"
-               placeholder="Your password" autocomplete="current-password"
-               onkeydown="if(event.key==='Enter') doLogin()">
-      </div>
-      <button class="btn-primary" id="btn-login" onclick="doLogin()">
-        Login to Bishop
-      </button>
-    </div>
-
-    <!-- Signup form -->
-    <div id="signup-form" style="display:none;">
-      <div class="form-group">
-        <label class="form-label">Full Name</label>
-        <input class="form-input" id="su-name" type="text"
-               placeholder="Your full name" autocomplete="name">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input class="form-input" id="su-email" type="email"
-               placeholder="you@example.com" autocomplete="email">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Password</label>
-        <input class="form-input" id="su-pass" type="password"
-               placeholder="Min. 8 characters" autocomplete="new-password"
-               onkeydown="if(event.key==='Enter') doSignup()">
-      </div>
-      <button class="btn-primary" id="btn-signup" onclick="doSignup()">
-        Create Account
-      </button>
-      <div class="signup-legal">
-        By creating an account you agree to our
-        <a href="/terms" target="_blank">Terms of Service</a> and
-        <a href="/privacy" target="_blank">Privacy Policy</a>.
-      </div>
-    </div>
-
-    <div class="auth-footer-links">
-      <a href="/privacy" target="_blank">Privacy Policy</a>
-      <a href="/terms"   target="_blank">Terms of Service</a>
-      <a href="mailto:support@brainchecker.in">Support</a>
-    </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════
+<!-- ════════════════════════════════════════════
      SCREEN 2 — PRODUCT SELECTION
-════════════════════════════════════════════════════ -->
+════════════════════════════════════════════ -->
 <div id="screen-products" class="screen">
   <nav class="navbar">
     <div class="navbar-brand">
-      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC"
-           onerror="this.style.display='none'">
+      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
       <div class="brand-text">
         <div class="brand-main">Bishop by Brain Checker</div>
         <div class="brand-sub">Post-Counseling AI</div>
@@ -861,19 +1021,19 @@ body {
     </div>
     <div class="navbar-right">
       <div class="navbar-user">Welcome, <strong id="nav-user-name">User</strong></div>
+      <button class="theme-btn" onclick="toggleTheme()" id="prod-theme-btn" title="Toggle theme">🌙</button>
       <button class="btn-logout" onclick="doLogout()">Logout</button>
     </div>
   </nav>
 
   <div class="page-content">
-    <div class="page-eyebrow">Step 1 of 3</div>
+    <div class="step-badge">Step 1 of 3</div>
     <div class="page-title">Choose Your Assessment</div>
     <div class="page-sub">Select the Brain Checker product your counselling session used.</div>
 
-    <div id="prod-loading" style="color:var(--gray-400);font-size:13px;padding:1rem 0;">
+    <div id="prod-loading" style="color:var(--text-secondary);font-size:13px;padding:1rem 0;">
       <span class="spinner" style="border-top-color:var(--teal);"></span> Loading products…
     </div>
-
     <div id="prod-student" style="display:none;">
       <div class="section-label">For Students &amp; Parents</div>
       <div class="products-grid" id="grid-student"></div>
@@ -886,14 +1046,13 @@ body {
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════
+<!-- ════════════════════════════════════════════
      SCREEN 3 — PDF UPLOAD
-════════════════════════════════════════════════════ -->
+════════════════════════════════════════════ -->
 <div id="screen-upload" class="screen">
   <nav class="navbar">
     <div class="navbar-brand">
-      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC"
-           onerror="this.style.display='none'">
+      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
       <div class="brand-text">
         <div class="brand-main">Bishop by Brain Checker</div>
         <div class="brand-sub">Post-Counseling AI</div>
@@ -901,15 +1060,17 @@ body {
     </div>
     <div class="navbar-right">
       <button class="btn-secondary" onclick="goTo('screen-products')">← Change</button>
+      <button class="theme-btn" onclick="toggleTheme()" id="upload-theme-btn" title="Toggle theme">🌙</button>
       <button class="btn-logout" onclick="doLogout()">Logout</button>
     </div>
   </nav>
 
   <div class="upload-content">
-    <div class="page-eyebrow">Step 2 of 3</div>
+    <div class="step-badge">Step 2 of 3</div>
     <div class="page-title" id="up-title">Upload Your Reports</div>
     <div class="page-sub" id="up-sub">Upload required PDFs to unlock AI analysis.</div>
     <div class="upload-badge" id="up-badge">📋 Product</div>
+
     <div class="upload-slots" id="up-slots"></div>
 
     <div class="progress-row">
@@ -924,24 +1085,22 @@ body {
       🔒 Upload required reports to continue
     </button>
     <div class="upload-note">
-      PDFs are processed in memory — never stored as files on our servers.
+      PDFs are processed in memory — never stored as files on our servers.<br>
       Only text embeddings are saved to power your AI session.
     </div>
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════
+<!-- ════════════════════════════════════════════
      SCREEN 4 — DASHBOARD / CHAT
-════════════════════════════════════════════════════ -->
+════════════════════════════════════════════ -->
 <div id="screen-dashboard" class="screen">
   <div class="dashboard-wrapper">
 
-    <!-- Shared navbar -->
     <nav class="navbar">
       <div class="navbar-brand">
-        <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC"
-             onerror="this.style.display='none'">
+        <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
         <div class="brand-text">
           <div class="brand-main">Bishop by Brain Checker</div>
           <div class="brand-sub">Post-Counseling AI</div>
@@ -949,71 +1108,70 @@ body {
       </div>
       <div class="navbar-right">
         <div class="navbar-user">Hi, <strong id="dash-user-name">User</strong></div>
+        <button class="theme-btn" onclick="toggleTheme()" id="dash-theme-btn" title="Toggle theme">🌙</button>
         <button class="btn-logout" onclick="doLogout()">Logout</button>
       </div>
     </nav>
 
     <div class="dashboard-body">
 
-      <!-- ── SIDEBAR (desktop only) ── -->
+      <!-- SIDEBAR -->
       <div class="sidebar">
-        <div class="sb-section">
+        <div class="sb-header">
           <div class="sb-product-tag">Active Product</div>
           <div class="sb-product-name" id="sb-prod-name">—</div>
         </div>
-        <div class="sb-divider"></div>
-        <div class="sb-label">Analysis Cards</div>
-        <div id="card-btns"></div>
 
-        <div class="usage-meter">
+        <div class="sb-nav">
+          <div class="sb-nav-label">Analysis Cards</div>
+          <div id="card-btns"></div>
+        </div>
+
+        <div class="sb-footer">
           <div class="usage-label">
             <span>Questions used</span>
-            <span id="usage-count">—</span>
+            <strong id="usage-count">—</strong>
           </div>
           <div class="usage-bar">
             <div class="usage-fill" id="usage-fill" style="width:0%"></div>
           </div>
-        </div>
-
-        <div class="sidebar-footer">
-          <a href="/privacy" target="_blank">Privacy</a>
-          <a href="/terms"   target="_blank">Terms</a>
-          <a href="mailto:support@brainchecker.in">Support</a>
-          <a href="#" onclick="openFeedback(); return false;">Feedback</a>
+          <div class="sb-links">
+            <a href="/privacy" target="_blank">Privacy</a>
+            <a href="/terms"   target="_blank">Terms</a>
+            <a href="mailto:support@brainchecker.in">Support</a>
+            <a href="#" onclick="openFeedback(); return false;">Feedback</a>
+          </div>
         </div>
       </div>
 
-      <!-- ── CHAT PANEL ── -->
+      <!-- CHAT PANEL -->
       <div class="chat-panel">
 
-        <!-- Chat topbar -->
         <div class="chat-topbar">
           <div class="ct-icon" id="ct-icon">
-            <img src="assets/bishop_BC.png" alt="Bishop" id="ct-icon-img">
+            <img src="assets/bishop_BC.png" alt="Bishop" id="ct-icon-img" onerror="this.textContent='🧠'">
           </div>
-          <div>
+          <div class="ct-info">
             <div class="ct-title" id="ct-title">Bishop AI Assistant</div>
             <div class="ct-sub"   id="ct-sub">Select a card to begin</div>
           </div>
           <div class="ct-actions">
-            <button class="feedback-btn" onclick="openFeedback()" title="Send feedback">
-              💬 Feedback
-            </button>
+            <button class="feedback-btn" onclick="openFeedback()">💬 Feedback</button>
             <div class="online-dot" title="AI Online"></div>
           </div>
         </div>
 
-        <!-- Messages area -->
         <div class="chat-messages" id="chat-messages">
           <div class="chat-welcome" id="chat-welcome">
             <img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop"
                  onerror="this.style.display='none'">
             <div class="chat-welcome-title">Your reports are loaded</div>
-            <div class="chat-welcome-sub">Select an analysis card to start chatting with Bishop.</div>
+            <div class="chat-welcome-sub">
+              Select an analysis card to start chatting with Bishop.
+            </div>
           </div>
         </div>
 
-        <!-- Input area -->
         <div class="chat-input-area">
           <div class="input-row">
             <textarea class="chat-input" id="chat-input"
@@ -1025,80 +1183,84 @@ body {
           </div>
           <div class="input-hint">
             Powered by Bishop · Brain Checker AI &nbsp;·&nbsp;
-            <a href="/privacy" target="_blank" style="color:var(--gray-600);text-decoration:none;">Privacy</a> &nbsp;·&nbsp;
-            <a href="/terms"   target="_blank" style="color:var(--gray-600);text-decoration:none;">Terms</a>
+            <a href="/privacy" target="_blank">Privacy</a> &nbsp;·&nbsp;
+            <a href="/terms" target="_blank">Terms</a>
           </div>
         </div>
 
-      </div><!-- /chat-panel -->
-    </div><!-- /dashboard-body -->
+      </div>
+    </div>
 
-    <!-- ── MOBILE CARD BAR (visible only on mobile, below chat) ── -->
+    <!-- MOBILE CARD BAR -->
     <div class="mobile-card-bar" id="mobile-card-bar"></div>
 
-  </div><!-- /dashboard-wrapper -->
-</div><!-- /screen-dashboard -->
+  </div>
+</div>
 
 
-<!-- ═══════════════════════════════════════════════════
+<!-- ════════════════════════════════════════════
      FEEDBACK MODAL
-════════════════════════════════════════════════════ -->
-<div id="feedback-modal" style="
-  display:none; position:fixed; inset:0; z-index:9000;
-  background:rgba(0,0,0,0.7); backdrop-filter:blur(6px);
-  align-items:center; justify-content:center; padding:1.5rem;
-">
-  <div style="
-    background:#0d1e34; border:1px solid rgba(255,255,255,0.12);
-    border-radius:20px; padding:2rem; max-width:400px; width:100%;
-    box-shadow:0 20px 60px rgba(0,0,0,0.5);
-    animation: slideUp 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
-  ">
-    <div style="font-family:var(--fh);font-size:16px;font-weight:700;margin-bottom:6px;">
-      💬 Send Feedback
-    </div>
-    <div style="font-size:12px;color:var(--gray-400);margin-bottom:1.2rem;line-height:1.5;">
-      Tell us what's working, what's broken, or how we can improve Bishop.
-    </div>
-    <textarea id="feedback-text" rows="4" style="
-      width:100%;padding:10px 12px;background:rgba(255,255,255,0.07);
-      border:1.5px solid rgba(255,255,255,0.12);border-radius:var(--r-md);
-      font-family:var(--fb);font-size:13px;color:var(--white);
-      resize:none;outline:none;margin-bottom:10px;
-    " placeholder="Your feedback…"></textarea>
-    <div style="display:flex;gap:8px;">
-      <button onclick="submitFeedback()" style="
-        flex:1;padding:10px;background:var(--teal);color:var(--navy-deep);
-        border:none;border-radius:var(--r-md);font-family:var(--fh);font-size:13px;
-        font-weight:700;cursor:pointer;transition:all 0.2s;
-      ">Send Feedback</button>
+════════════════════════════════════════════ -->
+<div id="feedback-modal" class="modal-backdrop">
+  <div class="modal-card">
+    <div class="modal-title">💬 Send Feedback</div>
+    <div class="modal-sub">Tell us what's working, what's broken, or how we can improve Bishop.</div>
+    <textarea id="feedback-text" class="modal-textarea" rows="4" placeholder="Your feedback…"></textarea>
+    <div class="modal-actions">
+      <button class="btn-primary" style="flex:1;margin-top:0;" onclick="submitFeedback()">Send Feedback</button>
       <button onclick="closeFeedback()" style="
-        padding:10px 16px;background:rgba(255,255,255,0.07);
-        border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-md);
-        color:var(--gray-400);font-family:var(--fb);font-size:13px;cursor:pointer;
+        padding:10px 16px; background:var(--bg-hover); border:1px solid var(--border);
+        border-radius:var(--r-md); color:var(--text-secondary); font-family:var(--fb);
+        font-size:13px; cursor:pointer; transition:all 0.2s; white-space:nowrap;
       ">Cancel</button>
     </div>
-    <div style="margin-top:10px;font-size:11px;color:var(--gray-600);text-align:center;">
-      Or email us: <a href="mailto:support@brainchecker.in" style="color:var(--teal);">support@brainchecker.in</a>
+    <div class="modal-note">
+      Or email: <a href="mailto:support@brainchecker.in">support@brainchecker.in</a>
     </div>
   </div>
 </div>
 
 
 <script>
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
    STATE
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 const S = {
-  token: null, user: null, sessionId: null, product: null,
-  card: null, history: [], uploadDone: {}, isTyping: false
+  token: null,
+  user: null,
+  sessionId: null,
+  product: null,
+  card: null,
+  // Per-card history map: { [cardKey]: [{role, content}, ...] }
+  cardHistories: {},
+  // Per-card DOM message HTML: { [cardKey]: string }
+  cardDomCache: {},
+  uploadDone: {},
+  isTyping: false
 };
+
 const LIMIT = 40;
-const BASE = 'https://bishop-brainchecker-di7m.onrender.com';
-   
-/* ═══════════════════════════════════════════
+const BASE  = 'https://bishop-brainchecker-di7m.onrender.com';
+
+/* ════════════════════════════════════════════════════════
+   THEME
+════════════════════════════════════════════════════════ */
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const icon = theme === 'dark' ? '🌙' : '☀️';
+  document.querySelectorAll('.theme-btn').forEach(b => b.textContent = icon);
+  localStorage.setItem('bc_theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+}
+// Init theme from storage
+applyTheme(localStorage.getItem('bc_theme') || 'dark');
+
+/* ════════════════════════════════════════════════════════
    MAPS
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 const PROD_ICONS = {
   dmit:'🧬', career_combo:'🎯', psychometric:'🧩', polaris:'🏢',
   polaris_combo:'🔗', best:'⚙️', best_combo:'🔬', tycoon:'🚀',
@@ -1178,14 +1340,24 @@ const CARD_WELCOME = {
   final_recommendation:() => `📣 I'll provide the final ranking and recommendation. Ready?`
 };
 
-/* ═══════════════════════════════════════════
-   FRIENDLY ERROR MESSAGES
-═══════════════════════════════════════════ */
+const FOLLOW_UP_CHIPS = {
+  understand_report:['What does this score mean?','Career suggestions','Stream recommendation'],
+  career_roadmap:['Show timeline','After 12th options','Entrance exams'],
+  college_finder:['Government options','Private options','Backup colleges'],
+  action_plan:['Weekly schedule','Parent tips','Exam strategy'],
+  parent_guide:['Communication tips','Study environment','Motivation strategies'],
+  engineering_branch:['JEE preparation','Top colleges','Career after this branch'],
+  job_fit:['Gap analysis','Final recommendation']
+};
+
+/* ════════════════════════════════════════════════════════
+   ERROR HELPERS
+════════════════════════════════════════════════════════ */
 function friendlyUploadError(data, status) {
   const d = (data.detail || '').toLowerCase();
   if (d.includes('too large') || d.includes('maximum'))
     return 'This PDF is too large (max 20 MB). Please compress it at ilovepdf.com and try again.';
-  if (d.includes('not a valid pdf') || d.includes('magic') || d.includes('%pdf'))
+  if (d.includes('not a valid pdf') || d.includes('%pdf'))
     return 'This file doesn\'t appear to be a valid PDF. Please check the file and try again.';
   if (d.includes('empty'))
     return 'The file is empty. Please check and upload a proper PDF.';
@@ -1193,38 +1365,35 @@ function friendlyUploadError(data, status) {
     return 'Could not read text from this PDF — it may be a scanned image. Please use the original digital PDF from Brain Checker.';
   if (d.includes('session') || status === 403)
     return 'Session expired. Please go back and select your product again.';
-  if (status === 500)
-    return 'Something went wrong on our end. Please try again in a moment.';
+  if (status === 500) return 'Something went wrong on our end. Please try again in a moment.';
   return 'Upload failed. Please check the file and try again, or contact Brain Checker support.';
 }
 
 function friendlyChatError(data, status) {
   const d = (data.detail || '').toLowerCase();
   if (status === 429 || d.includes('limit') || d.includes('monthly'))
-    return '⚠️ You\'ve reached your monthly question limit. It resets automatically on the 1st of next month. Contact Brain Checker support for an early reset.';
+    return '⚠️ You\'ve reached your monthly question limit. It resets on the 1st of next month.';
   if (status === 403 || d.includes('not available') || d.includes('card'))
-    return '⚠️ This analysis card isn\'t available for your product. Please select a different card from the sidebar.';
+    return '⚠️ This analysis card isn\'t available for your product. Please select a different card.';
   if (status === 401 || d.includes('expired') || d.includes('authentication'))
     return '⚠️ Your session has expired. Please save your work and log in again.';
-  if (d.includes('busy') || d.includes('rate') || d.includes('429'))
+  if (d.includes('busy') || d.includes('rate'))
     return '⚠️ The AI is temporarily busy. Please wait 30 seconds and try again.';
   if (d.includes('timeout') || d.includes('timed out'))
     return '⚠️ The AI took too long to respond. Try a shorter or simpler question.';
-  if (status === 0)
-    return '⚠️ Cannot reach the server. Please check your internet connection.';
+  if (status === 0) return '⚠️ Cannot reach the server. Please check your internet connection.';
   return '⚠️ The AI is temporarily unavailable. Please try again in a moment.';
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
    API HELPERS
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 let _slowTimer = null;
 
 async function api(path, opts = {}) {
   const h = { 'Content-Type': 'application/json', ...opts.headers };
   if (S.token) h['Authorization'] = 'Bearer ' + S.token;
 
-  // Show cold-start warning after 5 seconds
   clearTimeout(_slowTimer);
   _slowTimer = setTimeout(() => {
     showToast('⏳ Server is waking up — please wait up to 30 seconds…', 'info', 30000);
@@ -1232,13 +1401,11 @@ async function api(path, opts = {}) {
 
   try {
     const r = await fetch(BASE + path, { ...opts, headers: h });
-    clearTimeout(_slowTimer);
-    hideToast();
+    clearTimeout(_slowTimer); hideToast();
     const d = await r.json().catch(() => ({ detail: r.statusText }));
     return { ok: r.ok, data: d, status: r.status };
   } catch (err) {
-    clearTimeout(_slowTimer);
-    hideToast();
+    clearTimeout(_slowTimer); hideToast();
     return { ok: false, status: 0, data: { detail: 'Network error' } };
   }
 }
@@ -1255,9 +1422,9 @@ async function apiUpload(path, form) {
   }
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
    TOAST
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 let _toastTimer = null;
 function showToast(msg, type = 'info', duration = 4000) {
   const el = document.getElementById('toast');
@@ -1266,21 +1433,19 @@ function showToast(msg, type = 'info', duration = 4000) {
   clearTimeout(_toastTimer);
   if (duration > 0) _toastTimer = setTimeout(hideToast, duration);
 }
-function hideToast() {
-  document.getElementById('toast').className = '';
-}
+function hideToast() { document.getElementById('toast').className = ''; }
 
-/* ═══════════════════════════════════════════
-   SCREEN NAVIGATION
-═══════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════
+   SCREEN NAV
+════════════════════════════════════════════════════════ */
 function goTo(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-/* ═══════════════════════════════════════════
-   AUTH SCREEN
-═══════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════
+   AUTH
+════════════════════════════════════════════════════════ */
 function switchTab(tab) {
   document.querySelectorAll('.auth-tab').forEach((t, i) =>
     t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'signup'))
@@ -1311,29 +1476,23 @@ async function doLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pass  = document.getElementById('login-pass').value;
   clearAlert();
-  if (!email || !pass) {
-    showAlert('Please enter your email and password.');
-    return;
-  }
+  if (!email || !pass) { showAlert('Please enter your email and password.'); return; }
   setBtnLoading('btn-login', true, 'Logging in…');
   const { ok, data, status } = await api('/api/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({ email, password: pass })
+    method: 'POST', body: JSON.stringify({ email, password: pass })
   });
   setBtnLoading('btn-login', false, 'Login to Bishop');
-
   if (!ok) {
-    if (status === 401 || (data.detail || '').toLowerCase().includes('invalid'))
+    if (status === 401 || (data.detail||'').toLowerCase().includes('invalid'))
       showAlert('Incorrect email or password. Please try again.');
     else if (status === 0)
       showAlert('Cannot connect to the server. Please check your internet connection.');
-    else if ((data.detail || '').toLowerCase().includes('verify') || (data.detail || '').toLowerCase().includes('confirm'))
-      showAlert('Please check your email and verify your account before logging in.', 'warning');
+    else if ((data.detail||'').toLowerCase().includes('verify'))
+      showAlert('Please verify your email before logging in.', 'warning');
     else
       showAlert(data.detail || 'Login failed. Please try again.');
     return;
   }
-
   S.token = data.access_token;
   S.user  = data.user;
   sessionStorage.setItem('bc_token', S.token);
@@ -1346,52 +1505,46 @@ async function doSignup() {
   const email = document.getElementById('su-email').value.trim();
   const pass  = document.getElementById('su-pass').value;
   clearAlert();
-
-  if (!name)  { showAlert('Please enter your full name.'); return; }
-  if (!email) { showAlert('Please enter a valid email address.'); return; }
-  if (!pass)  { showAlert('Please enter a password.'); return; }
-  if (pass.length < 8) { showAlert('Password must be at least 8 characters long.'); return; }
+  if (!name)        { showAlert('Please enter your full name.'); return; }
+  if (!email)       { showAlert('Please enter a valid email address.'); return; }
+  if (!pass)        { showAlert('Please enter a password.'); return; }
+  if (pass.length < 8) { showAlert('Password must be at least 8 characters.'); return; }
 
   setBtnLoading('btn-signup', true, 'Creating account…');
   const { ok, data, status } = await api('/api/auth/signup', {
-    method: 'POST',
-    body: JSON.stringify({ full_name: name, email, password: pass })
+    method: 'POST', body: JSON.stringify({ full_name: name, email, password: pass })
   });
   setBtnLoading('btn-signup', false, 'Create Account');
-
   if (!ok) {
-    if (status === 409 || (data.detail || '').toLowerCase().includes('already'))
-      showAlert('An account with this email already exists. Please log in instead.');
+    if (status === 409 || (data.detail||'').toLowerCase().includes('already'))
+      showAlert('An account with this email already exists. Please log in.');
     else if (status === 0)
       showAlert('Cannot connect to the server. Please check your internet connection.');
     else
       showAlert(data.detail || 'Account creation failed. Please try again.');
     return;
   }
-
-  showAlert('Account created! ✅ Please check your email to verify your account, then log in.', 'success');
+  showAlert('Account created! ✅ Please check your email to verify, then log in.', 'success');
   setTimeout(() => switchTab('login'), 2400);
 }
 
 function afterLogin() {
   const name = S.user.full_name || S.user.email || 'User';
-  document.getElementById('nav-user-name').textContent = name;
+  document.getElementById('nav-user-name').textContent  = name;
   document.getElementById('dash-user-name').textContent = name.split(' ')[0];
   loadProducts();
   goTo('screen-products');
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
    PRODUCTS
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 async function loadProducts() {
   const el = document.getElementById('prod-loading');
   el.innerHTML = '<span class="spinner" style="border-top-color:var(--teal);"></span> Loading products…';
   el.style.display = 'block';
-
   const { ok, data, status } = await api('/api/auth/products');
   el.style.display = 'none';
-
   if (!ok) {
     el.innerHTML = status === 0
       ? '⚠️ No internet connection. Please refresh the page.'
@@ -1400,10 +1553,8 @@ async function loadProducts() {
     el.style.display = 'block';
     return;
   }
-
   const students = data.products.filter(p => !p.is_corporate);
   const corps    = data.products.filter(p =>  p.is_corporate);
-
   if (students.length) {
     renderGrid('grid-student', students);
     document.getElementById('prod-student').style.display = '';
@@ -1426,7 +1577,7 @@ function renderGrid(gridId, products) {
       <div class="product-card-name">${p.name}</div>
       <div class="product-card-badges">
         <span class="badge badge-pdf">${p.required_pdfs} PDF${p.required_pdfs > 1 ? 's' : ''}</span>
-        <span class="badge badge-cards">${(p.cards || []).length} cards</span>
+        <span class="badge badge-cards">${(p.cards||[]).length} cards</span>
         ${p.is_corporate ? '<span class="badge badge-corp">Corporate</span>' : ''}
       </div>`;
     g.appendChild(d);
@@ -1434,32 +1585,25 @@ function renderGrid(gridId, products) {
 }
 
 async function selectProduct(p, cardEl) {
-  // Show loading state on the card
   if (cardEl) {
     cardEl.classList.add('loading');
     cardEl.innerHTML = `<div class="product-card-icon"><span class="spinner" style="border-top-color:var(--teal);width:20px;height:20px;border-width:3px;"></span></div><div class="product-card-name">${p.name}</div>`;
   }
-
   const { ok, data, status } = await api('/api/auth/select-product', {
-    method: 'POST',
-    body: JSON.stringify({ product_slug: p.slug })
+    method: 'POST', body: JSON.stringify({ product_slug: p.slug })
   });
-
   if (!ok) {
     if (cardEl) cardEl.classList.remove('loading');
-    const msg = status === 0
-      ? 'No internet connection. Please check and try again.'
-      : 'Could not select this product. Please try again.';
-    showToast('⚠️ ' + msg, 'error');
-    loadProducts(); // rebuild grid
+    showToast('⚠️ ' + (status === 0 ? 'No internet. Please check and try again.' : 'Could not select this product. Please try again.'), 'error');
+    loadProducts();
     return;
   }
-
   S.sessionId = data.session_id;
   S.product   = data.product;
   S.uploadDone = {};
+  S.cardHistories = {};
+  S.cardDomCache  = {};
 
-  // Normalise arrays from API
   if (typeof S.product.pdf_labels === 'string') {
     try { S.product.pdf_labels = JSON.parse(S.product.pdf_labels); } catch { S.product.pdf_labels = []; }
   }
@@ -1473,21 +1617,20 @@ async function selectProduct(p, cardEl) {
   goTo('screen-upload');
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
    UPLOAD
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 function buildUploadGate() {
   const p = S.product;
   document.getElementById('up-title').textContent = `Upload Reports for ${p.name}`;
   document.getElementById('up-sub').textContent =
     `${p.required_pdfs} report${p.required_pdfs > 1 ? 's are' : ' is'} required before chatting.`;
   document.getElementById('up-badge').textContent = `${PROD_ICONS[p.slug] || '📋'} ${p.name}`;
-
   document.getElementById('up-slots').innerHTML = '';
   document.querySelectorAll('.hidden-file').forEach(e => e.remove());
 
   const labels    = p.pdf_labels;
-  const totalSlots = p.required_pdfs + 1; // +1 optional slot
+  const totalSlots = p.required_pdfs + 1;
 
   for (let i = 0; i < totalSlots; i++) {
     const required = i < p.required_pdfs;
@@ -1496,7 +1639,7 @@ function buildUploadGate() {
 
     const slot = document.createElement('div');
     slot.id = `slot-${i}`;
-    slot.className = `upload-slot ${required ? 'slot-required' : 'slot-optional'}`;
+    slot.className = `upload-slot`;
     slot.innerHTML = `
       <div class="slot-icon" id="slot-icon-${i}">📄</div>
       <div class="slot-info">
@@ -1523,7 +1666,6 @@ async function handleUpload(evt, idx, label) {
   if (!file) return;
   evt.target.value = '';
 
-  // Client-side size check before even uploading
   if (file.size > 20 * 1024 * 1024) {
     showSlotError(idx, '❌', 'File is too large (max 20 MB). Please compress it first.', idx < S.product.required_pdfs);
     return;
@@ -1541,14 +1683,12 @@ async function handleUpload(evt, idx, label) {
   const { ok, data, status } = await apiUpload(path, form);
 
   if (!ok) {
-    const msg = friendlyUploadError(data, status);
-    showSlotError(idx, '❌', msg, idx < S.product.required_pdfs);
+    showSlotError(idx, '❌', friendlyUploadError(data, status), idx < S.product.required_pdfs);
     return;
   }
 
   S.uploadDone[idx] = true;
-  const slot2 = document.getElementById(`slot-${idx}`);
-  slot2.className = 'upload-slot slot-done';
+  document.getElementById(`slot-${idx}`).className = 'upload-slot slot-done';
   document.getElementById(`slot-icon-${idx}`).textContent = '✅';
   const meta = document.getElementById(`slot-meta-${idx}`);
   meta.textContent = `${file.name} · Tap to replace`;
@@ -1558,8 +1698,7 @@ async function handleUpload(evt, idx, label) {
 }
 
 function showSlotError(idx, icon, msg, required) {
-  const slot = document.getElementById(`slot-${idx}`);
-  slot.className = 'upload-slot slot-error';
+  document.getElementById(`slot-${idx}`).className = 'upload-slot slot-error';
   document.getElementById(`slot-icon-${idx}`).textContent = icon;
   const meta = document.getElementById(`slot-meta-${idx}`);
   meta.textContent = msg;
@@ -1577,16 +1716,16 @@ function refreshProgress() {
   const btn = document.getElementById('btn-start');
   if (done >= req) {
     btn.disabled = false;
-    btn.textContent = '🚀 Start Chatting →';
+    btn.innerHTML = '🚀 Start Chatting →';
   } else {
     btn.disabled = true;
-    btn.textContent = `🔒 Upload required reports to continue (${done}/${req})`;
+    btn.innerHTML = `🔒 Upload required reports to continue (${done}/${req})`;
   }
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
    DASHBOARD
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 function goToDashboard() {
   buildDashboard();
   goTo('screen-dashboard');
@@ -1605,7 +1744,6 @@ function buildDashboard() {
   mobBar.innerHTML    = '';
 
   cards.forEach(key => {
-    // Desktop sidebar button
     const btn = document.createElement('button');
     btn.className = 'card-btn';
     btn.id = 'cbtn-' + key;
@@ -1613,24 +1751,21 @@ function buildDashboard() {
     btn.innerHTML = `<div class="card-btn-icon">${CARD_ICONS[key] || '📋'}</div>${CARD_LABELS[key] || key}`;
     container.appendChild(btn);
 
-    // Mobile bar chip
     const chip = document.createElement('button');
     chip.className = 'mob-card-chip';
     chip.id = 'mob-cbtn-' + key;
     chip.onclick = () => activateCard(key);
-    chip.innerHTML = `<span class="mob-card-chip-icon">${CARD_ICONS[key] || '📋'}</span>${CARD_LABELS[key] || key}`;
+    chip.innerHTML = `<span>${CARD_ICONS[key] || '📋'}</span>${CARD_LABELS[key] || key}`;
     mobBar.appendChild(chip);
   });
 
   updateUsage(S.user?.questions_used || 0);
   S.card = null;
-  S.history = [];
 
-  // Reset chat
-  document.getElementById('chat-messages').innerHTML = `
+  const msgs = document.getElementById('chat-messages');
+  msgs.innerHTML = `
     <div class="chat-welcome" id="chat-welcome">
-      <img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop"
-           onerror="this.style.display='none'">
+      <img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop" onerror="this.style.display='none'">
       <div class="chat-welcome-title">Your reports are loaded</div>
       <div class="chat-welcome-sub">Select an analysis card${window.innerWidth < 768 ? ' below' : ' from the sidebar'} to start chatting.</div>
     </div>`;
@@ -1640,8 +1775,6 @@ function buildDashboard() {
   inp.placeholder = 'Select a card to start…';
   inp.value = '';
   document.getElementById('send-btn').disabled = true;
-
-  // Reset topbar
   document.getElementById('ct-icon-img').src = 'assets/bishop_BC.png';
   document.getElementById('ct-title').textContent = 'Bishop AI Assistant';
   document.getElementById('ct-sub').textContent   = 'Select a card to begin';
@@ -1655,49 +1788,72 @@ function updateUsage(used) {
     pct > 80 ? 'var(--error)' : pct > 60 ? 'var(--warning)' : 'var(--teal)';
 }
 
+/* ════════════════════════════════════════════════════════
+   ACTIVATE CARD — with full history persistence
+   Saves current card DOM before switching, restores on return
+════════════════════════════════════════════════════════ */
 function activateCard(key) {
-  S.card = key;
-  S.history = [];
+  // ── Save current card's DOM before switching ──────────────
+  if (S.card && S.card !== key) {
+    const msgs = document.getElementById('chat-messages');
+    S.cardDomCache[S.card] = msgs.innerHTML;
+  }
 
-  // Highlight desktop sidebar
+  const isNewCard   = !S.cardHistories[key];
+  const prevCard    = S.card;
+  S.card = key;
+
+  // ── Highlight sidebar & mobile bar ───────────────────────
   document.querySelectorAll('.card-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('cbtn-' + key)?.classList.add('active');
-
-  // Highlight mobile bar
   document.querySelectorAll('.mob-card-chip').forEach(b => b.classList.remove('active'));
-  document.getElementById('mob-cbtn-' + key)?.classList.add('active');
-
-  // Scroll the active mobile chip into view
   const mc = document.getElementById('mob-cbtn-' + key);
-  if (mc) mc.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  if (mc) { mc.classList.add('active'); mc.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' }); }
 
-  // Update topbar
-  document.getElementById('ct-icon-img').src = 'assets/bishop_BC.png';
+  // ── Update topbar ─────────────────────────────────────────
   document.getElementById('ct-title').textContent = CARD_LABELS[key] || key;
   document.getElementById('ct-sub').textContent   = S.product.name;
 
-  // Clear messages and enable input
-  const msgs = document.getElementById('chat-messages');
-  msgs.innerHTML = '';
+  // ── Enable input ──────────────────────────────────────────
   const inp = document.getElementById('chat-input');
   inp.disabled = false;
   inp.placeholder = 'Ask anything about your report…';
-  inp.value = '';
-  inp.focus();
   document.getElementById('send-btn').disabled = false;
 
-  // Welcome message
-  const wFn = CARD_WELCOME[key] || (() => `Hello! I'm ready to help with **${CARD_LABELS[key] || key}**. What would you like to know?`);
-  addAI(wFn(S.product.name), true);
+  // ── Restore or initialise messages ───────────────────────
+  const msgs = document.getElementById('chat-messages');
 
-  // Chips
-  const chips = CARD_CHIPS[key];
-  if (chips) setTimeout(() => addChips(chips), 180);
+  if (!isNewCard && S.cardDomCache[key]) {
+    // Returning to a card — restore its messages
+    msgs.innerHTML = S.cardDomCache[key];
+    msgs.scrollTop = msgs.scrollHeight;
+
+    // Show a subtle banner so user knows they're back in history
+    const banner = document.createElement('div');
+    banner.className = 'history-banner fade-in';
+    banner.textContent = `↩ Continuing ${CARD_LABELS[key]} conversation`;
+    msgs.appendChild(banner);
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(() => banner.remove(), 2500);
+
+  } else {
+    // First time on this card — show welcome
+    msgs.innerHTML = '';
+    S.cardHistories[key] = [];
+
+    const wFn = CARD_WELCOME[key] || (() => `Hello! I'm ready to help with **${CARD_LABELS[key] || key}**. What would you like to know?`);
+    addAI(wFn(S.product.name), true);
+
+    const chips = CARD_CHIPS[key];
+    if (chips) setTimeout(() => addChips(chips), 180);
+  }
+
+  inp.focus();
 }
 
-/* ═══════════════════════════════════════════
-   MESSAGES
-═══════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════
+   MESSAGE RENDERERS
+════════════════════════════════════════════════════════ */
 function addAI(text, disclaimer = false) {
   document.getElementById('chat-welcome')?.remove();
   const msgs = document.getElementById('chat-messages');
@@ -1705,7 +1861,7 @@ function addAI(text, disclaimer = false) {
   d.className = 'msg ai fade-in';
   d.innerHTML = `
     <div class="msg-avatar ai">
-      <img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'">
+      <img src="assets/bishop_BC.png" alt="B" onerror="this.textContent='🧠'">
     </div>
     <div class="msg-body">
       <div class="msg-bubble">${fmt(text)}</div>
@@ -1721,8 +1877,9 @@ function addUser(text) {
   const msgs = document.getElementById('chat-messages');
   const d = document.createElement('div');
   d.className = 'msg user fade-in';
+  const initials = (S.user?.full_name || 'U').split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
   d.innerHTML = `
-    <div class="msg-avatar user">You</div>
+    <div class="msg-avatar user">${initials}</div>
     <div class="msg-body">
       <div class="msg-bubble">${esc(text)}</div>
       <div class="msg-time">${now()}</div>
@@ -1755,7 +1912,7 @@ function addTyping() {
   d.className = 'msg ai'; d.id = 'typing-ind';
   d.innerHTML = `
     <div class="msg-avatar ai">
-      <img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'">
+      <img src="assets/bishop_BC.png" alt="B" onerror="this.textContent='🧠'">
     </div>
     <div class="msg-body">
       <div class="typing-indicator">
@@ -1775,9 +1932,9 @@ function clickChip(text) {
   sendMessage();
 }
 
-/* ═══════════════════════════════════════════
-   SEND MESSAGE
-═══════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════
+   SEND MESSAGE — uses per-card history
+════════════════════════════════════════════════════════ */
 async function sendMessage() {
   if (!S.card || S.isTyping) return;
   const inp  = document.getElementById('chat-input');
@@ -1785,11 +1942,18 @@ async function sendMessage() {
   if (!text) return;
   inp.value = '';
   autoResize(inp);
+
+  // Ensure this card has a history array
+  if (!S.cardHistories[S.card]) S.cardHistories[S.card] = [];
+
   addUser(text);
-  S.history.push({ role: 'user', content: text });
+  S.cardHistories[S.card].push({ role: 'user', content: text });
   S.isTyping = true;
   document.getElementById('send-btn').disabled = true;
   addTyping();
+
+  // Send last 10 turns of THIS card's history
+  const historyToSend = S.cardHistories[S.card].slice(-20);
 
   const { ok, data, status } = await api('/api/ask', {
     method: 'POST',
@@ -1797,7 +1961,7 @@ async function sendMessage() {
       session_id: S.sessionId,
       card_mode:  S.card,
       message:    text,
-      history:    S.history.slice(-10)
+      history:    historyToSend.slice(0, -1) // exclude the message we just added
     })
   });
 
@@ -1806,44 +1970,68 @@ async function sendMessage() {
   document.getElementById('send-btn').disabled = false;
 
   if (!ok) {
-    S.history.pop();
+    S.cardHistories[S.card].pop();
     addAI(friendlyChatError(data, status));
     return;
   }
 
-  S.history.push({ role: 'assistant', content: data.reply });
+  S.cardHistories[S.card].push({ role: 'assistant', content: data.reply });
   addAI(data.reply);
   if (data.questions_remaining !== undefined) {
     updateUsage(LIMIT - data.questions_remaining);
   }
 
+  // Persist history to sessionStorage after each message
+  _persistHistory();
+
   // Follow-up chips
   setTimeout(() => {
-    const followUps = {
-      understand_report:['What does this score mean?','Career suggestions','Stream recommendation'],
-      career_roadmap:['Show timeline','After 12th options','Entrance exams'],
-      college_finder:['Government options','Private options','Backup colleges'],
-      action_plan:['Weekly schedule','Parent tips','Exam strategy'],
-      parent_guide:['Communication tips','Study environment','Motivation strategies'],
-      engineering_branch:['JEE preparation','Top colleges','Career after this branch'],
-      job_fit:['Gap analysis','Final recommendation']
-    };
-    const chips = (followUps[S.card] || []).slice(0, 3);
+    const chips = (FOLLOW_UP_CHIPS[S.card] || []).slice(0, 3);
     if (chips.length) addChips(chips);
   }, 280);
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
+   HISTORY PERSISTENCE (sessionStorage)
+   Saves/restores card histories across page refreshes
+════════════════════════════════════════════════════════ */
+function _persistHistory() {
+  try {
+    if (S.sessionId) {
+      sessionStorage.setItem(
+        `bc_hist_${S.sessionId}`,
+        JSON.stringify(S.cardHistories)
+      );
+    }
+  } catch (e) { /* quota exceeded — fail silently */ }
+}
+
+function _restoreHistory(sessionId) {
+  try {
+    const saved = sessionStorage.getItem(`bc_hist_${sessionId}`);
+    if (saved) {
+      S.cardHistories = JSON.parse(saved);
+      // Clear DOM cache since we only have the history data, not rendered HTML
+      S.cardDomCache = {};
+    }
+  } catch (e) {
+    S.cardHistories = {};
+  }
+}
+
+/* ════════════════════════════════════════════════════════
    LOGOUT
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 async function doLogout() {
   if (S.sessionId) {
+    // Clear persisted history for this session
+    try { sessionStorage.removeItem(`bc_hist_${S.sessionId}`); } catch(e) {}
     await api(`/api/session/${S.sessionId}/chunks`, { method: 'DELETE' }).catch(() => {});
   }
   await api('/api/auth/logout', { method: 'POST' }).catch(() => {});
   Object.assign(S, {
-    token: null, user: null, sessionId: null, product: null,
-    card: null, history: [], uploadDone: {}, isTyping: false
+    token:null, user:null, sessionId:null, product:null,
+    card:null, cardHistories:{}, cardDomCache:{}, uploadDone:{}, isTyping:false
   });
   sessionStorage.removeItem('bc_token');
   sessionStorage.removeItem('bc_user');
@@ -1856,52 +2044,68 @@ async function doLogout() {
   goTo('screen-auth');
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
    FEEDBACK MODAL
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 function openFeedback() {
-  const m = document.getElementById('feedback-modal');
-  m.style.display = 'flex';
+  document.getElementById('feedback-modal').classList.add('open');
   setTimeout(() => document.getElementById('feedback-text')?.focus(), 100);
 }
 function closeFeedback() {
-  document.getElementById('feedback-modal').style.display = 'none';
+  document.getElementById('feedback-modal').classList.remove('open');
   document.getElementById('feedback-text').value = '';
 }
 async function submitFeedback() {
   const text = document.getElementById('feedback-text').value.trim();
   if (!text) { showToast('Please write something before sending.', 'warning'); return; }
-  // Send to support email — simplest approach that works without extra infra
   const subject = encodeURIComponent('Bishop Feedback');
   const body    = encodeURIComponent(`User: ${S.user?.email || 'Unknown'}\nCard: ${S.card || 'None'}\n\nFeedback:\n${text}`);
   window.open(`mailto:support@brainchecker.in?subject=${subject}&body=${body}`, '_blank');
   closeFeedback();
   showToast('✅ Feedback opened in your email client. Thank you!', 'success');
 }
+// Close modal on backdrop click
+document.getElementById('feedback-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeFeedback();
+});
 
-/* ═══════════════════════════════════════════
-   UTILITY FUNCTIONS
-═══════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════
+   UTILITIES
+════════════════════════════════════════════════════════ */
 function now() {
-  return new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+  return new Date().toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' });
 }
 
 function esc(t) {
   return t
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/\n/g, '<br>');
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\n/g,'<br>');
 }
 
 function fmt(t) {
-  // Convert basic markdown to HTML for AI messages
-  return t
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g,     '<em>$1</em>')
-    .replace(/^#{1,3}\s+(.+)$/gm, '<strong>$1</strong>')
-    .replace(/\n\n/g, '</p><p style="margin-top:8px;">')
-    .replace(/\n/g,   '<br>')
-    .replace(/^/,     '<p>')
-    .replace(/$/,     '</p>');
+  // Markdown → HTML for AI messages
+  // Tables
+  t = t.replace(/\|(.+)\|\n\|[-| :]+\|\n((?:\|.+\|\n?)+)/g, (match, header, rows) => {
+    const ths = header.split('|').filter(c => c.trim()).map(c => `<th>${c.trim()}</th>`).join('');
+    const trs = rows.trim().split('\n').map(row => {
+      const tds = row.split('|').filter(c => c.trim()).map(c => `<td>${c.trim()}</td>`).join('');
+      return `<tr>${tds}</tr>`;
+    }).join('');
+    return `<table><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`;
+  });
+  // Bold, italic, headings
+  t = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  t = t.replace(/\*(.*?)\*/g,     '<em>$1</em>');
+  t = t.replace(/^#{1,3}\s+(.+)$/gm, '<strong style="font-size:1.05em;display:block;margin:8px 0 4px;">$1</strong>');
+  // Bullet lists
+  t = t.replace(/^[\-\*]\s+(.+)$/gm, '<li>$1</li>');
+  t = t.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+  // Numbered lists
+  t = t.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
+  // Paragraphs
+  t = t.replace(/\n\n/g, '</p><p style="margin-top:8px;">');
+  t = t.replace(/\n/g, '<br>');
+  return '<p>' + t + '</p>';
 }
 
 function handleKey(e) {
@@ -1913,9 +2117,9 @@ function autoResize(el) {
   el.style.height = Math.min(el.scrollHeight, 110) + 'px';
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
    INIT — restore session on page load
-═══════════════════════════════════════════ */
+════════════════════════════════════════════════════════ */
 (function init() {
   const tok = sessionStorage.getItem('bc_token');
   const usr = sessionStorage.getItem('bc_user');
