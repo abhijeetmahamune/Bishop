@@ -7,7 +7,7 @@
 <meta name="description" content="Bishop — AI-powered post-counseling assistant by Brain Checker. Understand your assessment reports instantly.">
 <meta property="og:title" content="Bishop by Brain Checker">
 <meta property="og:description" content="AI-powered post-counseling assistant. Decode your Brain Checker assessment reports.">
-<meta property="og:image" content="/assets/bishop_BC.png">
+<meta property="og:image" content="/assets/Bishop_logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
@@ -491,7 +491,7 @@ body {
   <div class="auth-card">
     <button class="theme-toggle auth-theme-toggle" onclick="toggleTheme()" title="Toggle theme" id="auth-toggle-btn">☀️</button>
     <div class="auth-logo">
-      <img src="assets/bishop_BC.png" class="auth-logo-img" alt="Bishop" onerror="this.style.display='none'">
+      <img src="" class="auth-logo-img" alt="Bishop" onerror="this.style.display='none'">
       <div class="auth-logo-text">
         <div class="brand-main">Bishop by Brain Checker</div>
         <div class="brand-sub">Post-Counseling AI System</div>
@@ -548,7 +548,7 @@ body {
 <div id="screen-products" class="screen">
   <nav class="navbar">
     <div class="navbar-brand">
-      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
+      <img src="assets/Bishop_logo.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
       <div class="brand-text"><div class="brand-main">Bishop by Brain Checker</div><div class="brand-sub">Post-Counseling AI</div></div>
     </div>
     <div class="navbar-right">
@@ -579,7 +579,7 @@ body {
 <div id="screen-upload" class="screen">
   <nav class="navbar">
     <div class="navbar-brand">
-      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
+      <img src="assets/Bishop_logo.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
       <div class="brand-text"><div class="brand-main">Bishop by Brain Checker</div><div class="brand-sub">Post-Counseling AI</div></div>
     </div>
     <div class="navbar-right">
@@ -609,7 +609,7 @@ body {
   <div class="dashboard-wrapper">
     <nav class="navbar">
       <div class="navbar-brand">
-        <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
+        <img src="assets/Bishop_logo.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
         <div class="brand-text"><div class="brand-main">Bishop by Brain Checker</div><div class="brand-sub">Post-Counseling AI</div></div>
       </div>
       <div class="navbar-right">
@@ -640,7 +640,7 @@ body {
       </div>
       <div class="chat-panel">
         <div class="chat-topbar">
-          <div class="ct-icon"><img src="assets/bishop_BC.png" alt="Bishop" id="ct-icon-img"></div>
+          <div class="ct-icon"><img src="assets/Bishop_logo.png" alt="Bishop" id="ct-icon-img"></div>
           <div>
             <div class="ct-title" id="ct-title">Bishop AI Assistant</div>
             <div class="ct-sub" id="ct-sub">Select a card to begin</div>
@@ -652,7 +652,7 @@ body {
         </div>
         <div class="chat-messages" id="chat-messages">
           <div class="chat-welcome" id="chat-welcome">
-            <img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop" onerror="this.style.display='none'">
+            <img src="assets/Bishop_logo.png" class="chat-welcome-logo" alt="Bishop" onerror="this.style.display='none'">
             <div class="chat-welcome-title">Your reports are loaded</div>
             <div class="chat-welcome-sub">Select an analysis card to start chatting with Bishop.</div>
           </div>
@@ -940,10 +940,10 @@ function buildDashboard() {
     mobBar.appendChild(chip);
   });
   updateUsage(S.user?.questions_used||0); S.card=null; S.history=[];
-  document.getElementById('chat-messages').innerHTML=`<div class="chat-welcome" id="chat-welcome"><img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop" onerror="this.style.display='none'"><div class="chat-welcome-title">Your reports are loaded</div><div class="chat-welcome-sub">Select an analysis card${window.innerWidth<768?' below':' from the sidebar'} to start chatting.</div></div>`;
+  document.getElementById('chat-messages').innerHTML=`<div class="chat-welcome" id="chat-welcome"><img src="assets/Bishop_logo.png" class="chat-welcome-logo" alt="Bishop" onerror="this.style.display='none'"><div class="chat-welcome-title">Your reports are loaded</div><div class="chat-welcome-sub">Select an analysis card${window.innerWidth<768?' below':' from the sidebar'} to start chatting.</div></div>`;
   const inp=document.getElementById('chat-input'); inp.disabled=true; inp.placeholder='Select a card to start…'; inp.value='';
   document.getElementById('send-btn').disabled=true;
-  document.getElementById('ct-icon-img').src='assets/bishop_BC.png';
+  document.getElementById('ct-icon-img').src='assets/Bishop_logo.png';
   document.getElementById('ct-title').textContent='Bishop AI Assistant';
   document.getElementById('ct-sub').textContent='Select a card to begin';
 }
@@ -962,7 +962,7 @@ function activateCard(key) {
   document.querySelectorAll('.mob-card-chip').forEach(b=>b.classList.remove('active'));
   document.getElementById('mob-cbtn-'+key)?.classList.add('active');
   const mc=document.getElementById('mob-cbtn-'+key); if(mc)mc.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
-  document.getElementById('ct-icon-img').src='assets/bishop_BC.png';
+  document.getElementById('ct-icon-img').src='assets/Bishop_logo.png';
   document.getElementById('ct-title').textContent=CARD_LABELS[key]||key;
   document.getElementById('ct-sub').textContent=S.product.name;
   const msgs=document.getElementById('chat-messages'); msgs.innerHTML='';
@@ -978,7 +978,7 @@ function addAI(text,disclaimer=false) {
   document.getElementById('chat-welcome')?.remove();
   const msgs=document.getElementById('chat-messages');
   const d=document.createElement('div'); d.className='msg ai fade-in';
-  d.innerHTML=`<div class="msg-avatar ai"><img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'"></div><div class="msg-body"><div class="msg-bubble">${fmt(text)}</div><div class="msg-time">${now()}</div>${disclaimer?'<div class="disclaimer">⚠️ AI guidance — does not replace professional counselling. Always refer to your counsellor\'s report.</div>':''}</div>`;
+  d.innerHTML=`<div class="msg-avatar ai"><img src="assets/Bishop_logo.png" alt="Bishop" onerror="this.textContent='AI'"></div><div class="msg-body"><div class="msg-bubble">${fmt(text)}</div><div class="msg-time">${now()}</div>${disclaimer?'<div class="disclaimer">⚠️ AI guidance — does not replace professional counselling. Always refer to your counsellor\'s report.</div>':''}</div>`;
   msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
 }
 function addUser(text) {
@@ -997,7 +997,7 @@ function addChips(chips) {
 function addTyping() {
   document.getElementById('chat-welcome')?.remove();
   const msgs=document.getElementById('chat-messages'); const d=document.createElement('div'); d.className='msg ai'; d.id='typing-ind';
-  d.innerHTML=`<div class="msg-avatar ai"><img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'"></div><div class="msg-body"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  d.innerHTML=`<div class="msg-avatar ai"><img src="assets/Bishop_logo.png" alt="Bishop" onerror="this.textContent='AI'"></div><div class="msg-body"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
   msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
 }
 function removeTyping(){document.getElementById('typing-ind')?.remove();}
