@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -11,869 +11,559 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
-   DESIGN TOKENS
+   THEME — DARK (default)
 ═══════════════════════════════════════════ */
-:root {
-  --navy-deep:  #000204;
-  --navy-mid:   #243657;
-  --navy-light: #2e4470;
-  --teal:       #00b4d8;
-  --teal-dark:  #0096b5;
-  --teal-light: #e0f7fc;
-  --white:      #ffffff;
-  --gray-400:   #94a3b8;
-  --gray-600:   #64748b;
-  --gray-800:   #334155;
-  --success:    #10b981;
-  --error:      #ef4444;
-  --warning:    #f59e0b;
-  --info:       #3b82f6;
+:root, [data-theme="dark"] {
+  --teal:        #00b4d8;
+  --teal-dark:   #0096b5;
+  --bg-base:     #000204;
+  --bg-mid:      #0d1e34;
+  --bg-card:     rgba(255,255,255,0.04);
+  --bg-input:    rgba(255,255,255,0.06);
+  --bg-sidebar:  rgba(6,14,26,0.94);
+  --bg-navbar:   rgba(10,20,36,0.97);
+  --bg-chatpanel:#080f1c;
+  --bg-topbar:   rgba(6,14,26,0.85);
+  --bg-inputarea:rgba(6,14,26,0.92);
+  --bg-chip:     rgba(0,180,216,0.07);
+  --bg-mobbar:   rgba(6,14,26,0.97);
+  --border-base: rgba(255,255,255,0.10);
+  --border-soft: rgba(255,255,255,0.07);
+  --border-input:rgba(255,255,255,0.11);
+  --border-sb:   rgba(255,255,255,0.07);
+  --text-primary: #ffffff;
+  --text-secondary:#94a3b8;
+  --text-muted:   #64748b;
+  --text-brand:   #00b4d8;
+  --bubble-ai-bg:    rgba(255,255,255,0.055);
+  --bubble-ai-border:rgba(255,255,255,0.09);
+  --bubble-ai-color: rgba(255,255,255,0.91);
+  --bubble-user-color:#000204;
   --shadow-md:  0 4px 16px rgba(0,0,0,0.18);
   --shadow-lg:  0 10px 40px rgba(0,0,0,0.22);
   --glow-teal:  0 0 40px rgba(0,180,216,0.18);
-  --r-sm:  6px;
-  --r-md:  12px;
-  --r-lg:  18px;
-  --r-xl:  26px;
-  --r-full:9999px;
-  --fh: 'Poppins', sans-serif;
-  --fb: 'DM Sans', sans-serif;
-  --nav-h: 56px;
-  --mob-drawer-h: 52px;
+  --card-hover-bg: rgba(0,180,216,0.07);
+  --slot-bg:      rgba(255,255,255,0.04);
+  --slot-border:  rgba(255,255,255,0.14);
+  --slot-icon-bg: rgba(255,255,255,0.06);
+  --sb-active-bg:    rgba(0,180,216,0.11);
+  --sb-active-color: #00b4d8;
+  --sb-hover-bg:     rgba(255,255,255,0.05);
+  --auth-card-bg:    rgba(255,255,255,0.04);
+  --prod-card-bg:    rgba(255,255,255,0.04);
+  --prod-card-border:rgba(255,255,255,0.09);
+  --toggle-icon: "☀️";
+  --success:#10b981; --error:#ef4444; --warning:#f59e0b; --info:#3b82f6;
 }
 
 /* ═══════════════════════════════════════════
-   RESET & BASE
+   THEME — LIGHT
 ═══════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; width: 100%; }
-
-body {
-  font-family: var(--fb);
-  background: var(--navy-deep);
-  color: var(--white);
-  overflow: hidden;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+[data-theme="light"] {
+  --bg-base:     #f0f4f8;
+  --bg-mid:      #ffffff;
+  --bg-card:     #ffffff;
+  --bg-input:    #f8fafb;
+  --bg-sidebar:  #ffffff;
+  --bg-navbar:   #ffffff;
+  --bg-chatpanel:#f4f8fb;
+  --bg-topbar:   #ffffff;
+  --bg-inputarea:#ffffff;
+  --bg-chip:     rgba(0,180,216,0.08);
+  --bg-mobbar:   #ffffff;
+  --border-base: rgba(0,0,0,0.10);
+  --border-soft: #e8edf2;
+  --border-input:#d0dce8;
+  --border-sb:   #e8edf2;
+  --text-primary:  #1a2535;
+  --text-secondary:#5a7184;
+  --text-muted:    #9aafbe;
+  --text-brand:    #0096b5;
+  --bubble-ai-bg:    #ffffff;
+  --bubble-ai-border:#e2eaf2;
+  --bubble-ai-color: #1a2535;
+  --bubble-user-color:#ffffff;
+  --shadow-md:  0 2px 12px rgba(0,0,0,0.07);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.10);
+  --glow-teal:  0 0 24px rgba(0,180,216,0.10);
+  --card-hover-bg: rgba(0,180,216,0.05);
+  --slot-bg:     #ffffff;
+  --slot-border: #d0dce8;
+  --slot-icon-bg:#f0f7fa;
+  --sb-active-bg:    rgba(0,175,200,0.10);
+  --sb-active-color: #007fa8;
+  --sb-hover-bg:     #f4f8fb;
+  --auth-card-bg:    #ffffff;
+  --prod-card-bg:    #ffffff;
+  --prod-card-border:#dde7f0;
+  --toggle-icon: "🌙";
 }
 
-/* Global scrollbar hide — all scrollable areas */
-* { scrollbar-width: none; }
-*::-webkit-scrollbar { display: none; }
+/* ═══════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════ */
+:root { --r-sm:6px; --r-md:12px; --r-lg:18px; --r-xl:26px; --r-full:9999px; --nav-h:56px; --mob-drawer-h:52px; }
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html, body { height:100%; width:100%; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg-base); color:var(--text-primary);
+  overflow:hidden; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background 0.3s, color 0.3s;
+}
+* { scrollbar-width:thin; scrollbar-color:rgba(0,180,216,0.2) transparent; }
+*::-webkit-scrollbar { width:4px; }
+*::-webkit-scrollbar-thumb { background:rgba(0,180,216,0.25); border-radius:4px; }
+[data-theme="light"] *::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.15); }
 
 /* ═══════════════════════════════════════════
    BACKGROUND
 ═══════════════════════════════════════════ */
-.bg-mesh {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+.bg-mesh { position:fixed; inset:0; pointer-events:none; z-index:0; transition:opacity 0.3s; }
+[data-theme="dark"] .bg-mesh {
   background:
-    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,180,216,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,180,216,0.04) 0%, transparent 60%),
-    linear-gradient(160deg, var(--navy-deep) 0%, #0d2240 50%, var(--navy-deep) 100%);
+    radial-gradient(ellipse 60% 50% at 20% 20%,rgba(0,180,216,0.07) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%,rgba(0,180,216,0.04) 0%,transparent 60%),
+    linear-gradient(160deg,#000204 0%,#0d2240 50%,#000204 100%);
 }
+[data-theme="light"] .bg-mesh {
+  background:
+    radial-gradient(ellipse 70% 60% at 10% 5%,rgba(0,180,216,0.05) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 50% at 90% 95%,rgba(0,180,216,0.04) 0%,transparent 50%),
+    linear-gradient(150deg,#e8f4f8 0%,#f0f4f8 50%,#edf2f7 100%);
+}
+
+/* ═══════════════════════════════════════════
+   THEME TOGGLE
+═══════════════════════════════════════════ */
+.theme-toggle {
+  width:34px; height:34px; border-radius:50%;
+  background:var(--bg-input); border:1.5px solid var(--border-input);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  font-size:15px; transition:all 0.2s; flex-shrink:0;
+}
+.theme-toggle:hover { border-color:var(--teal); background:var(--bg-chip); }
 
 /* ═══════════════════════════════════════════
    SCREENS
 ═══════════════════════════════════════════ */
-.screen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  flex-direction: column;
-  overflow: hidden;
-}
-.screen.active { display: flex; }
+.screen { display:none; position:fixed; inset:0; z-index:1; flex-direction:column; overflow:hidden; }
+.screen.active { display:flex; }
 
 /* ═══════════════════════════════════════════
    NAVBAR
 ═══════════════════════════════════════════ */
 .navbar {
-  background: rgba(10,20,36,0.97);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  padding: 0 1.25rem;
-  height: var(--nav-h);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 20;
-  gap: 8px;
+  background:var(--bg-navbar); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-soft); padding:0 1.25rem; height:var(--nav-h); flex-shrink:0;
+  display:flex; align-items:center; justify-content:space-between; z-index:20; gap:8px;
+  box-shadow:var(--shadow-md); transition:background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
+.navbar-brand { display:flex; align-items:center; gap:9px; min-width:0; flex-shrink:1; overflow:hidden; }
+.navbar-logo { width:32px; height:32px; border-radius:8px; object-fit:cover; flex-shrink:0; border:1.5px solid rgba(0,180,216,0.35); }
+.brand-text { min-width:0; overflow:hidden; }
+.brand-main { font-family:'Poppins',sans-serif; font-size:13px; font-weight:800; color:var(--text-primary); letter-spacing:-0.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:color 0.3s; }
+.brand-sub  { font-size:9.5px; color:var(--text-brand); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; white-space:nowrap; transition:color 0.3s; }
+.navbar-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.navbar-user { font-size:11.5px; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:120px; }
+.navbar-user strong { color:var(--text-primary); }
 
-.navbar-brand {
-  display: flex; align-items: center; gap: 9px;
-  min-width: 0; flex-shrink: 1; overflow: hidden;
-}
-.navbar-logo {
-  width: 32px; height: 32px; border-radius: 8px;
-  object-fit: cover; flex-shrink: 0;
-  border: 1.5px solid rgba(0,180,216,0.35);
-}
-.brand-text { min-width: 0; overflow: hidden; }
-.brand-main {
-  font-family: var(--fh); font-size: 13px; font-weight: 800;
-  color: var(--white); letter-spacing: -0.01em;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.brand-sub {
-  font-size: 9.5px; color: var(--teal); font-weight: 600;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  white-space: nowrap;
-}
-.navbar-right {
-  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
-}
-.navbar-user {
-  font-size: 11.5px; color: var(--gray-400);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  max-width: 120px;
-}
-.navbar-user strong { color: var(--white); }
-
-.btn-logout {
-  padding: 5px 12px; background: transparent;
-  border: 1px solid rgba(255,255,255,0.14); border-radius: var(--r-full);
-  color: var(--gray-400); font-size: 11.5px; font-weight: 600; cursor: pointer;
-  transition: all 0.2s; font-family: var(--fb); white-space: nowrap; flex-shrink: 0;
-}
-.btn-logout:hover { border-color: var(--error); color: var(--error); }
-
-.btn-secondary {
-  padding: 6px 13px; background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.13); border-radius: var(--r-md);
-  color: var(--white); font-size: 11.5px; font-weight: 600; cursor: pointer;
-  transition: all 0.2s; font-family: var(--fb); white-space: nowrap; flex-shrink: 0;
-}
-.btn-secondary:hover { background: rgba(255,255,255,0.13); }
+.btn-logout { padding:5px 12px; background:transparent; border:1px solid var(--border-input); border-radius:var(--r-full); color:var(--text-secondary); font-size:11.5px; font-weight:600; cursor:pointer; transition:all 0.2s; font-family:'DM Sans',sans-serif; white-space:nowrap; flex-shrink:0; }
+.btn-logout:hover { border-color:var(--error); color:var(--error); }
+.btn-secondary { padding:6px 13px; background:var(--bg-input); border:1px solid var(--border-input); border-radius:var(--r-md); color:var(--text-primary); font-size:11.5px; font-weight:600; cursor:pointer; transition:all 0.2s; font-family:'DM Sans',sans-serif; white-space:nowrap; flex-shrink:0; }
+.btn-secondary:hover { background:var(--bg-chip); }
 
 /* ═══════════════════════════════════════════
-   ALERT / TOAST SYSTEM
+   ALERTS / TOAST
 ═══════════════════════════════════════════ */
-.alert {
-  padding: 10px 14px; border-radius: var(--r-sm);
-  font-size: 13px; margin-bottom: 1rem; display: none; line-height: 1.5;
-}
-.alert.error   { background: rgba(239,68,68,0.12); color: #fca5a5; border-left: 3px solid var(--error); display: block; }
-.alert.success { background: rgba(16,185,129,0.12); color: #6ee7b7; border-left: 3px solid var(--success); display: block; }
-.alert.info    { background: rgba(59,130,246,0.12); color: #93c5fd; border-left: 3px solid var(--info); display: block; }
-.alert.warning { background: rgba(245,158,11,0.12); color: #fcd34d; border-left: 3px solid var(--warning); display: block; }
+.alert { padding:10px 14px; border-radius:var(--r-sm); font-size:13px; margin-bottom:1rem; display:none; line-height:1.5; }
+[data-theme="dark"] .alert.error   { background:rgba(239,68,68,0.12); color:#fca5a5; border-left:3px solid var(--error); display:block; }
+[data-theme="dark"] .alert.success { background:rgba(16,185,129,0.12); color:#6ee7b7; border-left:3px solid var(--success); display:block; }
+[data-theme="dark"] .alert.info    { background:rgba(59,130,246,0.12); color:#93c5fd; border-left:3px solid var(--info); display:block; }
+[data-theme="dark"] .alert.warning { background:rgba(245,158,11,0.12); color:#fcd34d; border-left:3px solid var(--warning); display:block; }
+[data-theme="light"] .alert.error   { background:rgba(239,68,68,0.08); color:#c53030; border-left:3px solid var(--error); display:block; }
+[data-theme="light"] .alert.success { background:rgba(16,185,129,0.08); color:#166534; border-left:3px solid var(--success); display:block; }
+[data-theme="light"] .alert.info    { background:rgba(59,130,246,0.08); color:#1e40af; border-left:3px solid var(--info); display:block; }
+[data-theme="light"] .alert.warning { background:rgba(245,158,11,0.08); color:#92400e; border-left:3px solid var(--warning); display:block; }
 
-/* Toast — for upload/chat errors that aren't in the auth form */
-#toast {
-  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-  z-index: 9999; max-width: 360px; width: calc(100% - 2rem);
-  padding: 10px 16px; border-radius: var(--r-md); font-size: 13px;
-  line-height: 1.5; font-family: var(--fb); text-align: center;
-  opacity: 0; pointer-events: none; transition: opacity 0.25s;
-}
-#toast.show { opacity: 1; pointer-events: auto; }
-#toast.t-error   { background: rgba(15,5,5,0.95); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
-#toast.t-success { background: rgba(5,15,10,0.95); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.4); }
-#toast.t-info    { background: rgba(5,10,20,0.95); color: #93c5fd; border: 1px solid rgba(59,130,246,0.4); }
-#toast.t-warning { background: rgba(15,10,5,0.95); color: #fcd34d; border: 1px solid rgba(245,158,11,0.4); }
+#toast { position:fixed; bottom:80px; left:50%; transform:translateX(-50%); z-index:9999; max-width:360px; width:calc(100% - 2rem); padding:10px 16px; border-radius:var(--r-md); font-size:13px; line-height:1.5; font-family:'DM Sans',sans-serif; text-align:center; opacity:0; pointer-events:none; transition:opacity 0.25s; }
+#toast.show { opacity:1; pointer-events:auto; }
+[data-theme="dark"] #toast.t-error   { background:rgba(15,5,5,0.95); color:#fca5a5; border:1px solid rgba(239,68,68,0.4); }
+[data-theme="dark"] #toast.t-success { background:rgba(5,15,10,0.95); color:#6ee7b7; border:1px solid rgba(16,185,129,0.4); }
+[data-theme="dark"] #toast.t-info    { background:rgba(5,10,20,0.95); color:#93c5fd; border:1px solid rgba(59,130,246,0.4); }
+[data-theme="dark"] #toast.t-warning { background:rgba(15,10,5,0.95); color:#fcd34d; border:1px solid rgba(245,158,11,0.4); }
+[data-theme="light"] #toast.t-error   { background:#fff5f5; color:#c53030; border:1px solid rgba(239,68,68,0.3); box-shadow:var(--shadow-md); }
+[data-theme="light"] #toast.t-success { background:#f0fff4; color:#166534; border:1px solid rgba(16,185,129,0.3); box-shadow:var(--shadow-md); }
+[data-theme="light"] #toast.t-info    { background:#eff6ff; color:#1e40af; border:1px solid rgba(59,130,246,0.3); box-shadow:var(--shadow-md); }
+[data-theme="light"] #toast.t-warning { background:#fffbeb; color:#92400e; border:1px solid rgba(245,158,11,0.3); box-shadow:var(--shadow-md); }
 
 /* ═══════════════════════════════════════════
    AUTH SCREEN
 ═══════════════════════════════════════════ */
-#screen-auth {
-  align-items: center; justify-content: center;
-  padding: 1.5rem; overflow-y: auto;
-}
-
+#screen-auth { align-items:center; justify-content:center; padding:1.5rem; overflow-y:auto; }
 .auth-card {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: var(--r-xl);
-  padding: 2.25rem 2rem;
-  width: 100%; max-width: 420px;
-  z-index: 1;
-  box-shadow: var(--shadow-lg), var(--glow-teal);
-  animation: slideUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+  background:var(--auth-card-bg); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--border-base); border-radius:var(--r-xl); padding:2.25rem 2rem;
+  width:100%; max-width:420px; z-index:1;
+  box-shadow:var(--shadow-lg),var(--glow-teal);
+  animation:slideUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+  transition:background 0.3s, border-color 0.3s; position:relative;
 }
-@keyframes slideUp {
-  from { opacity:0; transform:translateY(22px); }
-  to   { opacity:1; transform:translateY(0); }
-}
+[data-theme="light"] .auth-card { box-shadow:0 8px 48px rgba(0,0,0,0.10),0 2px 8px rgba(0,0,0,0.05); }
+@keyframes slideUp { from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);} }
+.auth-theme-toggle { position:absolute; top:16px; right:16px; }
 
-.auth-logo {
-  display: flex; align-items: center; justify-content: center;
-  gap: 12px; margin-bottom: 6px;
-}
-.auth-logo-img {
-  width: 52px; height: 52px; border-radius: 14px;
-  object-fit: cover; border: 2px solid rgba(0,180,216,0.4);
-}
-.auth-logo-text .brand-main { font-size: 1.2rem; }
-.auth-logo-text .brand-sub  { font-size: 10px; }
+.auth-logo { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:6px; }
+.auth-logo-img { width:52px; height:52px; border-radius:14px; object-fit:cover; border:2px solid rgba(0,180,216,0.4); }
+.auth-logo-text .brand-main { font-size:1.2rem; }
+.auth-logo-text .brand-sub  { font-size:10px; }
+.auth-tagline { text-align:center; font-size:11px; color:var(--text-muted); margin-bottom:1.6rem; font-style:italic; letter-spacing:0.01em; }
 
-.auth-tagline {
-  text-align: center; font-size: 11px; color: var(--gray-400);
-  margin-bottom: 1.6rem; font-style: italic; letter-spacing: 0.01em;
-}
+.auth-tabs { display:flex; background:var(--bg-input); border-radius:var(--r-md); padding:4px; margin-bottom:1.4rem; gap:4px; border:1px solid var(--border-input); }
+.auth-tab { flex:1; padding:8px; border:none; background:transparent; border-radius:var(--r-sm); font-family:'Poppins',sans-serif; font-size:13px; font-weight:600; color:var(--text-secondary); cursor:pointer; transition:all 0.2s; }
+.auth-tab.active { background:var(--teal); color:#ffffff; box-shadow:0 2px 10px rgba(0,180,216,0.35); }
 
-.auth-tabs {
-  display: flex; background: rgba(255,255,255,0.06);
-  border-radius: var(--r-md); padding: 4px; margin-bottom: 1.4rem; gap: 4px;
-}
-.auth-tab {
-  flex: 1; padding: 8px; border: none; background: transparent;
-  border-radius: var(--r-sm); font-family: var(--fh); font-size: 13px;
-  font-weight: 600; color: var(--gray-400); cursor: pointer; transition: all 0.2s;
-}
-.auth-tab.active {
-  background: var(--teal); color: var(--navy-deep);
-  box-shadow: 0 2px 10px rgba(0,180,216,0.4);
-}
+.form-group { margin-bottom:0.9rem; }
+.form-label { display:block; font-size:10.5px; font-weight:700; color:var(--text-secondary); margin-bottom:5px; letter-spacing:0.06em; text-transform:uppercase; }
+.form-input { width:100%; padding:11px 13px; background:var(--bg-input); border:1.5px solid var(--border-input); border-radius:var(--r-md); font-family:'DM Sans',sans-serif; font-size:14px; color:var(--text-primary); outline:none; transition:all 0.2s; }
+.form-input::placeholder { color:var(--text-muted); }
+.form-input:focus { border-color:var(--teal); background:var(--bg-chip); box-shadow:0 0 0 3px rgba(0,180,216,0.12); }
+[data-theme="light"] .form-input { background:#ffffff; border-color:#d0dce8; }
+[data-theme="light"] .form-input:focus { background:#f0fbfe; }
 
-.form-group { margin-bottom: 0.9rem; }
-.form-label {
-  display: block; font-size: 10.5px; font-weight: 700; color: var(--gray-400);
-  margin-bottom: 5px; letter-spacing: 0.06em; text-transform: uppercase;
-}
-.form-input {
-  width: 100%; padding: 11px 13px;
-  background: rgba(255,255,255,0.06);
-  border: 1.5px solid rgba(255,255,255,0.11);
-  border-radius: var(--r-md);
-  font-family: var(--fb); font-size: 14px; color: var(--white);
-  outline: none; transition: all 0.2s;
-}
-.form-input::placeholder { color: rgba(255,255,255,0.22); }
-.form-input:focus {
-  border-color: var(--teal); background: rgba(0,180,216,0.07);
-  box-shadow: 0 0 0 3px rgba(0,180,216,0.14);
-}
+.btn-primary { width:100%; padding:13px; background:var(--teal); color:#ffffff; border:none; border-radius:var(--r-md); font-family:'Poppins',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:0.25rem; }
+.btn-primary:hover:not(:disabled) { background:var(--teal-dark); transform:translateY(-2px); box-shadow:0 6px 24px rgba(0,180,216,0.35); }
+.btn-primary:disabled { background:var(--bg-input); color:var(--text-muted); cursor:not-allowed; transform:none; }
+[data-theme="light"] .btn-primary:disabled { background:#e8edf2; }
 
-.btn-primary {
-  width: 100%; padding: 13px; background: var(--teal); color: var(--navy-deep);
-  border: none; border-radius: var(--r-md); font-family: var(--fh); font-size: 14px;
-  font-weight: 700; cursor: pointer; transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  margin-top: 0.25rem;
-}
-.btn-primary:hover:not(:disabled) {
-  background: var(--teal-dark); transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0,180,216,0.4);
-}
-.btn-primary:disabled {
-  background: rgba(255,255,255,0.08); color: var(--gray-600);
-  cursor: not-allowed; transform: none;
-}
-
-.auth-footer-links {
-  display: flex; justify-content: center; gap: 14px;
-  margin-top: 1.2rem; flex-wrap: wrap;
-}
-.auth-footer-links a {
-  font-size: 11px; color: var(--gray-600); text-decoration: none;
-  transition: color 0.15s;
-}
-.auth-footer-links a:hover { color: var(--teal); }
-
-.signup-legal {
-  font-size: 10.5px; color: var(--gray-600); text-align: center;
-  margin-top: 10px; line-height: 1.6;
-}
-.signup-legal a { color: var(--teal); text-decoration: none; }
-.signup-legal a:hover { text-decoration: underline; }
+.auth-footer-links { display:flex; justify-content:center; gap:14px; margin-top:1.2rem; flex-wrap:wrap; }
+.auth-footer-links a { font-size:11px; color:var(--text-muted); text-decoration:none; transition:color 0.15s; }
+.auth-footer-links a:hover { color:var(--teal); }
+.signup-legal { font-size:10.5px; color:var(--text-muted); text-align:center; margin-top:10px; line-height:1.6; }
+.signup-legal a { color:var(--teal); text-decoration:none; }
+.signup-legal a:hover { text-decoration:underline; }
 
 /* ═══════════════════════════════════════════
    SPINNER
 ═══════════════════════════════════════════ */
-.spinner {
-  display: inline-block; width: 14px; height: 14px;
-  border: 2px solid rgba(255,255,255,0.3); border-top-color: currentColor;
-  border-radius: 50%; animation: spin 0.65s linear infinite;
-  vertical-align: middle; margin-right: 4px;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { display:inline-block; width:14px; height:14px; border:2px solid rgba(255,255,255,0.3); border-top-color:currentColor; border-radius:50%; animation:spin 0.65s linear infinite; vertical-align:middle; margin-right:4px; }
+@keyframes spin { to { transform:rotate(360deg); } }
 
 /* ═══════════════════════════════════════════
-   PRODUCT SELECTION SCREEN
+   PAGE CONTENT (products / upload)
 ═══════════════════════════════════════════ */
-.page-content {
-  flex: 1; max-width: 1100px; margin: 0 auto;
-  padding: 1.75rem 1.25rem; width: 100%; overflow-y: auto;
-}
-.page-eyebrow {
-  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--teal); margin-bottom: 4px;
-}
-.page-title {
-  font-family: var(--fh); font-size: clamp(1.25rem, 3vw, 1.7rem);
-  font-weight: 800; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px;
-}
-.page-sub { font-size: 13.5px; color: var(--gray-400); margin-bottom: 1.75rem; }
+.page-content { flex:1; max-width:1100px; margin:0 auto; padding:1.75rem 1.25rem; width:100%; overflow-y:auto; }
+.page-eyebrow { font-size:10.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:4px; }
+.page-title   { font-family:'Poppins',sans-serif; font-size:clamp(1.25rem,3vw,1.7rem); font-weight:800; color:var(--text-primary); letter-spacing:-0.02em; margin-bottom:4px; }
+.page-sub     { font-size:13.5px; color:var(--text-secondary); margin-bottom:1.75rem; }
+.section-label { font-size:10.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-secondary); margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+.section-label::after { content:''; flex:1; height:1px; background:var(--border-soft); }
 
-.section-label {
-  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--gray-400); margin-bottom: 10px;
-  display: flex; align-items: center; gap: 10px;
-}
-.section-label::after { content:''; flex:1; height:1px; background:rgba(255,255,255,0.07); }
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
-  gap: 10px; margin-bottom: 1.75rem;
-}
-
-.product-card {
-  background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.09);
-  border-radius: var(--r-lg); padding: 16px; cursor: pointer;
-  transition: all 0.22s ease; position: relative; overflow: hidden;
-}
-.product-card.loading { pointer-events: none; opacity: 0.6; }
-.product-card:hover {
-  border-color: var(--teal); background: rgba(0,180,216,0.07);
-  transform: translateY(-3px); box-shadow: var(--shadow-md), var(--glow-teal);
-}
-.product-card-icon { font-size: 24px; margin-bottom: 9px; }
-.product-card-name {
-  font-family: var(--fh); font-size: 13px; font-weight: 700;
-  color: var(--white); margin-bottom: 7px; line-height: 1.3;
-}
-.product-card-badges { display: flex; gap: 4px; flex-wrap: wrap; }
-.badge { font-size: 9.5px; font-weight: 600; padding: 2px 7px; border-radius: var(--r-full); }
-.badge-pdf  { background: rgba(0,180,216,0.15); color: var(--teal); border: 1px solid rgba(0,180,216,0.3); }
-.badge-cards{ background: rgba(255,255,255,0.07); color: var(--gray-400); border: 1px solid rgba(255,255,255,0.11); }
-.badge-corp { background: rgba(245,158,11,0.15); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
+/* ═══════════════════════════════════════════
+   PRODUCT CARDS
+═══════════════════════════════════════════ */
+.products-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(195px,1fr)); gap:10px; margin-bottom:1.75rem; }
+.product-card { background:var(--prod-card-bg); border:1.5px solid var(--prod-card-border); border-radius:var(--r-lg); padding:16px; cursor:pointer; transition:all 0.22s ease; position:relative; overflow:hidden; box-shadow:var(--shadow-md); }
+[data-theme="light"] .product-card { box-shadow:0 1px 6px rgba(0,0,0,0.06); }
+.product-card.loading { pointer-events:none; opacity:0.6; }
+.product-card:hover { border-color:var(--teal); background:var(--card-hover-bg); transform:translateY(-3px); box-shadow:var(--shadow-md),var(--glow-teal); }
+[data-theme="light"] .product-card:hover { box-shadow:0 4px 20px rgba(0,180,216,0.12),0 1px 6px rgba(0,0,0,0.06); }
+.product-card-icon { font-size:24px; margin-bottom:9px; }
+.product-card-name { font-family:'Poppins',sans-serif; font-size:13px; font-weight:700; color:var(--text-primary); margin-bottom:7px; line-height:1.3; }
+.product-card-badges { display:flex; gap:4px; flex-wrap:wrap; }
+.badge { font-size:9.5px; font-weight:600; padding:2px 7px; border-radius:var(--r-full); }
+.badge-pdf   { background:rgba(0,180,216,0.12); color:var(--teal); border:1px solid rgba(0,180,216,0.25); }
+.badge-cards { background:var(--bg-input); color:var(--text-secondary); border:1px solid var(--border-input); }
+.badge-corp  { background:rgba(245,158,11,0.12); color:var(--warning); border:1px solid rgba(245,158,11,0.25); }
 
 /* ═══════════════════════════════════════════
    UPLOAD SCREEN
 ═══════════════════════════════════════════ */
-.upload-content {
-  flex: 1; max-width: 640px; margin: 0 auto;
-  padding: 1.75rem 1.25rem; width: 100%; overflow-y: auto;
-}
+.upload-content { flex:1; max-width:640px; margin:0 auto; padding:1.75rem 1.25rem; width:100%; overflow-y:auto; }
+.upload-badge { display:inline-flex; align-items:center; gap:7px; background:var(--bg-chip); border:1px solid rgba(0,180,216,0.25); padding:4px 13px; border-radius:var(--r-full); font-size:12px; font-weight:600; color:var(--teal); margin-bottom:1.4rem; }
+.upload-slots { margin-bottom:1.6rem; }
 
-.upload-badge {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(0,180,216,0.1); border: 1px solid rgba(0,180,216,0.25);
-  padding: 4px 13px; border-radius: var(--r-full);
-  font-size: 12px; font-weight: 600; color: var(--teal); margin-bottom: 1.4rem;
-}
+.upload-slot { background:var(--slot-bg); border:1.5px dashed var(--slot-border); border-radius:var(--r-lg); padding:14px 16px; margin-bottom:9px; display:flex; align-items:center; gap:13px; cursor:pointer; transition:all 0.2s ease; user-select:none; box-shadow:var(--shadow-md); }
+[data-theme="light"] .upload-slot { box-shadow:0 1px 4px rgba(0,0,0,0.05); }
+.upload-slot:hover:not(.slot-uploading) { border-color:var(--teal); background:var(--bg-chip); }
+.upload-slot.slot-done      { border-color:rgba(16,185,129,0.45); background:rgba(16,185,129,0.04); border-style:solid; }
+.upload-slot.slot-uploading { border-color:var(--teal); background:var(--bg-chip); cursor:wait; pointer-events:none; }
+.upload-slot.slot-error     { border-color:rgba(239,68,68,0.4); background:rgba(239,68,68,0.03); border-style:solid; }
 
-.upload-slots { margin-bottom: 1.6rem; }
+.slot-icon { width:40px; height:40px; border-radius:var(--r-md); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; background:var(--slot-icon-bg); }
+.slot-done .slot-icon      { background:rgba(16,185,129,0.12); }
+.slot-uploading .slot-icon { background:rgba(0,180,216,0.10); }
+.slot-error .slot-icon     { background:rgba(239,68,68,0.10); }
 
-.upload-slot {
-  background: rgba(255,255,255,0.04);
-  border: 1.5px dashed rgba(255,255,255,0.14);
-  border-radius: var(--r-lg); padding: 14px 16px; margin-bottom: 9px;
-  display: flex; align-items: center; gap: 13px;
-  cursor: pointer; transition: all 0.2s ease; user-select: none;
-}
-.upload-slot:hover:not(.slot-uploading) {
-  border-color: var(--teal); background: rgba(0,180,216,0.06);
-}
-.upload-slot.slot-done {
-  border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.05); border-style: solid;
-}
-.upload-slot.slot-uploading {
-  border-color: var(--teal); background: rgba(0,180,216,0.06);
-  cursor: wait; pointer-events: none;
-}
-.upload-slot.slot-error {
-  border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.04); border-style: solid;
-}
+.slot-info { flex:1; min-width:0; }
+.slot-label { font-family:'Poppins',sans-serif; font-size:13px; font-weight:700; color:var(--text-primary); margin-bottom:2px; }
+.slot-meta  { font-size:11px; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.slot-meta.ok  { color:var(--success); }
+.slot-meta.err { color:var(--error); white-space:normal; }
+.slot-badge { font-size:9.5px; font-weight:700; padding:2px 8px; border-radius:var(--r-full); flex-shrink:0; background:var(--bg-chip); color:var(--teal); border:1px solid rgba(0,180,216,0.3); }
 
-.slot-icon {
-  width: 40px; height: 40px; border-radius: var(--r-md);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0; background: rgba(255,255,255,0.06);
-}
-.slot-done  .slot-icon { background: rgba(16,185,129,0.14); }
-.slot-uploading .slot-icon { background: rgba(0,180,216,0.12); }
-.slot-error .slot-icon { background: rgba(239,68,68,0.12); }
+.progress-row { display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--text-secondary); margin-bottom:7px; }
+.progress-row strong { color:var(--text-primary); }
+.progress-bar { background:var(--bg-input); border-radius:var(--r-full); height:6px; overflow:hidden; margin-bottom:1.4rem; border:1px solid var(--border-soft); }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--teal),#48cae4); border-radius:var(--r-full); transition:width 0.4s ease; }
 
-.slot-info { flex: 1; min-width: 0; }
-.slot-label { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
-.slot-meta  { font-size: 11px; color: var(--gray-400); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.slot-meta.ok  { color: var(--success); }
-.slot-meta.err { color: #fca5a5; white-space: normal; }
+.btn-start { width:100%; padding:13px; background:var(--teal); color:#ffffff; border:none; border-radius:var(--r-md); font-family:'Poppins',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn-start:hover:not(:disabled) { background:var(--teal-dark); transform:translateY(-2px); box-shadow:0 6px 24px rgba(0,180,216,0.35); }
+.btn-start:disabled { background:var(--bg-input); color:var(--text-muted); cursor:not-allowed; transform:none; }
+[data-theme="light"] .btn-start:disabled { background:#e8edf2; }
 
-.slot-badge {
-  font-size: 9.5px; font-weight: 700; padding: 2px 8px;
-  border-radius: var(--r-full); flex-shrink: 0;
-  background: rgba(0,180,216,0.14); color: var(--teal); border: 1px solid rgba(0,180,216,0.3);
-}
-
-.progress-row {
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 13px; color: var(--gray-400); margin-bottom: 7px;
-}
-.progress-row strong { color: var(--white); }
-.progress-bar {
-  background: rgba(255,255,255,0.07); border-radius: var(--r-full);
-  height: 5px; overflow: hidden; margin-bottom: 1.4rem;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--teal), #48cae4);
-  border-radius: var(--r-full); transition: width 0.4s ease;
-}
-
-.btn-start {
-  width: 100%; padding: 13px; background: var(--teal); color: var(--navy-deep);
-  border: none; border-radius: var(--r-md); font-family: var(--fh); font-size: 14px;
-  font-weight: 700; cursor: pointer; transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.btn-start:hover:not(:disabled) {
-  background: var(--teal-dark); transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0,180,216,0.4);
-}
-.btn-start:disabled {
-  background: rgba(255,255,255,0.08); color: var(--gray-600);
-  cursor: not-allowed; transform: none;
-}
-
-.upload-note {
-  text-align: center; font-size: 10.5px; color: var(--gray-600);
-  margin-top: 0.9rem; line-height: 1.55;
-}
+.upload-note { text-align:center; font-size:10.5px; color:var(--text-muted); margin-top:0.9rem; line-height:1.55; }
 
 /* ═══════════════════════════════════════════
-   DASHBOARD LAYOUT
+   DASHBOARD
 ═══════════════════════════════════════════ */
-.dashboard-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
-.dashboard-body    { flex: 1; display: flex; overflow: hidden; min-height: 0; }
+.dashboard-wrapper { display:flex; flex-direction:column; height:100%; width:100%; }
+.dashboard-body    { flex:1; display:flex; overflow:hidden; min-height:0; }
 
-/* ── Sidebar (desktop) ── */
-.sidebar {
-  width: 234px; flex-shrink: 0;
-  background: rgba(6,14,26,0.94);
-  border-right: 1px solid rgba(255,255,255,0.07);
-  display: flex; flex-direction: column;
-  overflow-y: auto; overflow-x: hidden;
-}
+/* Sidebar */
+.sidebar { width:234px; flex-shrink:0; background:var(--bg-sidebar); border-right:1px solid var(--border-sb); display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden; transition:background 0.3s,border-color 0.3s; }
+[data-theme="light"] .sidebar { box-shadow:2px 0 8px rgba(0,0,0,0.04); }
 
-.sb-section { padding: 14px 13px 0; }
-.sb-product-tag {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--teal); margin-bottom: 3px;
-}
-.sb-product-name {
-  font-family: var(--fh); font-size: 13px; font-weight: 700;
-  color: var(--white); line-height: 1.35;
-}
-.sb-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 12px 13px 8px; }
-.sb-label {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em;
-  text-transform: uppercase; color: var(--gray-600); padding: 0 13px; margin-bottom: 3px;
-}
+.sb-section { padding:14px 13px 0; }
+.sb-product-tag  { font-size:9.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-brand); margin-bottom:3px; }
+.sb-product-name { font-family:'Poppins',sans-serif; font-size:13px; font-weight:700; color:var(--text-primary); line-height:1.35; }
+.sb-divider { height:1px; background:var(--border-soft); margin:12px 13px 8px; }
+.sb-label { font-size:9.5px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; color:var(--text-muted); padding:0 13px; margin-bottom:3px; }
 
-.card-btn {
-  width: 100%; display: flex; align-items: center; gap: 9px;
-  padding: 9px 13px; background: transparent; border: none;
-  color: var(--gray-400); font-family: var(--fb); font-size: 12.5px;
-  font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: left;
-}
-.card-btn:hover { background: rgba(255,255,255,0.05); color: var(--white); }
-.card-btn.active {
-  background: rgba(0,180,216,0.11); color: var(--teal);
-  border-right: 2px solid var(--teal); font-weight: 600;
-}
-.card-btn-icon {
-  width: 26px; height: 26px; border-radius: 7px;
-  background: rgba(255,255,255,0.06);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; flex-shrink: 0;
-}
-.card-btn.active .card-btn-icon { background: rgba(0,180,216,0.2); }
+.card-btn { width:100%; display:flex; align-items:center; gap:9px; padding:9px 13px; background:transparent; border:none; color:var(--text-secondary); font-family:'DM Sans',sans-serif; font-size:12.5px; font-weight:500; cursor:pointer; transition:all 0.15s; text-align:left; }
+.card-btn:hover  { background:var(--sb-hover-bg); color:var(--text-primary); }
+.card-btn.active { background:var(--sb-active-bg); color:var(--sb-active-color); border-right:2px solid var(--teal); font-weight:600; }
+.card-btn-icon   { width:26px; height:26px; border-radius:7px; background:var(--bg-input); display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; }
+.card-btn.active .card-btn-icon { background:rgba(0,180,216,0.15); }
 
-.usage-meter {
-  margin-top: auto; padding: 12px 13px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-.usage-label {
-  font-size: 10.5px; color: var(--gray-400); margin-bottom: 5px;
-  display: flex; justify-content: space-between;
-}
-.usage-bar { background: rgba(255,255,255,0.08); border-radius: var(--r-full); height: 4px; overflow: hidden; }
-.usage-fill { height: 100%; background: var(--teal); border-radius: var(--r-full); transition: width 0.4s; }
+.usage-meter { margin-top:auto; padding:12px 13px; border-top:1px solid var(--border-soft); }
+.usage-label { font-size:10.5px; color:var(--text-secondary); margin-bottom:5px; display:flex; justify-content:space-between; }
+.usage-bar  { background:var(--bg-input); border-radius:var(--r-full); height:4px; overflow:hidden; }
+.usage-fill { height:100%; background:var(--teal); border-radius:var(--r-full); transition:width 0.4s; }
 
-.sidebar-footer {
-  padding: 8px 13px 13px;
-  display: flex; gap: 10px; flex-wrap: wrap;
-}
-.sidebar-footer a {
-  font-size: 10px; color: var(--gray-600); text-decoration: none;
-  transition: color 0.15s;
-}
-.sidebar-footer a:hover { color: var(--teal); }
+.sidebar-footer { padding:8px 13px 13px; display:flex; gap:10px; flex-wrap:wrap; }
+.sidebar-footer a { font-size:10px; color:var(--text-muted); text-decoration:none; transition:color 0.15s; }
+.sidebar-footer a:hover { color:var(--teal); }
 
-/* ── Chat panel ── */
-.chat-panel {
-  flex: 1; display: flex; flex-direction: column;
-  overflow: hidden; min-width: 0; background: #080f1c;
-}
+/* Chat panel */
+.chat-panel { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; background:var(--bg-chatpanel); transition:background 0.3s; }
 
-.chat-topbar {
-  padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.07);
-  display: flex; align-items: center; gap: 10px;
-  background: rgba(6,14,26,0.85); flex-shrink: 0;
-}
-.ct-icon {
-  width: 34px; height: 34px; border-radius: 9px;
-  background: rgba(0,180,216,0.14); display: flex;
-  align-items: center; justify-content: center;
-  font-size: 16px; flex-shrink: 0; overflow: hidden;
-}
-.ct-icon img { width: 22px; height: 22px; object-fit: contain; border-radius: 4px; }
-.ct-title { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--white); }
-.ct-sub   { font-size: 10.5px; color: var(--gray-400); margin-top: 1px; }
-.ct-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.chat-topbar { padding:10px 16px; border-bottom:1px solid var(--border-soft); display:flex; align-items:center; gap:10px; background:var(--bg-topbar); flex-shrink:0; transition:background 0.3s,border-color 0.3s; }
+[data-theme="light"] .chat-topbar { box-shadow:0 1px 4px rgba(0,0,0,0.04); }
 
-.online-dot {
-  width: 7px; height: 7px; background: var(--success); border-radius: 50%;
-  animation: pulse-dot 2.2s infinite;
-}
-@keyframes pulse-dot {
-  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,0.4);}
-  50%{opacity:.7;box-shadow:0 0 0 5px rgba(16,185,129,0);}
-}
+.ct-icon { width:34px; height:34px; border-radius:9px; background:rgba(0,180,216,0.12); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; overflow:hidden; }
+.ct-icon img { width:22px; height:22px; object-fit:contain; border-radius:4px; }
+.ct-title { font-family:'Poppins',sans-serif; font-size:13px; font-weight:700; color:var(--text-primary); }
+.ct-sub   { font-size:10.5px; color:var(--text-secondary); margin-top:1px; }
+.ct-actions { margin-left:auto; display:flex; align-items:center; gap:8px; flex-shrink:0; }
 
-.feedback-btn {
-  font-size: 11px; color: var(--gray-600); background: none; border: none;
-  cursor: pointer; padding: 4px 6px; border-radius: var(--r-sm);
-  transition: all 0.15s; font-family: var(--fb);
-}
-.feedback-btn:hover { color: var(--teal); background: rgba(0,180,216,0.08); }
+.online-dot { width:7px; height:7px; background:var(--success); border-radius:50%; animation:pulse-dot 2.2s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,0.4);}50%{opacity:.7;box-shadow:0 0 0 5px rgba(16,185,129,0);} }
 
-/* ── Messages ── */
-.chat-messages {
-  flex: 1; overflow-y: auto; overflow-x: hidden;
-  padding: 16px; display: flex; flex-direction: column;
-  gap: 13px; min-height: 0;
-}
+.feedback-btn { font-size:11px; color:var(--text-muted); background:none; border:none; cursor:pointer; padding:4px 6px; border-radius:var(--r-sm); transition:all 0.15s; font-family:'DM Sans',sans-serif; }
+.feedback-btn:hover { color:var(--teal); background:var(--bg-chip); }
 
-.chat-welcome {
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: center; text-align: center; padding: 2.5rem 1.5rem;
-  color: var(--gray-600); flex: 1;
-}
-.chat-welcome-logo {
-  width: 72px; height: 72px; object-fit: contain; margin-bottom: 16px;
-  opacity: 0.7; border-radius: 16px;
-}
-.chat-welcome-title {
-  font-family: var(--fh); font-size: 1rem; font-weight: 700;
-  color: var(--gray-400); margin-bottom: 6px;
-}
-.chat-welcome-sub { font-size: 13px; max-width: 240px; line-height: 1.55; }
+/* Messages */
+.chat-messages { flex:1; overflow-y:auto; overflow-x:hidden; padding:16px; display:flex; flex-direction:column; gap:13px; min-height:0; }
 
-.msg { display: flex; gap: 8px; }
-.msg.user { flex-direction: row-reverse; }
+.chat-welcome { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:2.5rem 1.5rem; color:var(--text-muted); flex:1; }
+.chat-welcome-logo { width:72px; height:72px; object-fit:contain; margin-bottom:16px; opacity:0.65; border-radius:16px; }
+.chat-welcome-title { font-family:'Poppins',sans-serif; font-size:1rem; font-weight:700; color:var(--text-secondary); margin-bottom:6px; }
+.chat-welcome-sub { font-size:13px; max-width:240px; line-height:1.55; color:var(--text-muted); }
 
-.msg-avatar {
-  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700; overflow: hidden;
-}
-.msg-avatar.ai   { background: linear-gradient(135deg,var(--teal),#48cae4); }
-.msg-avatar.ai img { width: 18px; height: 18px; object-fit: contain; border-radius: 3px; }
-.msg-avatar.user { background: var(--navy-light); color: var(--white); font-size: 9px; }
+.msg { display:flex; gap:8px; }
+.msg.user { flex-direction:row-reverse; }
+.msg-avatar { width:28px; height:28px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; overflow:hidden; }
+.msg-avatar.ai   { background:linear-gradient(135deg,var(--teal),#48cae4); }
+.msg-avatar.ai img { width:18px; height:18px; object-fit:contain; border-radius:3px; }
+.msg-avatar.user { background:var(--teal); color:#ffffff; font-size:9px; }
+[data-theme="light"] .msg-avatar.user { background:#1a2535; }
 
-.msg-body { max-width: calc(100% - 40px); }
-.msg.user .msg-body { align-items: flex-end; display: flex; flex-direction: column; }
+.msg-body { max-width:calc(100% - 40px); }
+.msg.user .msg-body { align-items:flex-end; display:flex; flex-direction:column; }
+.msg-bubble { padding:9px 13px; border-radius:13px; font-size:13.5px; line-height:1.65; }
+.msg-bubble p { margin-bottom:6px; }
+.msg-bubble p:last-child { margin-bottom:0; }
+.msg.ai .msg-bubble   { background:var(--bubble-ai-bg); border:1px solid var(--bubble-ai-border); border-radius:4px 13px 13px 13px; color:var(--bubble-ai-color); }
+.msg.user .msg-bubble { background:linear-gradient(135deg,var(--teal-dark),var(--teal)); color:var(--bubble-user-color); border-radius:13px 4px 13px 13px; font-weight:500; }
+.msg-time { font-size:9.5px; color:var(--text-muted); margin-top:3px; padding:0 2px; }
 
-.msg-bubble {
-  padding: 9px 13px; border-radius: 13px;
-  font-size: 13.5px; line-height: 1.65;
-}
-.msg-bubble p { margin-bottom: 6px; }
-.msg-bubble p:last-child { margin-bottom: 0; }
-.msg.ai   .msg-bubble {
-  background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 4px 13px 13px 13px; color: rgba(255,255,255,0.91);
-}
-.msg.user .msg-bubble {
-  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
-  color: var(--navy-deep); border-radius: 13px 4px 13px 13px; font-weight: 500;
-}
-.msg-time { font-size: 9.5px; color: var(--gray-600); margin-top: 3px; padding: 0 2px; }
+.disclaimer { font-size:10.5px; color:var(--text-secondary); font-style:italic; margin-top:6px; padding:5px 9px; background:rgba(245,158,11,0.06); border-left:2px solid var(--warning); border-radius:0 4px 4px 0; }
 
-.disclaimer {
-  font-size: 10.5px; color: var(--gray-600); font-style: italic;
-  margin-top: 6px; padding: 5px 9px;
-  background: rgba(245,158,11,0.06); border-left: 2px solid var(--warning);
-  border-radius: 0 4px 4px 0;
-}
+.chips-row { display:flex; gap:5px; flex-wrap:wrap; margin-top:5px; }
+.chip { padding:4px 12px; border-radius:var(--r-full); font-size:11.5px; font-weight:500; cursor:pointer; border:1px solid rgba(0,180,216,0.35); background:var(--bg-chip); color:var(--teal); transition:all 0.15s; white-space:nowrap; }
+.chip:hover { background:var(--teal); color:#ffffff; border-color:var(--teal); transform:translateY(-1px); }
 
-.chips-row { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
-.chip {
-  padding: 4px 12px; border-radius: var(--r-full); font-size: 11.5px;
-  font-weight: 500; cursor: pointer;
-  border: 1px solid rgba(0,180,216,0.35); background: rgba(0,180,216,0.07);
-  color: var(--teal); transition: all 0.15s; white-space: nowrap;
-}
-.chip:hover {
-  background: var(--teal); color: var(--navy-deep);
-  border-color: var(--teal); transform: translateY(-1px);
-}
-
-.typing-indicator {
-  display: flex; align-items: center; gap: 4px; padding: 9px 13px;
-  background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 4px 13px 13px 13px; width: fit-content;
-}
-.typing-dot {
-  width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
-  animation: bounce-dot 1.2s infinite;
-}
+.typing-indicator { display:flex; align-items:center; gap:4px; padding:9px 13px; background:var(--bubble-ai-bg); border:1px solid var(--bubble-ai-border); border-radius:4px 13px 13px 13px; width:fit-content; }
+.typing-dot { width:5px; height:5px; border-radius:50%; background:var(--teal); animation:bounce-dot 1.2s infinite; }
 .typing-dot:nth-child(2){animation-delay:.2s;}
 .typing-dot:nth-child(3){animation-delay:.4s;}
-@keyframes bounce-dot {
-  0%,60%,100%{transform:translateY(0);opacity:.35;}
-  30%{transform:translateY(-5px);opacity:1;}
-}
+@keyframes bounce-dot { 0%,60%,100%{transform:translateY(0);opacity:.35;}30%{transform:translateY(-5px);opacity:1;} }
 
-/* ── Chat input ── */
-.chat-input-area {
-  flex-shrink: 0; border-top: 1px solid rgba(255,255,255,0.07);
-  padding: 10px 14px 12px; background: rgba(6,14,26,0.92);
-}
-.input-row { display: flex; gap: 8px; align-items: flex-end; }
+/* Input area */
+.chat-input-area { flex-shrink:0; border-top:1px solid var(--border-soft); padding:10px 14px 12px; background:var(--bg-inputarea); transition:background 0.3s,border-color 0.3s; }
+[data-theme="light"] .chat-input-area { box-shadow:0 -1px 6px rgba(0,0,0,0.04); }
+.input-row { display:flex; gap:8px; align-items:flex-end; }
+.chat-input { flex:1; background:var(--bg-input); border:1.5px solid var(--border-input); border-radius:var(--r-md); padding:10px 12px; font-family:'DM Sans',sans-serif; font-size:14px; color:var(--text-primary); resize:none; outline:none; min-height:42px; max-height:110px; transition:border-color 0.2s,background 0.2s; line-height:1.5; }
+.chat-input::placeholder { color:var(--text-muted); }
+.chat-input:focus { border-color:var(--teal); background:var(--bg-chip); }
+.chat-input:disabled { opacity:0.5; cursor:not-allowed; }
+[data-theme="light"] .chat-input { background:#ffffff; border-color:#d0dce8; }
+[data-theme="light"] .chat-input:focus { background:#f0fbfe; }
 
-.chat-input {
-  flex: 1; background: rgba(255,255,255,0.065);
-  border: 1.5px solid rgba(255,255,255,0.11); border-radius: var(--r-md);
-  padding: 10px 12px; font-family: var(--fb); font-size: 14px; color: var(--white);
-  resize: none; outline: none; min-height: 42px; max-height: 110px;
-  transition: border-color 0.2s; line-height: 1.5;
-}
-.chat-input::placeholder { color: rgba(255,255,255,0.22); }
-.chat-input:focus { border-color: var(--teal); background: rgba(0,180,216,0.06); }
-.chat-input:disabled { opacity: 0.4; cursor: not-allowed; }
+.send-btn { width:42px; height:42px; border-radius:var(--r-md); background:var(--teal); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#ffffff; font-size:17px; transition:all 0.2s; flex-shrink:0; }
+.send-btn:hover:not(:disabled) { background:var(--teal-dark); transform:scale(1.05); }
+.send-btn:disabled { background:var(--bg-input); cursor:not-allowed; color:var(--text-muted); }
+[data-theme="light"] .send-btn:disabled { background:#e8edf2; }
 
-.send-btn {
-  width: 42px; height: 42px; border-radius: var(--r-md); background: var(--teal);
-  border: none; cursor: pointer; display: flex; align-items: center;
-  justify-content: center; color: var(--navy-deep); font-size: 17px;
-  transition: all 0.2s; flex-shrink: 0;
-}
-.send-btn:hover:not(:disabled) { background: var(--teal-dark); transform: scale(1.05); }
-.send-btn:disabled { background: rgba(255,255,255,0.07); cursor: not-allowed; color: var(--gray-600); }
+.input-hint { font-size:10px; color:var(--text-muted); margin-top:5px; text-align:center; }
+.input-hint a { color:var(--text-muted); text-decoration:none; }
+.input-hint a:hover { color:var(--teal); }
 
-.input-hint { font-size: 10px; color: var(--gray-600); margin-top: 5px; text-align: center; }
-
-/* ── Animations ── */
-.fade-in { animation: fadeIn 0.26s ease forwards; }
+.fade-in { animation:fadeIn 0.26s ease forwards; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);} }
-
-/* ── Hidden file input ── */
-.hidden-file { display: none; }
+.hidden-file { display:none; }
 
 /* ═══════════════════════════════════════════
-   MOBILE CARD DRAWER  (replaces hidden sidebar on mobile)
-   A bottom drawer that slides up with the card list
+   MOBILE CARD BAR
 ═══════════════════════════════════════════ */
-.mobile-card-bar {
-  display: none; /* hidden on desktop */
-  flex-shrink: 0; height: var(--mob-drawer-h);
-  background: rgba(6,14,26,0.97);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  overflow-x: auto; overflow-y: hidden;
-  align-items: center; gap: 6px;
-  padding: 0 10px;
-  z-index: 10;
-}
-.mob-card-chip {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 7px 12px; border-radius: var(--r-full); flex-shrink: 0;
-  border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05);
-  color: var(--gray-400); font-family: var(--fb); font-size: 12px;
-  font-weight: 500; cursor: pointer; transition: all 0.18s; white-space: nowrap;
-}
-.mob-card-chip:hover { background: rgba(255,255,255,0.1); color: var(--white); }
-.mob-card-chip.active {
-  background: rgba(0,180,216,0.18); border-color: var(--teal);
-  color: var(--teal); font-weight: 600;
-}
-.mob-card-chip-icon { font-size: 13px; }
+.mobile-card-bar { display:none; flex-shrink:0; height:var(--mob-drawer-h); background:var(--bg-mobbar); border-top:1px solid var(--border-soft); overflow-x:auto; overflow-y:hidden; align-items:center; gap:6px; padding:0 10px; z-index:10; transition:background 0.3s; }
+[data-theme="light"] .mobile-card-bar { box-shadow:0 -1px 4px rgba(0,0,0,0.04); }
+.mob-card-chip { display:inline-flex; align-items:center; gap:5px; padding:7px 12px; border-radius:var(--r-full); flex-shrink:0; border:1px solid var(--border-input); background:var(--bg-input); color:var(--text-secondary); font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500; cursor:pointer; transition:all 0.18s; white-space:nowrap; }
+.mob-card-chip:hover  { background:var(--bg-chip); color:var(--text-primary); }
+.mob-card-chip.active { background:var(--sb-active-bg); border-color:var(--teal); color:var(--sb-active-color); font-weight:600; }
+.mob-card-chip-icon { font-size:13px; }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
+   FEEDBACK MODAL
 ═══════════════════════════════════════════ */
+.fb-overlay { position:fixed; inset:0; z-index:9000; background:rgba(0,0,0,0.5); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:1.5rem; }
+.fb-box { background:var(--bg-mid); border:1px solid var(--border-base); border-radius:20px; padding:2rem; max-width:400px; width:100%; box-shadow:var(--shadow-lg); animation:slideUp 0.3s cubic-bezier(0.16,1,0.3,1) forwards; transition:background 0.3s; }
+[data-theme="light"] .fb-box { box-shadow:0 16px 48px rgba(0,0,0,0.10); }
+.fb-title { font-family:'Poppins',sans-serif; font-size:16px; font-weight:700; margin-bottom:6px; color:var(--text-primary); }
+.fb-sub { font-size:12px; color:var(--text-secondary); margin-bottom:1.2rem; line-height:1.5; }
+.fb-textarea { width:100%; padding:10px 12px; background:var(--bg-input); border:1.5px solid var(--border-input); border-radius:var(--r-md); font-family:'DM Sans',sans-serif; font-size:13px; color:var(--text-primary); resize:none; outline:none; margin-bottom:10px; transition:border-color 0.2s; }
+[data-theme="light"] .fb-textarea { background:#ffffff; border-color:#d0dce8; }
+.fb-textarea:focus { border-color:var(--teal); }
+.fb-actions { display:flex; gap:8px; }
+.btn-teal    { flex:1; padding:10px; background:var(--teal); color:#ffffff; border:none; border-radius:var(--r-md); font-family:'Poppins',sans-serif; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s; }
+.btn-teal:hover { background:var(--teal-dark); }
+.btn-outline { padding:10px 16px; background:var(--bg-input); border:1px solid var(--border-input); border-radius:var(--r-md); color:var(--text-secondary); font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; transition:all 0.2s; }
+.btn-outline:hover { border-color:var(--teal); color:var(--teal); }
+.fb-foot { margin-top:10px; font-size:11px; color:var(--text-muted); text-align:center; }
+.fb-foot a { color:var(--teal); }
 
-/* Tablet */
-@media (max-width: 768px) {
-  :root { --nav-h: 52px; }
-
-  .navbar { padding: 0 1rem; gap: 6px; }
-  .brand-main { font-size: 12px; }
-  .navbar-user { display: none; } /* hide "Welcome, Name" — too cramped */
-  .btn-secondary { padding: 5px 10px; font-size: 11px; }
-
-  .sidebar { display: none; } /* hidden — replaced by mobile-card-bar */
-  .mobile-card-bar { display: flex; }
-
-  /* Dashboard: chat fills screen, card bar is at bottom */
-  .dashboard-body { flex-direction: column; }
-  .chat-panel { flex: 1; min-height: 0; }
-
-  /* Reorder: chat messages, then input, then card bar at very bottom */
-  #screen-dashboard .dashboard-wrapper {
-    display: flex; flex-direction: column;
-  }
-  #screen-dashboard .dashboard-body {
-    flex: 1; min-height: 0; overflow: hidden;
-  }
-
-  .products-grid { grid-template-columns: repeat(2, 1fr); }
-  .page-content  { padding: 1.25rem 1rem; }
-  .upload-content{ padding: 1.25rem 1rem; }
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width:768px) {
+  :root { --nav-h:52px; }
+  .navbar { padding:0 1rem; gap:6px; }
+  .brand-main { font-size:12px; }
+  .navbar-user { display:none; }
+  .btn-secondary { padding:5px 10px; font-size:11px; }
+  .sidebar { display:none; }
+  .mobile-card-bar { display:flex; }
+  .dashboard-body { flex-direction:column; }
+  .chat-panel { flex:1; min-height:0; }
+  .products-grid { grid-template-columns:repeat(2,1fr); }
+  .page-content  { padding:1.25rem 1rem; }
+  .upload-content{ padding:1.25rem 1rem; }
 }
-
-/* Mobile */
-@media (max-width: 480px) {
-  .brand-main { font-size: 11.5px; }
-  .brand-sub  { font-size: 9px; }
-  .navbar-logo { width: 28px; height: 28px; }
-
-  .products-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .product-card  { padding: 12px; }
-  .product-card-icon { font-size: 20px; margin-bottom: 7px; }
-  .product-card-name { font-size: 12px; }
-
-  .auth-card { padding: 1.75rem 1.25rem; }
-  .auth-logo-img { width: 44px; height: 44px; }
-  .auth-logo-text .brand-main { font-size: 1rem; }
-
-  .chat-input-area { padding: 8px 10px 10px; }
-  .chat-messages   { padding: 12px 10px; gap: 10px; }
-  .msg-bubble { font-size: 13px; }
-
-  .mob-card-chip { padding: 6px 10px; font-size: 11.5px; }
+@media (max-width:480px) {
+  .brand-main { font-size:11.5px; } .brand-sub { font-size:9px; } .navbar-logo { width:28px; height:28px; }
+  .products-grid { grid-template-columns:1fr 1fr; gap:8px; }
+  .product-card { padding:12px; } .product-card-icon { font-size:20px; margin-bottom:7px; } .product-card-name { font-size:12px; }
+  .auth-card { padding:1.75rem 1.25rem; } .auth-logo-img { width:44px; height:44px; } .auth-logo-text .brand-main { font-size:1rem; }
+  .chat-input-area { padding:8px 10px 10px; } .chat-messages { padding:12px 10px; gap:10px; } .msg-bubble { font-size:13px; }
+  .mob-card-chip { padding:6px 10px; font-size:11.5px; }
 }
-
-/* Very small phones */
-@media (max-width: 360px) {
-  .products-grid { grid-template-columns: 1fr; }
-  .brand-main { display: none; } /* just show logo on tiny phones */
-}
+@media (max-width:360px) { .products-grid { grid-template-columns:1fr; } .brand-main { display:none; } }
 </style>
 </head>
 <body>
 <div class="bg-mesh"></div>
-
-<!-- ═══════════════════════ TOAST ═══════════════════════ -->
 <div id="toast"></div>
 
-<!-- ═══════════════════════════════════════════════════
-     SCREEN 1 — AUTH
-════════════════════════════════════════════════════ -->
+<!-- ══════════ SCREEN 1 — AUTH ══════════ -->
 <div id="screen-auth" class="screen active">
   <div class="auth-card">
-
+    <button class="theme-toggle auth-theme-toggle" onclick="toggleTheme()" title="Toggle theme" id="auth-toggle-btn">☀️</button>
     <div class="auth-logo">
-      <img src="assets/bishop_BC.png" class="auth-logo-img" alt="Bishop Brain Checker"
-           onerror="this.style.display='none'">
+      <img src="assets/bishop_BC.png" class="auth-logo-img" alt="Bishop" onerror="this.style.display='none'">
       <div class="auth-logo-text">
         <div class="brand-main">Bishop by Brain Checker</div>
         <div class="brand-sub">Post-Counseling AI System</div>
       </div>
     </div>
-
     <div class="auth-tagline">Decoding Brain Power, Unleashing Opportunities</div>
-
     <div class="auth-tabs">
       <button class="auth-tab active" onclick="switchTab('login')">Login</button>
       <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
     </div>
-
     <div id="auth-alert" class="alert"></div>
-
-    <!-- Login form -->
     <div id="login-form">
       <div class="form-group">
         <label class="form-label">Email</label>
-        <input class="form-input" id="login-email" type="email"
-               placeholder="you@example.com" autocomplete="email">
+        <input class="form-input" id="login-email" type="email" placeholder="you@example.com" autocomplete="email">
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
-        <input class="form-input" id="login-pass" type="password"
-               placeholder="Your password" autocomplete="current-password"
+        <input class="form-input" id="login-pass" type="password" placeholder="Your password" autocomplete="current-password"
                onkeydown="if(event.key==='Enter') doLogin()">
       </div>
-      <button class="btn-primary" id="btn-login" onclick="doLogin()">
-        Login to Bishop
-      </button>
+      <button class="btn-primary" id="btn-login" onclick="doLogin()">Login to Bishop</button>
     </div>
-
-    <!-- Signup form -->
     <div id="signup-form" style="display:none;">
       <div class="form-group">
         <label class="form-label">Full Name</label>
-        <input class="form-input" id="su-name" type="text"
-               placeholder="Your full name" autocomplete="name">
+        <input class="form-input" id="su-name" type="text" placeholder="Your full name" autocomplete="name">
       </div>
       <div class="form-group">
         <label class="form-label">Email</label>
-        <input class="form-input" id="su-email" type="email"
-               placeholder="you@example.com" autocomplete="email">
+        <input class="form-input" id="su-email" type="email" placeholder="you@example.com" autocomplete="email">
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
-        <input class="form-input" id="su-pass" type="password"
-               placeholder="Min. 8 characters" autocomplete="new-password"
+        <input class="form-input" id="su-pass" type="password" placeholder="Min. 8 characters" autocomplete="new-password"
                onkeydown="if(event.key==='Enter') doSignup()">
       </div>
-      <button class="btn-primary" id="btn-signup" onclick="doSignup()">
-        Create Account
-      </button>
+      <button class="btn-primary" id="btn-signup" onclick="doSignup()">Create Account</button>
       <div class="signup-legal">
         By creating an account you agree to our
         <a href="/terms" target="_blank">Terms of Service</a> and
         <a href="/privacy" target="_blank">Privacy Policy</a>.
       </div>
     </div>
-
     <div class="auth-footer-links">
       <a href="/privacy" target="_blank">Privacy Policy</a>
-      <a href="/terms"   target="_blank">Terms of Service</a>
+      <a href="/terms" target="_blank">Terms of Service</a>
       <a href="mailto:support@brainchecker.in">Support</a>
     </div>
-
   </div>
 </div>
 
-
-<!-- ═══════════════════════════════════════════════════
-     SCREEN 2 — PRODUCT SELECTION
-════════════════════════════════════════════════════ -->
+<!-- ══════════ SCREEN 2 — PRODUCTS ══════════ -->
 <div id="screen-products" class="screen">
   <nav class="navbar">
     <div class="navbar-brand">
-      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC"
-           onerror="this.style.display='none'">
-      <div class="brand-text">
-        <div class="brand-main">Bishop by Brain Checker</div>
-        <div class="brand-sub">Post-Counseling AI</div>
-      </div>
+      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
+      <div class="brand-text"><div class="brand-main">Bishop by Brain Checker</div><div class="brand-sub">Post-Counseling AI</div></div>
     </div>
     <div class="navbar-right">
       <div class="navbar-user">Welcome, <strong id="nav-user-name">User</strong></div>
+      <button class="theme-toggle" onclick="toggleTheme()" id="prod-toggle-btn" title="Toggle theme">☀️</button>
       <button class="btn-logout" onclick="doLogout()">Logout</button>
     </div>
   </nav>
-
   <div class="page-content">
     <div class="page-eyebrow">Step 1 of 3</div>
     <div class="page-title">Choose Your Assessment</div>
     <div class="page-sub">Select the Brain Checker product your counselling session used.</div>
-
-    <div id="prod-loading" style="color:var(--gray-400);font-size:13px;padding:1rem 0;">
+    <div id="prod-loading" style="color:var(--text-secondary);font-size:13px;padding:1rem 0;">
       <span class="spinner" style="border-top-color:var(--teal);"></span> Loading products…
     </div>
-
     <div id="prod-student" style="display:none;">
       <div class="section-label">For Students &amp; Parents</div>
       <div class="products-grid" id="grid-student"></div>
@@ -885,77 +575,50 @@ body {
   </div>
 </div>
 
-
-<!-- ═══════════════════════════════════════════════════
-     SCREEN 3 — PDF UPLOAD
-════════════════════════════════════════════════════ -->
+<!-- ══════════ SCREEN 3 — UPLOAD ══════════ -->
 <div id="screen-upload" class="screen">
   <nav class="navbar">
     <div class="navbar-brand">
-      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC"
-           onerror="this.style.display='none'">
-      <div class="brand-text">
-        <div class="brand-main">Bishop by Brain Checker</div>
-        <div class="brand-sub">Post-Counseling AI</div>
-      </div>
+      <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
+      <div class="brand-text"><div class="brand-main">Bishop by Brain Checker</div><div class="brand-sub">Post-Counseling AI</div></div>
     </div>
     <div class="navbar-right">
       <button class="btn-secondary" onclick="goTo('screen-products')">← Change</button>
+      <button class="theme-toggle" onclick="toggleTheme()" id="up-toggle-btn" title="Toggle theme">☀️</button>
       <button class="btn-logout" onclick="doLogout()">Logout</button>
     </div>
   </nav>
-
   <div class="upload-content">
     <div class="page-eyebrow">Step 2 of 3</div>
     <div class="page-title" id="up-title">Upload Your Reports</div>
     <div class="page-sub" id="up-sub">Upload required PDFs to unlock AI analysis.</div>
     <div class="upload-badge" id="up-badge">📋 Product</div>
     <div class="upload-slots" id="up-slots"></div>
-
     <div class="progress-row">
       <span>Upload progress</span>
       <strong id="up-count">0 of 0 required</strong>
     </div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="up-fill" style="width:0%"></div>
-    </div>
-
-    <button class="btn-start" id="btn-start" onclick="goToDashboard()" disabled>
-      🔒 Upload required reports to continue
-    </button>
-    <div class="upload-note">
-      PDFs are processed in memory — never stored as files on our servers.
-      Only text embeddings are saved to power your AI session.
-    </div>
+    <div class="progress-bar"><div class="progress-fill" id="up-fill" style="width:0%"></div></div>
+    <button class="btn-start" id="btn-start" onclick="goToDashboard()" disabled>🔒 Upload required reports to continue</button>
+    <div class="upload-note">PDFs are processed in memory — never stored as files on our servers. Only text embeddings are saved to power your AI session.</div>
   </div>
 </div>
 
-
-<!-- ═══════════════════════════════════════════════════
-     SCREEN 4 — DASHBOARD / CHAT
-════════════════════════════════════════════════════ -->
+<!-- ══════════ SCREEN 4 — DASHBOARD ══════════ -->
 <div id="screen-dashboard" class="screen">
   <div class="dashboard-wrapper">
-
-    <!-- Shared navbar -->
     <nav class="navbar">
       <div class="navbar-brand">
-        <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC"
-             onerror="this.style.display='none'">
-        <div class="brand-text">
-          <div class="brand-main">Bishop by Brain Checker</div>
-          <div class="brand-sub">Post-Counseling AI</div>
-        </div>
+        <img src="assets/bishop_BC.png" class="navbar-logo" alt="BC" onerror="this.style.display='none'">
+        <div class="brand-text"><div class="brand-main">Bishop by Brain Checker</div><div class="brand-sub">Post-Counseling AI</div></div>
       </div>
       <div class="navbar-right">
         <div class="navbar-user">Hi, <strong id="dash-user-name">User</strong></div>
+        <button class="theme-toggle" onclick="toggleTheme()" id="dash-toggle-btn" title="Toggle theme">☀️</button>
         <button class="btn-logout" onclick="doLogout()">Logout</button>
       </div>
     </nav>
-
     <div class="dashboard-body">
-
-      <!-- ── SIDEBAR (desktop only) ── -->
       <div class="sidebar">
         <div class="sb-section">
           <div class="sb-product-tag">Active Product</div>
@@ -964,973 +627,439 @@ body {
         <div class="sb-divider"></div>
         <div class="sb-label">Analysis Cards</div>
         <div id="card-btns"></div>
-
         <div class="usage-meter">
-          <div class="usage-label">
-            <span>Questions used</span>
-            <span id="usage-count">—</span>
-          </div>
-          <div class="usage-bar">
-            <div class="usage-fill" id="usage-fill" style="width:0%"></div>
-          </div>
+          <div class="usage-label"><span>Questions used</span><span id="usage-count">—</span></div>
+          <div class="usage-bar"><div class="usage-fill" id="usage-fill" style="width:0%"></div></div>
         </div>
-
         <div class="sidebar-footer">
           <a href="/privacy" target="_blank">Privacy</a>
-          <a href="/terms"   target="_blank">Terms</a>
+          <a href="/terms" target="_blank">Terms</a>
           <a href="mailto:support@brainchecker.in">Support</a>
-          <a href="#" onclick="openFeedback(); return false;">Feedback</a>
+          <a href="#" onclick="openFeedback();return false;">Feedback</a>
         </div>
       </div>
-
-      <!-- ── CHAT PANEL ── -->
       <div class="chat-panel">
-
-        <!-- Chat topbar -->
         <div class="chat-topbar">
-          <div class="ct-icon" id="ct-icon">
-            <img src="assets/bishop_BC.png" alt="Bishop" id="ct-icon-img">
-          </div>
+          <div class="ct-icon"><img src="assets/bishop_BC.png" alt="Bishop" id="ct-icon-img"></div>
           <div>
             <div class="ct-title" id="ct-title">Bishop AI Assistant</div>
-            <div class="ct-sub"   id="ct-sub">Select a card to begin</div>
+            <div class="ct-sub" id="ct-sub">Select a card to begin</div>
           </div>
           <div class="ct-actions">
-            <button class="feedback-btn" onclick="openFeedback()" title="Send feedback">
-              💬 Feedback
-            </button>
+            <button class="feedback-btn" onclick="openFeedback()">💬 Feedback</button>
             <div class="online-dot" title="AI Online"></div>
           </div>
         </div>
-
-        <!-- Messages area -->
         <div class="chat-messages" id="chat-messages">
           <div class="chat-welcome" id="chat-welcome">
-            <img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop"
-                 onerror="this.style.display='none'">
+            <img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop" onerror="this.style.display='none'">
             <div class="chat-welcome-title">Your reports are loaded</div>
             <div class="chat-welcome-sub">Select an analysis card to start chatting with Bishop.</div>
           </div>
         </div>
-
-        <!-- Input area -->
         <div class="chat-input-area">
           <div class="input-row">
-            <textarea class="chat-input" id="chat-input"
-                      placeholder="Select a card to start…" rows="1"
-                      disabled
-                      onkeydown="handleKey(event)"
-                      oninput="autoResize(this)"></textarea>
+            <textarea class="chat-input" id="chat-input" placeholder="Select a card to start…" rows="1"
+                      disabled onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
             <button class="send-btn" id="send-btn" onclick="sendMessage()" disabled>➤</button>
           </div>
           <div class="input-hint">
             Powered by Bishop · Brain Checker AI &nbsp;·&nbsp;
-            <a href="/privacy" target="_blank" style="color:var(--gray-600);text-decoration:none;">Privacy</a> &nbsp;·&nbsp;
-            <a href="/terms"   target="_blank" style="color:var(--gray-600);text-decoration:none;">Terms</a>
+            <a href="/privacy" target="_blank">Privacy</a> &nbsp;·&nbsp;
+            <a href="/terms" target="_blank">Terms</a>
           </div>
         </div>
-
-      </div><!-- /chat-panel -->
-    </div><!-- /dashboard-body -->
-
-    <!-- ── MOBILE CARD BAR (visible only on mobile, below chat) ── -->
+      </div>
+    </div>
     <div class="mobile-card-bar" id="mobile-card-bar"></div>
-
-  </div><!-- /dashboard-wrapper -->
-</div><!-- /screen-dashboard -->
-
-
-<!-- ═══════════════════════════════════════════════════
-     FEEDBACK MODAL
-════════════════════════════════════════════════════ -->
-<div id="feedback-modal" style="
-  display:none; position:fixed; inset:0; z-index:9000;
-  background:rgba(0,0,0,0.7); backdrop-filter:blur(6px);
-  align-items:center; justify-content:center; padding:1.5rem;
-">
-  <div style="
-    background:#0d1e34; border:1px solid rgba(255,255,255,0.12);
-    border-radius:20px; padding:2rem; max-width:400px; width:100%;
-    box-shadow:0 20px 60px rgba(0,0,0,0.5);
-    animation: slideUp 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
-  ">
-    <div style="font-family:var(--fh);font-size:16px;font-weight:700;margin-bottom:6px;">
-      💬 Send Feedback
-    </div>
-    <div style="font-size:12px;color:var(--gray-400);margin-bottom:1.2rem;line-height:1.5;">
-      Tell us what's working, what's broken, or how we can improve Bishop.
-    </div>
-    <textarea id="feedback-text" rows="4" style="
-      width:100%;padding:10px 12px;background:rgba(255,255,255,0.07);
-      border:1.5px solid rgba(255,255,255,0.12);border-radius:var(--r-md);
-      font-family:var(--fb);font-size:13px;color:var(--white);
-      resize:none;outline:none;margin-bottom:10px;
-    " placeholder="Your feedback…"></textarea>
-    <div style="display:flex;gap:8px;">
-      <button onclick="submitFeedback()" style="
-        flex:1;padding:10px;background:var(--teal);color:var(--navy-deep);
-        border:none;border-radius:var(--r-md);font-family:var(--fh);font-size:13px;
-        font-weight:700;cursor:pointer;transition:all 0.2s;
-      ">Send Feedback</button>
-      <button onclick="closeFeedback()" style="
-        padding:10px 16px;background:rgba(255,255,255,0.07);
-        border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-md);
-        color:var(--gray-400);font-family:var(--fb);font-size:13px;cursor:pointer;
-      ">Cancel</button>
-    </div>
-    <div style="margin-top:10px;font-size:11px;color:var(--gray-600);text-align:center;">
-      Or email us: <a href="mailto:support@brainchecker.in" style="color:var(--teal);">support@brainchecker.in</a>
-    </div>
   </div>
 </div>
 
+<!-- ══════════ FEEDBACK MODAL ══════════ -->
+<div id="feedback-modal" style="display:none;" class="fb-overlay">
+  <div class="fb-box">
+    <div class="fb-title">💬 Send Feedback</div>
+    <div class="fb-sub">Tell us what's working, what's broken, or how we can improve Bishop.</div>
+    <textarea id="feedback-text" rows="4" class="fb-textarea" placeholder="Your feedback…"></textarea>
+    <div class="fb-actions">
+      <button class="btn-teal" onclick="submitFeedback()">Send Feedback</button>
+      <button class="btn-outline" onclick="closeFeedback()">Cancel</button>
+    </div>
+    <div class="fb-foot">Or email us: <a href="mailto:support@brainchecker.in">support@brainchecker.in</a></div>
+  </div>
+</div>
 
 <script>
-/* ═══════════════════════════════════════════
-   STATE
-═══════════════════════════════════════════ */
-const S = {
-  token: null, user: null, sessionId: null, product: null,
-  card: null, history: [], uploadDone: {}, isTyping: false
-};
+/* ══════════ THEME ══════════ */
+const THEME_KEY = 'bc_theme';
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem(THEME_KEY, theme);
+  const icon = theme === 'dark' ? '☀️' : '🌙';
+  document.querySelectorAll('.theme-toggle').forEach(b => b.textContent = icon);
+}
+function toggleTheme() {
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+}
+applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+
+/* ══════════ STATE ══════════ */
+const S = { token:null, user:null, sessionId:null, product:null, card:null, history:[], uploadDone:{}, isTyping:false };
 const LIMIT = 40;
 const BASE = 'https://bishop-brainchecker-di7m.onrender.com';
-   
-/* ═══════════════════════════════════════════
-   MAPS
-═══════════════════════════════════════════ */
-const PROD_ICONS = {
-  dmit:'🧬', career_combo:'🎯', psychometric:'🧩', polaris:'🏢',
-  polaris_combo:'🔗', best:'⚙️', best_combo:'🔬', tycoon:'🚀',
-  tycoon_combo:'💡', hiring:'👔', hiring_comparison:'⚖️'
-};
 
-const CARD_ICONS = {
-  understand_report:'📄', career_roadmap:'🗺️', college_finder:'🎓',
-  action_plan:'📅', parent_guide:'👨‍👩‍👧', profile_insights:'🔍',
-  strengths_weaknesses:'💪', learning_style:'📖', career_growth:'📈',
-  skill_gap:'🔧', workplace_behavior:'🏢', skill_development:'⚙️',
-  personality_insights:'🧬', engineering_branch:'🏗️', skill_requirements:'📋',
-  career_path:'🚀', engineering_specialization:'🔬', entrepreneur_profile:'💡',
-  business_skills:'💼', real_world_application:'🌍', entrepreneur_path:'🛣️',
-  candidate_evaluation:'🔎', job_fit:'🎯', strengths_gaps:'📊',
-  hiring_recommendation:'✅', candidate_comparison:'⚖️',
-  ranking_dashboard:'🏆', strength_comparison:'💪', final_recommendation:'📣'
-};
+/* ══════════ MAPS ══════════ */
+const PROD_ICONS = { dmit:'🧬',career_combo:'🎯',psychometric:'🧩',polaris:'🏢',polaris_combo:'🔗',best:'⚙️',best_combo:'🔬',tycoon:'🚀',tycoon_combo:'💡',hiring:'👔',hiring_comparison:'⚖️' };
+const CARD_ICONS = { understand_report:'📄',career_roadmap:'🗺️',college_finder:'🎓',action_plan:'📅',parent_guide:'👨‍👩‍👧',profile_insights:'🔍',strengths_weaknesses:'💪',learning_style:'📖',career_growth:'📈',skill_gap:'🔧',workplace_behavior:'🏢',skill_development:'⚙️',personality_insights:'🧬',engineering_branch:'🏗️',skill_requirements:'📋',career_path:'🚀',engineering_specialization:'🔬',entrepreneur_profile:'💡',business_skills:'💼',real_world_application:'🌍',entrepreneur_path:'🛣️',candidate_evaluation:'🔎',job_fit:'🎯',strengths_gaps:'📊',hiring_recommendation:'✅',candidate_comparison:'⚖️',ranking_dashboard:'🏆',strength_comparison:'💪',final_recommendation:'📣' };
+const CARD_LABELS = { understand_report:'Understand Report',career_roadmap:'Career Roadmap',college_finder:'College Finder',action_plan:'Action Plan',parent_guide:'Parent Guide',profile_insights:'Profile Insights',strengths_weaknesses:'Strengths & Weaknesses',learning_style:'Learning Style',career_growth:'Career Growth Plan',skill_gap:'Skill Gap Analysis',workplace_behavior:'Workplace Behavior',skill_development:'Skill Development',personality_insights:'Personality Insights',engineering_branch:'Engineering Branch',skill_requirements:'Skill Requirements',career_path:'Career Path',engineering_specialization:'Engineering Specialization',entrepreneur_profile:'Entrepreneur Profile',business_skills:'Business Skills',real_world_application:'Real-World Application',entrepreneur_path:'Entrepreneur Path',candidate_evaluation:'Candidate Evaluation',job_fit:'Job Fit Analysis',strengths_gaps:'Strengths & Gaps',hiring_recommendation:'Hiring Recommendation',candidate_comparison:'Candidate Comparison',ranking_dashboard:'Ranking Dashboard',strength_comparison:'Strength Comparison',final_recommendation:'Final Recommendation' };
+const CARD_CHIPS = { understand_report:['Explain IQ Score','RIASEC overview','Top strengths','Recommended stream','Personality traits'],career_roadmap:['Science → Engineering','Commerce path','Arts path','After 10th options','Entrance exams'],college_finder:['Government colleges','Private colleges','State CETs','Budget options','Backup colleges'],action_plan:['30-day plan','60-day milestones','Weekly schedule','Parent support tips'],parent_guide:['How child learns','Motivation tips','Mistakes to avoid','Communication tips'],profile_insights:['Combined analysis','DMIT vs Psychometric','Key patterns','Career alignment'],strengths_weaknesses:['Top strengths','Areas to improve','Leverage strengths','Improvement plan'],learning_style:['Study tips','Parent support','Best methods'],career_growth:['1-year plan','3-year plan','Skills to develop','Certifications'],skill_gap:['Current vs target','How to close gaps','Training options'],workplace_behavior:['Communication style','Leadership approach','Team dynamics'],engineering_branch:['Best branch for me','JEE tips','Top colleges'],entrepreneur_profile:['My business style','Risk appetite','Innovation score'],candidate_evaluation:['Key strengths','Areas of concern','Full evaluation'],job_fit:['Fit score','Technical match','Soft skills'],hiring_recommendation:['Hire decision','Conditions','Onboarding plan'],candidate_comparison:['Full comparison','Ranking','Top candidate'],final_recommendation:['Show ranking','Top candidate','Full recommendation'] };
+const CARD_WELCOME = { understand_report:(p)=>`Hello! 👋 I'll help you understand your **${p}** report in plain language. What would you like to know?`,career_roadmap:()=>`🗺️ Let's build your career roadmap! Tell me the student's current class, stream, and any interests.`,college_finder:()=>`🎓 I'll help find best-fit colleges. What field or stream is the student aiming for?`,action_plan:()=>`📅 Let's create a 30-60-90 day action plan. How many hours a day can the student realistically study?`,parent_guide:()=>`👨‍👩‍👧 Welcome! I'm here to help you support your child after counselling. What would you like guidance on?`,profile_insights:()=>`🔍 I'll cross-reference all your uploaded documents for deep insights. What would you like to explore first?`,strengths_weaknesses:()=>`💪 Let me identify the top strengths and growth areas from the report. Which aspect first?`,learning_style:()=>`📖 I'll explain the student's learning style with tailored study tips. Shall I start with the full overview?`,career_growth:()=>`📈 Let's build a career growth plan. What is the professional's current role and target role?`,skill_gap:()=>`🔧 I'll analyse the skill gap. What role or career aspiration are we targeting?`,workplace_behavior:()=>`🏢 I'll explain workplace behaviour and leadership style. What would you like to explore first?`,engineering_branch:()=>`⚙️ I'll recommend the best engineering branches. Shall I start with the full recommendation?`,entrepreneur_profile:()=>`💡 Let's explore the entrepreneurial profile — business style, risk appetite, and innovation score.`,candidate_evaluation:()=>`🔎 I'll evaluate the candidate's profile. Start with strengths, concerns, or full evaluation?`,job_fit:()=>`🎯 I'll score the candidate's job fit across technical skills, soft skills, and experience.`,hiring_recommendation:()=>`✅ I'll provide a clear hiring recommendation based on all documents. Ready to begin?`,candidate_comparison:()=>`⚖️ I'll compare all candidates side by side. Shall I generate the full comparison table?`,final_recommendation:()=>`📣 I'll provide the final ranking and recommendation. Ready?` };
 
-const CARD_LABELS = {
-  understand_report:'Understand Report', career_roadmap:'Career Roadmap',
-  college_finder:'College Finder', action_plan:'Action Plan',
-  parent_guide:'Parent Guide', profile_insights:'Profile Insights',
-  strengths_weaknesses:'Strengths & Weaknesses', learning_style:'Learning Style',
-  career_growth:'Career Growth Plan', skill_gap:'Skill Gap Analysis',
-  workplace_behavior:'Workplace Behavior', skill_development:'Skill Development',
-  personality_insights:'Personality Insights', engineering_branch:'Engineering Branch',
-  skill_requirements:'Skill Requirements', career_path:'Career Path',
-  engineering_specialization:'Engineering Specialization',
-  entrepreneur_profile:'Entrepreneur Profile', business_skills:'Business Skills',
-  real_world_application:'Real-World Application', entrepreneur_path:'Entrepreneur Path',
-  candidate_evaluation:'Candidate Evaluation', job_fit:'Job Fit Analysis',
-  strengths_gaps:'Strengths & Gaps', hiring_recommendation:'Hiring Recommendation',
-  candidate_comparison:'Candidate Comparison', ranking_dashboard:'Ranking Dashboard',
-  strength_comparison:'Strength Comparison', final_recommendation:'Final Recommendation'
-};
-
-const CARD_CHIPS = {
-  understand_report:['Explain IQ Score','RIASEC overview','Top strengths','Recommended stream','Personality traits'],
-  career_roadmap:['Science → Engineering','Commerce path','Arts path','After 10th options','Entrance exams'],
-  college_finder:['Government colleges','Private colleges','State CETs','Budget options','Backup colleges'],
-  action_plan:['30-day plan','60-day milestones','Weekly schedule','Parent support tips'],
-  parent_guide:['How child learns','Motivation tips','Mistakes to avoid','Communication tips'],
-  profile_insights:['Combined analysis','DMIT vs Psychometric','Key patterns','Career alignment'],
-  strengths_weaknesses:['Top strengths','Areas to improve','Leverage strengths','Improvement plan'],
-  learning_style:['Study tips','Parent support','Best methods'],
-  career_growth:['1-year plan','3-year plan','Skills to develop','Certifications'],
-  skill_gap:['Current vs target','How to close gaps','Training options'],
-  workplace_behavior:['Communication style','Leadership approach','Team dynamics'],
-  engineering_branch:['Best branch for me','JEE tips','Top colleges'],
-  entrepreneur_profile:['My business style','Risk appetite','Innovation score'],
-  candidate_evaluation:['Key strengths','Areas of concern','Full evaluation'],
-  job_fit:['Fit score','Technical match','Soft skills'],
-  hiring_recommendation:['Hire decision','Conditions','Onboarding plan'],
-  candidate_comparison:['Full comparison','Ranking','Top candidate'],
-  final_recommendation:['Show ranking','Top candidate','Full recommendation']
-};
-
-const CARD_WELCOME = {
-  understand_report:(p) => `Hello! 👋 I'll help you understand your **${p}** report in plain language. What would you like to know?`,
-  career_roadmap:() => `🗺️ Let's build your career roadmap! Tell me the student's current class, stream, and any interests.`,
-  college_finder:() => `🎓 I'll help find best-fit colleges. What field or stream is the student aiming for?`,
-  action_plan:() => `📅 Let's create a 30-60-90 day action plan. How many hours a day can the student realistically study?`,
-  parent_guide:() => `👨‍👩‍👧 Welcome! I'm here to help you support your child after counselling. What would you like guidance on?`,
-  profile_insights:() => `🔍 I'll cross-reference all your uploaded documents for deep insights. What would you like to explore first?`,
-  strengths_weaknesses:() => `💪 Let me identify the top strengths and growth areas from the report. Which aspect first?`,
-  learning_style:() => `📖 I'll explain the student's learning style with tailored study tips. Shall I start with the full overview?`,
-  career_growth:() => `📈 Let's build a career growth plan. What is the professional's current role and target role?`,
-  skill_gap:() => `🔧 I'll analyse the skill gap. What role or career aspiration are we targeting?`,
-  workplace_behavior:() => `🏢 I'll explain workplace behaviour and leadership style. What would you like to explore first?`,
-  engineering_branch:() => `⚙️ I'll recommend the best engineering branches. Shall I start with the full recommendation?`,
-  entrepreneur_profile:() => `💡 Let's explore the entrepreneurial profile — business style, risk appetite, and innovation score.`,
-  candidate_evaluation:() => `🔎 I'll evaluate the candidate's profile. Start with strengths, concerns, or full evaluation?`,
-  job_fit:() => `🎯 I'll score the candidate's job fit across technical skills, soft skills, and experience.`,
-  hiring_recommendation:() => `✅ I'll provide a clear hiring recommendation based on all documents. Ready to begin?`,
-  candidate_comparison:() => `⚖️ I'll compare all candidates side by side. Shall I generate the full comparison table?`,
-  final_recommendation:() => `📣 I'll provide the final ranking and recommendation. Ready?`
-};
-
-/* ═══════════════════════════════════════════
-   FRIENDLY ERROR MESSAGES
-═══════════════════════════════════════════ */
+/* ══════════ ERROR MESSAGES ══════════ */
 function friendlyUploadError(data, status) {
-  const d = (data.detail || '').toLowerCase();
-  if (d.includes('too large') || d.includes('maximum'))
-    return 'This PDF is too large (max 20 MB). Please compress it at ilovepdf.com and try again.';
-  if (d.includes('not a valid pdf') || d.includes('magic') || d.includes('%pdf'))
-    return 'This file doesn\'t appear to be a valid PDF. Please check the file and try again.';
-  if (d.includes('empty'))
-    return 'The file is empty. Please check and upload a proper PDF.';
-  if (d.includes('scanned') || d.includes('image') || d.includes('extract'))
-    return 'Could not read text from this PDF — it may be a scanned image. Please use the original digital PDF from Brain Checker.';
-  if (d.includes('session') || status === 403)
-    return 'Session expired. Please go back and select your product again.';
-  if (status === 500)
-    return 'Something went wrong on our end. Please try again in a moment.';
+  const d = (data.detail||'').toLowerCase();
+  if (d.includes('too large')||d.includes('maximum')) return 'This PDF is too large (max 20 MB). Please compress it at ilovepdf.com and try again.';
+  if (d.includes('not a valid pdf')||d.includes('%pdf')) return "This file doesn't appear to be a valid PDF. Please check the file and try again.";
+  if (d.includes('empty')) return 'The file is empty. Please check and upload a proper PDF.';
+  if (d.includes('scanned')||d.includes('image')||d.includes('extract')) return 'Could not read text from this PDF — it may be a scanned image. Please use the original digital PDF.';
+  if (d.includes('session')||status===403) return 'Session expired. Please go back and select your product again.';
+  if (status===500) return 'Something went wrong on our end. Please try again in a moment.';
   return 'Upload failed. Please check the file and try again, or contact Brain Checker support.';
 }
-
 function friendlyChatError(data, status) {
-  const d = (data.detail || '').toLowerCase();
-  if (status === 429 || d.includes('limit') || d.includes('monthly'))
-    return '⚠️ You\'ve reached your monthly question limit. It resets automatically on the 1st of next month. Contact Brain Checker support for an early reset.';
-  if (status === 403 || d.includes('not available') || d.includes('card'))
-    return '⚠️ This analysis card isn\'t available for your product. Please select a different card from the sidebar.';
-  if (status === 401 || d.includes('expired') || d.includes('authentication'))
-    return '⚠️ Your session has expired. Please save your work and log in again.';
-  if (d.includes('busy') || d.includes('rate') || d.includes('429'))
-    return '⚠️ The AI is temporarily busy. Please wait 30 seconds and try again.';
-  if (d.includes('timeout') || d.includes('timed out'))
-    return '⚠️ The AI took too long to respond. Try a shorter or simpler question.';
-  if (status === 0)
-    return '⚠️ Cannot reach the server. Please check your internet connection.';
+  const d = (data.detail||'').toLowerCase();
+  if (status===429||d.includes('limit')||d.includes('monthly')) return "⚠️ You've reached your monthly question limit. It resets automatically on the 1st of next month.";
+  if (status===403||d.includes('card')) return "⚠️ This analysis card isn't available for your product. Please select a different card.";
+  if (status===401||d.includes('expired')) return '⚠️ Your session has expired. Please log in again.';
+  if (d.includes('busy')||d.includes('rate')) return '⚠️ The AI is temporarily busy. Please wait 30 seconds and try again.';
+  if (d.includes('timeout')) return '⚠️ The AI took too long to respond. Try a shorter or simpler question.';
+  if (status===0) return '⚠️ Cannot reach the server. Please check your internet connection.';
   return '⚠️ The AI is temporarily unavailable. Please try again in a moment.';
 }
 
-/* ═══════════════════════════════════════════
-   API HELPERS
-═══════════════════════════════════════════ */
+/* ══════════ API ══════════ */
 let _slowTimer = null;
-
-async function api(path, opts = {}) {
-  const h = { 'Content-Type': 'application/json', ...opts.headers };
-  if (S.token) h['Authorization'] = 'Bearer ' + S.token;
-
-  // Show cold-start warning after 5 seconds
+async function api(path, opts={}) {
+  const h={'Content-Type':'application/json',...opts.headers};
+  if(S.token) h['Authorization']='Bearer '+S.token;
   clearTimeout(_slowTimer);
-  _slowTimer = setTimeout(() => {
-    showToast('⏳ Server is waking up — please wait up to 30 seconds…', 'info', 30000);
-  }, 5000);
-
+  _slowTimer=setTimeout(()=>showToast('⏳ Server is waking up — please wait up to 30 seconds…','info',30000),5000);
   try {
-    const r = await fetch(BASE + path, { ...opts, headers: h });
-    clearTimeout(_slowTimer);
-    hideToast();
-    const d = await r.json().catch(() => ({ detail: r.statusText }));
-    return { ok: r.ok, data: d, status: r.status };
-  } catch (err) {
-    clearTimeout(_slowTimer);
-    hideToast();
-    return { ok: false, status: 0, data: { detail: 'Network error' } };
-  }
+    const r=await fetch(BASE+path,{...opts,headers:h});
+    clearTimeout(_slowTimer); hideToast();
+    const d=await r.json().catch(()=>({detail:r.statusText}));
+    return {ok:r.ok,data:d,status:r.status};
+  } catch(err) { clearTimeout(_slowTimer); hideToast(); return {ok:false,status:0,data:{detail:'Network error'}}; }
 }
-
 async function apiUpload(path, form) {
-  const h = {};
-  if (S.token) h['Authorization'] = 'Bearer ' + S.token;
+  const h={}; if(S.token) h['Authorization']='Bearer '+S.token;
   try {
-    const r = await fetch(BASE + path, { method: 'POST', headers: h, body: form });
-    const d = await r.json().catch(() => ({ detail: r.statusText }));
-    return { ok: r.ok, data: d, status: r.status };
-  } catch (err) {
-    return { ok: false, status: 0, data: { detail: 'Network error' } };
-  }
+    const r=await fetch(BASE+path,{method:'POST',headers:h,body:form});
+    const d=await r.json().catch(()=>({detail:r.statusText}));
+    return {ok:r.ok,data:d,status:r.status};
+  } catch(err) { return {ok:false,status:0,data:{detail:'Network error'}}; }
 }
 
-/* ═══════════════════════════════════════════
-   TOAST
-═══════════════════════════════════════════ */
-let _toastTimer = null;
-function showToast(msg, type = 'info', duration = 4000) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = `show t-${type}`;
-  clearTimeout(_toastTimer);
-  if (duration > 0) _toastTimer = setTimeout(hideToast, duration);
-}
-function hideToast() {
-  document.getElementById('toast').className = '';
-}
+/* ══════════ TOAST ══════════ */
+let _toastTimer=null;
+function showToast(msg,type='info',duration=4000) { const el=document.getElementById('toast'); el.textContent=msg; el.className=`show t-${type}`; clearTimeout(_toastTimer); if(duration>0) _toastTimer=setTimeout(hideToast,duration); }
+function hideToast() { document.getElementById('toast').className=''; }
 
-/* ═══════════════════════════════════════════
-   SCREEN NAVIGATION
-═══════════════════════════════════════════ */
-function goTo(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+/* ══════════ SCREENS ══════════ */
+function goTo(id) { document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 
-/* ═══════════════════════════════════════════
-   AUTH SCREEN
-═══════════════════════════════════════════ */
+/* ══════════ AUTH ══════════ */
 function switchTab(tab) {
-  document.querySelectorAll('.auth-tab').forEach((t, i) =>
-    t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'signup'))
-  );
-  document.getElementById('login-form').style.display  = tab === 'login'  ? '' : 'none';
-  document.getElementById('signup-form').style.display = tab === 'signup' ? '' : 'none';
+  document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='login')||(i===1&&tab==='signup')));
+  document.getElementById('login-form').style.display=tab==='login'?'':'none';
+  document.getElementById('signup-form').style.display=tab==='signup'?'':'none';
   clearAlert();
 }
-
-function showAlert(msg, type = 'error') {
-  const el = document.getElementById('auth-alert');
-  el.className = 'alert ' + type;
-  el.textContent = msg;
-  el.style.display = 'block';
-}
-function clearAlert() {
-  const el = document.getElementById('auth-alert');
-  el.style.display = 'none';
-}
-
-function setBtnLoading(id, on, label) {
-  const b = document.getElementById(id);
-  b.disabled = on;
-  b.innerHTML = on ? `<span class="spinner"></span>${label}` : label;
-}
+function showAlert(msg,type='error') { const el=document.getElementById('auth-alert'); el.className='alert '+type; el.textContent=msg; el.style.display='block'; }
+function clearAlert() { document.getElementById('auth-alert').style.display='none'; }
+function setBtnLoading(id,on,label) { const b=document.getElementById(id); b.disabled=on; b.innerHTML=on?`<span class="spinner"></span>${label}`:label; }
 
 async function doLogin() {
-  const email = document.getElementById('login-email').value.trim();
-  const pass  = document.getElementById('login-pass').value;
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value;
   clearAlert();
-  if (!email || !pass) {
-    showAlert('Please enter your email and password.');
+  if(!email||!pass){showAlert('Please enter your email and password.');return;}
+  setBtnLoading('btn-login',true,'Logging in…');
+  const {ok,data,status}=await api('/api/auth/login',{method:'POST',body:JSON.stringify({email,password:pass})});
+  setBtnLoading('btn-login',false,'Login to Bishop');
+  if(!ok) {
+    if(status===401||(data.detail||'').toLowerCase().includes('invalid')) showAlert('Incorrect email or password. Please try again.');
+    else if(status===0) showAlert('Cannot connect to the server. Please check your internet connection.');
+    else if((data.detail||'').toLowerCase().includes('verify')) showAlert('Please check your email and verify your account before logging in.','warning');
+    else showAlert(data.detail||'Login failed. Please try again.');
     return;
   }
-  setBtnLoading('btn-login', true, 'Logging in…');
-  const { ok, data, status } = await api('/api/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({ email, password: pass })
-  });
-  setBtnLoading('btn-login', false, 'Login to Bishop');
-
-  if (!ok) {
-    if (status === 401 || (data.detail || '').toLowerCase().includes('invalid'))
-      showAlert('Incorrect email or password. Please try again.');
-    else if (status === 0)
-      showAlert('Cannot connect to the server. Please check your internet connection.');
-    else if ((data.detail || '').toLowerCase().includes('verify') || (data.detail || '').toLowerCase().includes('confirm'))
-      showAlert('Please check your email and verify your account before logging in.', 'warning');
-    else
-      showAlert(data.detail || 'Login failed. Please try again.');
-    return;
-  }
-
-  S.token = data.access_token;
-  S.user  = data.user;
-  sessionStorage.setItem('bc_token', S.token);
-  sessionStorage.setItem('bc_user',  JSON.stringify(S.user));
+  S.token=data.access_token; S.user=data.user;
+  sessionStorage.setItem('bc_token',S.token); sessionStorage.setItem('bc_user',JSON.stringify(S.user));
   afterLogin();
 }
 
 async function doSignup() {
-  const name  = document.getElementById('su-name').value.trim();
-  const email = document.getElementById('su-email').value.trim();
-  const pass  = document.getElementById('su-pass').value;
+  const name=document.getElementById('su-name').value.trim();
+  const email=document.getElementById('su-email').value.trim();
+  const pass=document.getElementById('su-pass').value;
   clearAlert();
-
-  if (!name)  { showAlert('Please enter your full name.'); return; }
-  if (!email) { showAlert('Please enter a valid email address.'); return; }
-  if (!pass)  { showAlert('Please enter a password.'); return; }
-  if (pass.length < 8) { showAlert('Password must be at least 8 characters long.'); return; }
-
-  setBtnLoading('btn-signup', true, 'Creating account…');
-  const { ok, data, status } = await api('/api/auth/signup', {
-    method: 'POST',
-    body: JSON.stringify({ full_name: name, email, password: pass })
-  });
-  setBtnLoading('btn-signup', false, 'Create Account');
-
-  if (!ok) {
-    if (status === 409 || (data.detail || '').toLowerCase().includes('already'))
-      showAlert('An account with this email already exists. Please log in instead.');
-    else if (status === 0)
-      showAlert('Cannot connect to the server. Please check your internet connection.');
-    else
-      showAlert(data.detail || 'Account creation failed. Please try again.');
+  if(!name){showAlert('Please enter your full name.');return;}
+  if(!email){showAlert('Please enter a valid email address.');return;}
+  if(!pass){showAlert('Please enter a password.');return;}
+  if(pass.length<8){showAlert('Password must be at least 8 characters long.');return;}
+  setBtnLoading('btn-signup',true,'Creating account…');
+  const {ok,data,status}=await api('/api/auth/signup',{method:'POST',body:JSON.stringify({full_name:name,email,password:pass})});
+  setBtnLoading('btn-signup',false,'Create Account');
+  if(!ok) {
+    if(status===409||(data.detail||'').toLowerCase().includes('already')) showAlert('An account with this email already exists. Please log in instead.');
+    else if(status===0) showAlert('Cannot connect to the server. Please check your internet connection.');
+    else showAlert(data.detail||'Account creation failed. Please try again.');
     return;
   }
-
-  showAlert('Account created! ✅ Please check your email to verify your account, then log in.', 'success');
-  setTimeout(() => switchTab('login'), 2400);
+  showAlert('Account created! ✅ Please check your email to verify your account, then log in.','success');
+  setTimeout(()=>switchTab('login'),2400);
 }
 
 function afterLogin() {
-  const name = S.user.full_name || S.user.email || 'User';
-  document.getElementById('nav-user-name').textContent = name;
-  document.getElementById('dash-user-name').textContent = name.split(' ')[0];
-  loadProducts();
-  goTo('screen-products');
+  const name=S.user.full_name||S.user.email||'User';
+  document.getElementById('nav-user-name').textContent=name;
+  document.getElementById('dash-user-name').textContent=name.split(' ')[0];
+  loadProducts(); goTo('screen-products');
 }
 
-/* ═══════════════════════════════════════════
-   PRODUCTS
-═══════════════════════════════════════════ */
+/* ══════════ PRODUCTS ══════════ */
 async function loadProducts() {
-  const el = document.getElementById('prod-loading');
-  el.innerHTML = '<span class="spinner" style="border-top-color:var(--teal);"></span> Loading products…';
-  el.style.display = 'block';
-
-  const { ok, data, status } = await api('/api/auth/products');
-  el.style.display = 'none';
-
-  if (!ok) {
-    el.innerHTML = status === 0
-      ? '⚠️ No internet connection. Please refresh the page.'
-      : '⚠️ Could not load products. Please refresh the page.';
-    el.style.color = 'var(--error)';
-    el.style.display = 'block';
-    return;
-  }
-
-  const students = data.products.filter(p => !p.is_corporate);
-  const corps    = data.products.filter(p =>  p.is_corporate);
-
-  if (students.length) {
-    renderGrid('grid-student', students);
-    document.getElementById('prod-student').style.display = '';
-  }
-  if (corps.length) {
-    renderGrid('grid-corp', corps);
-    document.getElementById('prod-corp').style.display = '';
-  }
+  const el=document.getElementById('prod-loading');
+  el.innerHTML='<span class="spinner" style="border-top-color:var(--teal);"></span> Loading products…'; el.style.display='block';
+  const {ok,data,status}=await api('/api/auth/products');
+  el.style.display='none';
+  if(!ok) { el.innerHTML=status===0?'⚠️ No internet connection. Please refresh.':'⚠️ Could not load products. Please refresh.'; el.style.color='var(--error)'; el.style.display='block'; return; }
+  const students=data.products.filter(p=>!p.is_corporate);
+  const corps=data.products.filter(p=>p.is_corporate);
+  if(students.length){renderGrid('grid-student',students);document.getElementById('prod-student').style.display='';}
+  if(corps.length){renderGrid('grid-corp',corps);document.getElementById('prod-corp').style.display='';}
 }
 
 function renderGrid(gridId, products) {
-  const g = document.getElementById(gridId);
-  g.innerHTML = '';
-  products.forEach(p => {
-    const d = document.createElement('div');
-    d.className = 'product-card';
-    d.onclick = () => selectProduct(p, d);
-    d.innerHTML = `
-      <div class="product-card-icon">${PROD_ICONS[p.slug] || '📋'}</div>
-      <div class="product-card-name">${p.name}</div>
-      <div class="product-card-badges">
-        <span class="badge badge-pdf">${p.required_pdfs} PDF${p.required_pdfs > 1 ? 's' : ''}</span>
-        <span class="badge badge-cards">${(p.cards || []).length} cards</span>
-        ${p.is_corporate ? '<span class="badge badge-corp">Corporate</span>' : ''}
-      </div>`;
+  const g=document.getElementById(gridId); g.innerHTML='';
+  products.forEach(p=>{
+    const d=document.createElement('div'); d.className='product-card'; d.onclick=()=>selectProduct(p,d);
+    d.innerHTML=`<div class="product-card-icon">${PROD_ICONS[p.slug]||'📋'}</div><div class="product-card-name">${p.name}</div><div class="product-card-badges"><span class="badge badge-pdf">${p.required_pdfs} PDF${p.required_pdfs>1?'s':''}</span><span class="badge badge-cards">${(p.cards||[]).length} cards</span>${p.is_corporate?'<span class="badge badge-corp">Corporate</span>':''}</div>`;
     g.appendChild(d);
   });
 }
 
 async function selectProduct(p, cardEl) {
-  // Show loading state on the card
-  if (cardEl) {
-    cardEl.classList.add('loading');
-    cardEl.innerHTML = `<div class="product-card-icon"><span class="spinner" style="border-top-color:var(--teal);width:20px;height:20px;border-width:3px;"></span></div><div class="product-card-name">${p.name}</div>`;
-  }
-
-  const { ok, data, status } = await api('/api/auth/select-product', {
-    method: 'POST',
-    body: JSON.stringify({ product_slug: p.slug })
-  });
-
-  if (!ok) {
-    if (cardEl) cardEl.classList.remove('loading');
-    const msg = status === 0
-      ? 'No internet connection. Please check and try again.'
-      : 'Could not select this product. Please try again.';
-    showToast('⚠️ ' + msg, 'error');
-    loadProducts(); // rebuild grid
-    return;
-  }
-
-  S.sessionId = data.session_id;
-  S.product   = data.product;
-  S.uploadDone = {};
-
-  // Normalise arrays from API
-  if (typeof S.product.pdf_labels === 'string') {
-    try { S.product.pdf_labels = JSON.parse(S.product.pdf_labels); } catch { S.product.pdf_labels = []; }
-  }
-  if (!Array.isArray(S.product.pdf_labels)) S.product.pdf_labels = [];
-  if (typeof S.product.cards === 'string') {
-    try { S.product.cards = JSON.parse(S.product.cards); } catch { S.product.cards = []; }
-  }
-  if (!Array.isArray(S.product.cards)) S.product.cards = [];
-
-  buildUploadGate();
-  goTo('screen-upload');
+  if(cardEl){cardEl.classList.add('loading');cardEl.innerHTML=`<div class="product-card-icon"><span class="spinner" style="border-top-color:var(--teal);width:20px;height:20px;border-width:3px;"></span></div><div class="product-card-name">${p.name}</div>`;}
+  const {ok,data}=await api('/api/auth/select-product',{method:'POST',body:JSON.stringify({product_slug:p.slug})});
+  if(!ok){if(cardEl)cardEl.classList.remove('loading');showToast('⚠️ Could not select this product. Please try again.','error');loadProducts();return;}
+  S.sessionId=data.session_id; S.product=data.product; S.uploadDone={};
+  if(typeof S.product.pdf_labels==='string'){try{S.product.pdf_labels=JSON.parse(S.product.pdf_labels);}catch{S.product.pdf_labels=[];}}
+  if(!Array.isArray(S.product.pdf_labels))S.product.pdf_labels=[];
+  if(typeof S.product.cards==='string'){try{S.product.cards=JSON.parse(S.product.cards);}catch{S.product.cards=[];}}
+  if(!Array.isArray(S.product.cards))S.product.cards=[];
+  buildUploadGate(); goTo('screen-upload');
 }
 
-/* ═══════════════════════════════════════════
-   UPLOAD
-═══════════════════════════════════════════ */
+/* ══════════ UPLOAD ══════════ */
 function buildUploadGate() {
-  const p = S.product;
-  document.getElementById('up-title').textContent = `Upload Reports for ${p.name}`;
-  document.getElementById('up-sub').textContent =
-    `${p.required_pdfs} report${p.required_pdfs > 1 ? 's are' : ' is'} required before chatting.`;
-  document.getElementById('up-badge').textContent = `${PROD_ICONS[p.slug] || '📋'} ${p.name}`;
-
-  document.getElementById('up-slots').innerHTML = '';
-  document.querySelectorAll('.hidden-file').forEach(e => e.remove());
-
-  const labels    = p.pdf_labels;
-  const totalSlots = p.required_pdfs + 1; // +1 optional slot
-
-  for (let i = 0; i < totalSlots; i++) {
-    const required = i < p.required_pdfs;
-    const label    = required ? (labels[i] || `Report ${i + 1}`) : 'Additional Report (Optional)';
-    S.uploadDone[i] = false;
-
-    const slot = document.createElement('div');
-    slot.id = `slot-${i}`;
-    slot.className = `upload-slot ${required ? 'slot-required' : 'slot-optional'}`;
-    slot.innerHTML = `
-      <div class="slot-icon" id="slot-icon-${i}">📄</div>
-      <div class="slot-info">
-        <div class="slot-label">${required ? '★ ' : ''}${label}</div>
-        <div class="slot-meta" id="slot-meta-${i}">
-          ${required ? 'Required · Tap to upload' : 'Optional · Tap to upload'}
-        </div>
-      </div>
-      <span class="slot-badge" id="slot-badge-${i}">${required ? 'Required' : 'Optional'}</span>`;
-    slot.onclick = () => document.getElementById(`finput-${i}`).click();
+  const p=S.product;
+  document.getElementById('up-title').textContent=`Upload Reports for ${p.name}`;
+  document.getElementById('up-sub').textContent=`${p.required_pdfs} report${p.required_pdfs>1?'s are':' is'} required before chatting.`;
+  document.getElementById('up-badge').textContent=`${PROD_ICONS[p.slug]||'📋'} ${p.name}`;
+  document.getElementById('up-slots').innerHTML='';
+  document.querySelectorAll('.hidden-file').forEach(e=>e.remove());
+  const labels=p.pdf_labels; const totalSlots=p.required_pdfs+1;
+  for(let i=0;i<totalSlots;i++){
+    const required=i<p.required_pdfs;
+    const label=required?(labels[i]||`Report ${i+1}`):'Additional Report (Optional)';
+    S.uploadDone[i]=false;
+    const slot=document.createElement('div'); slot.id=`slot-${i}`; slot.className=`upload-slot ${required?'slot-required':'slot-optional'}`;
+    slot.innerHTML=`<div class="slot-icon" id="slot-icon-${i}">📄</div><div class="slot-info"><div class="slot-label">${required?'★ ':''}${label}</div><div class="slot-meta" id="slot-meta-${i}">${required?'Required · Tap to upload':'Optional · Tap to upload'}</div></div><span class="slot-badge" id="slot-badge-${i}">${required?'Required':'Optional'}</span>`;
+    slot.onclick=()=>document.getElementById(`finput-${i}`).click();
     document.getElementById('up-slots').appendChild(slot);
-
-    const inp = document.createElement('input');
-    inp.type = 'file'; inp.accept = '.pdf';
-    inp.className = 'hidden-file'; inp.id = `finput-${i}`;
-    inp.onchange = (e) => handleUpload(e, i, label);
-    document.body.appendChild(inp);
+    const inp=document.createElement('input'); inp.type='file'; inp.accept='.pdf'; inp.className='hidden-file'; inp.id=`finput-${i}`;
+    inp.onchange=(e)=>handleUpload(e,i,label); document.body.appendChild(inp);
   }
   refreshProgress();
 }
 
 async function handleUpload(evt, idx, label) {
-  const file = evt.target.files[0];
-  if (!file) return;
-  evt.target.value = '';
-
-  // Client-side size check before even uploading
-  if (file.size > 20 * 1024 * 1024) {
-    showSlotError(idx, '❌', 'File is too large (max 20 MB). Please compress it first.', idx < S.product.required_pdfs);
-    return;
-  }
-
-  const slot = document.getElementById(`slot-${idx}`);
-  slot.className = 'upload-slot slot-uploading';
-  document.getElementById(`slot-icon-${idx}`).textContent = '⏳';
-  document.getElementById(`slot-meta-${idx}`).textContent = `Uploading ${file.name}…`;
-  document.getElementById(`slot-badge-${idx}`).textContent = 'Uploading…';
-
-  const form = new FormData();
-  form.append('file', file);
-  const path = `/api/upload?session_id=${encodeURIComponent(S.sessionId)}&doc_index=${idx}&doc_label=${encodeURIComponent(label)}`;
-  const { ok, data, status } = await apiUpload(path, form);
-
-  if (!ok) {
-    const msg = friendlyUploadError(data, status);
-    showSlotError(idx, '❌', msg, idx < S.product.required_pdfs);
-    return;
-  }
-
-  S.uploadDone[idx] = true;
-  const slot2 = document.getElementById(`slot-${idx}`);
-  slot2.className = 'upload-slot slot-done';
-  document.getElementById(`slot-icon-${idx}`).textContent = '✅';
-  const meta = document.getElementById(`slot-meta-${idx}`);
-  meta.textContent = `${file.name} · Tap to replace`;
-  meta.className = 'slot-meta ok';
-  document.getElementById(`slot-badge-${idx}`).textContent = 'Uploaded ✓';
+  const file=evt.target.files[0]; if(!file)return; evt.target.value='';
+  if(file.size>20*1024*1024){showSlotError(idx,'❌','File is too large (max 20 MB). Please compress it first.',idx<S.product.required_pdfs);return;}
+  const slot=document.getElementById(`slot-${idx}`); slot.className='upload-slot slot-uploading';
+  document.getElementById(`slot-icon-${idx}`).textContent='⏳';
+  document.getElementById(`slot-meta-${idx}`).textContent=`Uploading ${file.name}…`;
+  document.getElementById(`slot-badge-${idx}`).textContent='Uploading…';
+  const form=new FormData(); form.append('file',file);
+  const path=`/api/upload?session_id=${encodeURIComponent(S.sessionId)}&doc_index=${idx}&doc_label=${encodeURIComponent(label)}`;
+  const {ok,data,status}=await apiUpload(path,form);
+  if(!ok){showSlotError(idx,'❌',friendlyUploadError(data,status),idx<S.product.required_pdfs);return;}
+  S.uploadDone[idx]=true;
+  document.getElementById(`slot-${idx}`).className='upload-slot slot-done';
+  document.getElementById(`slot-icon-${idx}`).textContent='✅';
+  const meta=document.getElementById(`slot-meta-${idx}`); meta.textContent=`${file.name} · Tap to replace`; meta.className='slot-meta ok';
+  document.getElementById(`slot-badge-${idx}`).textContent='Uploaded ✓';
   refreshProgress();
 }
 
 function showSlotError(idx, icon, msg, required) {
-  const slot = document.getElementById(`slot-${idx}`);
-  slot.className = 'upload-slot slot-error';
-  document.getElementById(`slot-icon-${idx}`).textContent = icon;
-  const meta = document.getElementById(`slot-meta-${idx}`);
-  meta.textContent = msg;
-  meta.className = 'slot-meta err';
-  document.getElementById(`slot-badge-${idx}`).textContent = required ? 'Required' : 'Optional';
+  document.getElementById(`slot-${idx}`).className='upload-slot slot-error';
+  document.getElementById(`slot-icon-${idx}`).textContent=icon;
+  const meta=document.getElementById(`slot-meta-${idx}`); meta.textContent=msg; meta.className='slot-meta err';
+  document.getElementById(`slot-badge-${idx}`).textContent=required?'Required':'Optional';
 }
 
 function refreshProgress() {
-  const req = S.product.required_pdfs;
-  let done = 0;
-  for (let i = 0; i < req; i++) { if (S.uploadDone[i]) done++; }
-  const pct = req > 0 ? (done / req) * 100 : 0;
-  document.getElementById('up-fill').style.width = pct + '%';
-  document.getElementById('up-count').textContent = `${done} of ${req} required`;
-  const btn = document.getElementById('btn-start');
-  if (done >= req) {
-    btn.disabled = false;
-    btn.textContent = '🚀 Start Chatting →';
-  } else {
-    btn.disabled = true;
-    btn.textContent = `🔒 Upload required reports to continue (${done}/${req})`;
-  }
+  const req=S.product.required_pdfs; let done=0;
+  for(let i=0;i<req;i++){if(S.uploadDone[i])done++;}
+  document.getElementById('up-fill').style.width=(req>0?(done/req)*100:0)+'%';
+  document.getElementById('up-count').textContent=`${done} of ${req} required`;
+  const btn=document.getElementById('btn-start');
+  if(done>=req){btn.disabled=false;btn.textContent='🚀 Start Chatting →';}
+  else{btn.disabled=true;btn.textContent=`🔒 Upload required reports to continue (${done}/${req})`;}
 }
 
-/* ═══════════════════════════════════════════
-   DASHBOARD
-═══════════════════════════════════════════ */
-function goToDashboard() {
-  buildDashboard();
-  goTo('screen-dashboard');
-}
+/* ══════════ DASHBOARD ══════════ */
+function goToDashboard(){buildDashboard();goTo('screen-dashboard');}
 
 function buildDashboard() {
-  const p    = S.product;
-  const name = S.user?.full_name || S.user?.email || 'User';
-  document.getElementById('dash-user-name').textContent = name.split(' ')[0];
-  document.getElementById('sb-prod-name').textContent   = p.name;
-
-  const cards     = Array.isArray(p.cards) ? p.cards : [];
-  const container = document.getElementById('card-btns');
-  const mobBar    = document.getElementById('mobile-card-bar');
-  container.innerHTML = '';
-  mobBar.innerHTML    = '';
-
-  cards.forEach(key => {
-    // Desktop sidebar button
-    const btn = document.createElement('button');
-    btn.className = 'card-btn';
-    btn.id = 'cbtn-' + key;
-    btn.onclick = () => activateCard(key);
-    btn.innerHTML = `<div class="card-btn-icon">${CARD_ICONS[key] || '📋'}</div>${CARD_LABELS[key] || key}`;
+  const p=S.product; const name=S.user?.full_name||S.user?.email||'User';
+  document.getElementById('dash-user-name').textContent=name.split(' ')[0];
+  document.getElementById('sb-prod-name').textContent=p.name;
+  const cards=Array.isArray(p.cards)?p.cards:[];
+  const container=document.getElementById('card-btns'); const mobBar=document.getElementById('mobile-card-bar');
+  container.innerHTML=''; mobBar.innerHTML='';
+  cards.forEach(key=>{
+    const btn=document.createElement('button'); btn.className='card-btn'; btn.id='cbtn-'+key; btn.onclick=()=>activateCard(key);
+    btn.innerHTML=`<div class="card-btn-icon">${CARD_ICONS[key]||'📋'}</div>${CARD_LABELS[key]||key}`;
     container.appendChild(btn);
-
-    // Mobile bar chip
-    const chip = document.createElement('button');
-    chip.className = 'mob-card-chip';
-    chip.id = 'mob-cbtn-' + key;
-    chip.onclick = () => activateCard(key);
-    chip.innerHTML = `<span class="mob-card-chip-icon">${CARD_ICONS[key] || '📋'}</span>${CARD_LABELS[key] || key}`;
+    const chip=document.createElement('button'); chip.className='mob-card-chip'; chip.id='mob-cbtn-'+key; chip.onclick=()=>activateCard(key);
+    chip.innerHTML=`<span class="mob-card-chip-icon">${CARD_ICONS[key]||'📋'}</span>${CARD_LABELS[key]||key}`;
     mobBar.appendChild(chip);
   });
-
-  updateUsage(S.user?.questions_used || 0);
-  S.card = null;
-  S.history = [];
-
-  // Reset chat
-  document.getElementById('chat-messages').innerHTML = `
-    <div class="chat-welcome" id="chat-welcome">
-      <img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop"
-           onerror="this.style.display='none'">
-      <div class="chat-welcome-title">Your reports are loaded</div>
-      <div class="chat-welcome-sub">Select an analysis card${window.innerWidth < 768 ? ' below' : ' from the sidebar'} to start chatting.</div>
-    </div>`;
-
-  const inp = document.getElementById('chat-input');
-  inp.disabled = true;
-  inp.placeholder = 'Select a card to start…';
-  inp.value = '';
-  document.getElementById('send-btn').disabled = true;
-
-  // Reset topbar
-  document.getElementById('ct-icon-img').src = 'assets/bishop_BC.png';
-  document.getElementById('ct-title').textContent = 'Bishop AI Assistant';
-  document.getElementById('ct-sub').textContent   = 'Select a card to begin';
+  updateUsage(S.user?.questions_used||0); S.card=null; S.history=[];
+  document.getElementById('chat-messages').innerHTML=`<div class="chat-welcome" id="chat-welcome"><img src="assets/bishop_BC.png" class="chat-welcome-logo" alt="Bishop" onerror="this.style.display='none'"><div class="chat-welcome-title">Your reports are loaded</div><div class="chat-welcome-sub">Select an analysis card${window.innerWidth<768?' below':' from the sidebar'} to start chatting.</div></div>`;
+  const inp=document.getElementById('chat-input'); inp.disabled=true; inp.placeholder='Select a card to start…'; inp.value='';
+  document.getElementById('send-btn').disabled=true;
+  document.getElementById('ct-icon-img').src='assets/bishop_BC.png';
+  document.getElementById('ct-title').textContent='Bishop AI Assistant';
+  document.getElementById('ct-sub').textContent='Select a card to begin';
 }
 
 function updateUsage(used) {
-  const pct = Math.min(100, (used / LIMIT) * 100);
-  document.getElementById('usage-count').textContent = `${used} / ${LIMIT}`;
-  document.getElementById('usage-fill').style.width  = pct + '%';
-  document.getElementById('usage-fill').style.background =
-    pct > 80 ? 'var(--error)' : pct > 60 ? 'var(--warning)' : 'var(--teal)';
+  const pct=Math.min(100,(used/LIMIT)*100);
+  document.getElementById('usage-count').textContent=`${used} / ${LIMIT}`;
+  document.getElementById('usage-fill').style.width=pct+'%';
+  document.getElementById('usage-fill').style.background=pct>80?'var(--error)':pct>60?'var(--warning)':'var(--teal)';
 }
 
 function activateCard(key) {
-  S.card = key;
-  S.history = [];
-
-  // Highlight desktop sidebar
-  document.querySelectorAll('.card-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('cbtn-' + key)?.classList.add('active');
-
-  // Highlight mobile bar
-  document.querySelectorAll('.mob-card-chip').forEach(b => b.classList.remove('active'));
-  document.getElementById('mob-cbtn-' + key)?.classList.add('active');
-
-  // Scroll the active mobile chip into view
-  const mc = document.getElementById('mob-cbtn-' + key);
-  if (mc) mc.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-
-  // Update topbar
-  document.getElementById('ct-icon-img').src = 'assets/bishop_BC.png';
-  document.getElementById('ct-title').textContent = CARD_LABELS[key] || key;
-  document.getElementById('ct-sub').textContent   = S.product.name;
-
-  // Clear messages and enable input
-  const msgs = document.getElementById('chat-messages');
-  msgs.innerHTML = '';
-  const inp = document.getElementById('chat-input');
-  inp.disabled = false;
-  inp.placeholder = 'Ask anything about your report…';
-  inp.value = '';
-  inp.focus();
-  document.getElementById('send-btn').disabled = false;
-
-  // Welcome message
-  const wFn = CARD_WELCOME[key] || (() => `Hello! I'm ready to help with **${CARD_LABELS[key] || key}**. What would you like to know?`);
-  addAI(wFn(S.product.name), true);
-
-  // Chips
-  const chips = CARD_CHIPS[key];
-  if (chips) setTimeout(() => addChips(chips), 180);
+  S.card=key; S.history=[];
+  document.querySelectorAll('.card-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('cbtn-'+key)?.classList.add('active');
+  document.querySelectorAll('.mob-card-chip').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mob-cbtn-'+key)?.classList.add('active');
+  const mc=document.getElementById('mob-cbtn-'+key); if(mc)mc.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  document.getElementById('ct-icon-img').src='assets/bishop_BC.png';
+  document.getElementById('ct-title').textContent=CARD_LABELS[key]||key;
+  document.getElementById('ct-sub').textContent=S.product.name;
+  const msgs=document.getElementById('chat-messages'); msgs.innerHTML='';
+  const inp=document.getElementById('chat-input'); inp.disabled=false; inp.placeholder='Ask anything about your report…'; inp.value=''; inp.focus();
+  document.getElementById('send-btn').disabled=false;
+  const wFn=CARD_WELCOME[key]||(()=>`Hello! I'm ready to help with **${CARD_LABELS[key]||key}**. What would you like to know?`);
+  addAI(wFn(S.product.name),true);
+  const chips=CARD_CHIPS[key]; if(chips)setTimeout(()=>addChips(chips),180);
 }
 
-/* ═══════════════════════════════════════════
-   MESSAGES
-═══════════════════════════════════════════ */
-function addAI(text, disclaimer = false) {
+/* ══════════ MESSAGES ══════════ */
+function addAI(text,disclaimer=false) {
   document.getElementById('chat-welcome')?.remove();
-  const msgs = document.getElementById('chat-messages');
-  const d = document.createElement('div');
-  d.className = 'msg ai fade-in';
-  d.innerHTML = `
-    <div class="msg-avatar ai">
-      <img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'">
-    </div>
-    <div class="msg-body">
-      <div class="msg-bubble">${fmt(text)}</div>
-      <div class="msg-time">${now()}</div>
-      ${disclaimer ? '<div class="disclaimer">⚠️ AI guidance — does not replace professional counselling. Always refer to your counsellor\'s report.</div>' : ''}
-    </div>`;
-  msgs.appendChild(d);
-  msgs.scrollTop = msgs.scrollHeight;
+  const msgs=document.getElementById('chat-messages');
+  const d=document.createElement('div'); d.className='msg ai fade-in';
+  d.innerHTML=`<div class="msg-avatar ai"><img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'"></div><div class="msg-body"><div class="msg-bubble">${fmt(text)}</div><div class="msg-time">${now()}</div>${disclaimer?'<div class="disclaimer">⚠️ AI guidance — does not replace professional counselling. Always refer to your counsellor\'s report.</div>':''}</div>`;
+  msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
 }
-
 function addUser(text) {
   document.getElementById('chat-welcome')?.remove();
-  const msgs = document.getElementById('chat-messages');
-  const d = document.createElement('div');
-  d.className = 'msg user fade-in';
-  d.innerHTML = `
-    <div class="msg-avatar user">You</div>
-    <div class="msg-body">
-      <div class="msg-bubble">${esc(text)}</div>
-      <div class="msg-time">${now()}</div>
-    </div>`;
-  msgs.appendChild(d);
-  msgs.scrollTop = msgs.scrollHeight;
+  const msgs=document.getElementById('chat-messages');
+  const d=document.createElement('div'); d.className='msg user fade-in';
+  d.innerHTML=`<div class="msg-avatar user">You</div><div class="msg-body"><div class="msg-bubble">${esc(text)}</div><div class="msg-time">${now()}</div></div>`;
+  msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
 }
-
 function addChips(chips) {
-  const msgs = document.getElementById('chat-messages');
-  const id   = 'chips-' + Date.now();
-  const row  = document.createElement('div');
-  row.className = 'chips-row fade-in';
-  row.id = id;
-  chips.forEach(c => {
-    const btn = document.createElement('button');
-    btn.className = 'chip';
-    btn.textContent = c;
-    btn.onclick = () => { document.getElementById(id)?.remove(); clickChip(c); };
-    row.appendChild(btn);
-  });
-  msgs.appendChild(row);
-  msgs.scrollTop = msgs.scrollHeight;
+  const msgs=document.getElementById('chat-messages'); const id='chips-'+Date.now();
+  const row=document.createElement('div'); row.className='chips-row fade-in'; row.id=id;
+  chips.forEach(c=>{const btn=document.createElement('button');btn.className='chip';btn.textContent=c;btn.onclick=()=>{document.getElementById(id)?.remove();clickChip(c);};row.appendChild(btn);});
+  msgs.appendChild(row); msgs.scrollTop=msgs.scrollHeight;
 }
-
 function addTyping() {
   document.getElementById('chat-welcome')?.remove();
-  const msgs = document.getElementById('chat-messages');
-  const d = document.createElement('div');
-  d.className = 'msg ai'; d.id = 'typing-ind';
-  d.innerHTML = `
-    <div class="msg-avatar ai">
-      <img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'">
-    </div>
-    <div class="msg-body">
-      <div class="typing-indicator">
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-      </div>
-    </div>`;
-  msgs.appendChild(d);
-  msgs.scrollTop = msgs.scrollHeight;
+  const msgs=document.getElementById('chat-messages'); const d=document.createElement('div'); d.className='msg ai'; d.id='typing-ind';
+  d.innerHTML=`<div class="msg-avatar ai"><img src="assets/bishop_BC.png" alt="Bishop" onerror="this.textContent='AI'"></div><div class="msg-body"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight;
 }
+function removeTyping(){document.getElementById('typing-ind')?.remove();}
+function clickChip(text){document.getElementById('chat-input').value=text;sendMessage();}
 
-function removeTyping() { document.getElementById('typing-ind')?.remove(); }
-
-function clickChip(text) {
-  document.getElementById('chat-input').value = text;
-  sendMessage();
-}
-
-/* ═══════════════════════════════════════════
-   SEND MESSAGE
-═══════════════════════════════════════════ */
+/* ══════════ SEND ══════════ */
 async function sendMessage() {
-  if (!S.card || S.isTyping) return;
-  const inp  = document.getElementById('chat-input');
-  const text = inp.value.trim();
-  if (!text) return;
-  inp.value = '';
-  autoResize(inp);
-  addUser(text);
-  S.history.push({ role: 'user', content: text });
-  S.isTyping = true;
-  document.getElementById('send-btn').disabled = true;
-  addTyping();
-
-  const { ok, data, status } = await api('/api/ask', {
-    method: 'POST',
-    body: JSON.stringify({
-      session_id: S.sessionId,
-      card_mode:  S.card,
-      message:    text,
-      history:    S.history.slice(-10)
-    })
-  });
-
-  removeTyping();
-  S.isTyping = false;
-  document.getElementById('send-btn').disabled = false;
-
-  if (!ok) {
-    S.history.pop();
-    addAI(friendlyChatError(data, status));
-    return;
-  }
-
-  S.history.push({ role: 'assistant', content: data.reply });
-  addAI(data.reply);
-  if (data.questions_remaining !== undefined) {
-    updateUsage(LIMIT - data.questions_remaining);
-  }
-
-  // Follow-up chips
-  setTimeout(() => {
-    const followUps = {
-      understand_report:['What does this score mean?','Career suggestions','Stream recommendation'],
-      career_roadmap:['Show timeline','After 12th options','Entrance exams'],
-      college_finder:['Government options','Private options','Backup colleges'],
-      action_plan:['Weekly schedule','Parent tips','Exam strategy'],
-      parent_guide:['Communication tips','Study environment','Motivation strategies'],
-      engineering_branch:['JEE preparation','Top colleges','Career after this branch'],
-      job_fit:['Gap analysis','Final recommendation']
-    };
-    const chips = (followUps[S.card] || []).slice(0, 3);
-    if (chips.length) addChips(chips);
-  }, 280);
+  if(!S.card||S.isTyping)return;
+  const inp=document.getElementById('chat-input'); const text=inp.value.trim(); if(!text)return;
+  inp.value=''; autoResize(inp); addUser(text);
+  S.history.push({role:'user',content:text}); S.isTyping=true; document.getElementById('send-btn').disabled=true; addTyping();
+  const {ok,data,status}=await api('/api/ask',{method:'POST',body:JSON.stringify({session_id:S.sessionId,card_mode:S.card,message:text,history:S.history.slice(-10)})});
+  removeTyping(); S.isTyping=false; document.getElementById('send-btn').disabled=false;
+  if(!ok){S.history.pop();addAI(friendlyChatError(data,status));return;}
+  S.history.push({role:'assistant',content:data.reply}); addAI(data.reply);
+  if(data.questions_remaining!==undefined)updateUsage(LIMIT-data.questions_remaining);
+  setTimeout(()=>{
+    const fu={understand_report:['What does this score mean?','Career suggestions','Stream recommendation'],career_roadmap:['Show timeline','After 12th options','Entrance exams'],college_finder:['Government options','Private options','Backup colleges'],action_plan:['Weekly schedule','Parent tips','Exam strategy'],parent_guide:['Communication tips','Study environment','Motivation strategies'],engineering_branch:['JEE preparation','Top colleges','Career after this branch'],job_fit:['Gap analysis','Final recommendation']};
+    const chips=(fu[S.card]||[]).slice(0,3); if(chips.length)addChips(chips);
+  },280);
 }
 
-/* ═══════════════════════════════════════════
-   LOGOUT
-═══════════════════════════════════════════ */
+/* ══════════ LOGOUT ══════════ */
 async function doLogout() {
-  if (S.sessionId) {
-    await api(`/api/session/${S.sessionId}/chunks`, { method: 'DELETE' }).catch(() => {});
-  }
-  await api('/api/auth/logout', { method: 'POST' }).catch(() => {});
-  Object.assign(S, {
-    token: null, user: null, sessionId: null, product: null,
-    card: null, history: [], uploadDone: {}, isTyping: false
-  });
-  sessionStorage.removeItem('bc_token');
-  sessionStorage.removeItem('bc_user');
-  ['login-email','login-pass','su-name','su-email','su-pass'].forEach(id => {
-    const e = document.getElementById(id);
-    if (e) e.value = '';
-  });
-  clearAlert();
-  switchTab('login');
-  goTo('screen-auth');
+  if(S.sessionId)await api(`/api/session/${S.sessionId}/chunks`,{method:'DELETE'}).catch(()=>{});
+  await api('/api/auth/logout',{method:'POST'}).catch(()=>{});
+  Object.assign(S,{token:null,user:null,sessionId:null,product:null,card:null,history:[],uploadDone:{},isTyping:false});
+  sessionStorage.removeItem('bc_token'); sessionStorage.removeItem('bc_user');
+  ['login-email','login-pass','su-name','su-email','su-pass'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  clearAlert(); switchTab('login'); goTo('screen-auth');
 }
 
-/* ═══════════════════════════════════════════
-   FEEDBACK MODAL
-═══════════════════════════════════════════ */
-function openFeedback() {
-  const m = document.getElementById('feedback-modal');
-  m.style.display = 'flex';
-  setTimeout(() => document.getElementById('feedback-text')?.focus(), 100);
-}
-function closeFeedback() {
-  document.getElementById('feedback-modal').style.display = 'none';
-  document.getElementById('feedback-text').value = '';
-}
-async function submitFeedback() {
-  const text = document.getElementById('feedback-text').value.trim();
-  if (!text) { showToast('Please write something before sending.', 'warning'); return; }
-  // Send to support email — simplest approach that works without extra infra
-  const subject = encodeURIComponent('Bishop Feedback');
-  const body    = encodeURIComponent(`User: ${S.user?.email || 'Unknown'}\nCard: ${S.card || 'None'}\n\nFeedback:\n${text}`);
-  window.open(`mailto:support@brainchecker.in?subject=${subject}&body=${body}`, '_blank');
-  closeFeedback();
-  showToast('✅ Feedback opened in your email client. Thank you!', 'success');
+/* ══════════ FEEDBACK ══════════ */
+function openFeedback(){document.getElementById('feedback-modal').style.display='flex';setTimeout(()=>document.getElementById('feedback-text')?.focus(),100);}
+function closeFeedback(){document.getElementById('feedback-modal').style.display='none';document.getElementById('feedback-text').value='';}
+function submitFeedback(){
+  const text=document.getElementById('feedback-text').value.trim();
+  if(!text){showToast('Please write something before sending.','warning');return;}
+  const subject=encodeURIComponent('Bishop Feedback');
+  const body=encodeURIComponent(`User: ${S.user?.email||'Unknown'}\nCard: ${S.card||'None'}\n\nFeedback:\n${text}`);
+  window.open(`mailto:support@brainchecker.in?subject=${subject}&body=${body}`,'_blank');
+  closeFeedback(); showToast('✅ Feedback opened in your email client. Thank you!','success');
 }
 
-/* ═══════════════════════════════════════════
-   UTILITY FUNCTIONS
-═══════════════════════════════════════════ */
-function now() {
-  return new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
-}
+/* ══════════ UTILS ══════════ */
+function now(){return new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});}
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+function fmt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/^#{1,3}\s+(.+)$/gm,'<strong>$1</strong>').replace(/\n\n/g,'</p><p style="margin-top:8px;">').replace(/\n/g,'<br>').replace(/^/,'<p>').replace(/$/,'</p>');}
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
+function autoResize(el){el.style.height='';el.style.height=Math.min(el.scrollHeight,110)+'px';}
 
-function esc(t) {
-  return t
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/\n/g, '<br>');
-}
-
-function fmt(t) {
-  // Convert basic markdown to HTML for AI messages
-  return t
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g,     '<em>$1</em>')
-    .replace(/^#{1,3}\s+(.+)$/gm, '<strong>$1</strong>')
-    .replace(/\n\n/g, '</p><p style="margin-top:8px;">')
-    .replace(/\n/g,   '<br>')
-    .replace(/^/,     '<p>')
-    .replace(/$/,     '</p>');
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-}
-
-function autoResize(el) {
-  el.style.height = '';
-  el.style.height = Math.min(el.scrollHeight, 110) + 'px';
-}
-
-/* ═══════════════════════════════════════════
-   INIT — restore session on page load
-═══════════════════════════════════════════ */
-(function init() {
-  const tok = sessionStorage.getItem('bc_token');
-  const usr = sessionStorage.getItem('bc_user');
-  if (tok && usr) {
-    try {
-      S.token = tok;
-      S.user  = JSON.parse(usr);
-      const name = S.user.full_name || S.user.email || 'User';
-      document.getElementById('nav-user-name').textContent  = name;
-      document.getElementById('dash-user-name').textContent = name.split(' ')[0];
-      loadProducts();
-      goTo('screen-products');
-    } catch (e) {
-      sessionStorage.clear();
-    }
+/* ══════════ INIT ══════════ */
+(function init(){
+  const tok=sessionStorage.getItem('bc_token'); const usr=sessionStorage.getItem('bc_user');
+  if(tok&&usr){
+    try{
+      S.token=tok; S.user=JSON.parse(usr);
+      const name=S.user.full_name||S.user.email||'User';
+      document.getElementById('nav-user-name').textContent=name;
+      document.getElementById('dash-user-name').textContent=name.split(' ')[0];
+      loadProducts(); goTo('screen-products');
+    }catch(e){sessionStorage.clear();}
   }
 })();
 </script>
